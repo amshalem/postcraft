@@ -68,7 +68,7 @@ class Login extends Component {
                         iconClass={MaterialsIcon}
                         iconName={'lock'}
                         iconColor={'#c6cbdf'}
-                        labelStyle={{ marginLeft: -12, color: '#c6cbdf', fontSize: 24, fontWeight: 'bold' }}
+                        labelStyle={{ marginLeft: -12, color: '#c6cbdf', fontSize: 20, fontWeight: 'bold' }}
                         inputStyle={{ color: '#c6cbdf' }}
                         secureTextEntry={true}
                         useNativeDrive
