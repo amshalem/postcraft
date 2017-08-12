@@ -61,7 +61,7 @@ class OnBoarding extends Component {
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => Actions.main()}>
                             <Image
-                                style={[styles.buttons, styles.btnLogin]}
+                                style={[styles.buttons, styles.btnSignup]}
                                 source={require('../assets/logo-man.png')}>
                                     <Text style={styles.btnText}>SIGNUP</Text>
                             </Image>
