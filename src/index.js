@@ -46,7 +46,7 @@ export default class postcraft extends Component {
             <Router createReducer={reducerCreate}>
                 <Scene key="root">
                 <Scene key="onboarding" hideNavBar={true} component={OnBoarding} title="OnBoarding" initial />
-                <Scene key="login" component={Login} title="Login" />
+                <Scene key="login" hideNavBar={true} component={Login} title="Login" />
                 <Scene key="main" component={Main} title="Main" />
                 <Scene key="sub" component={Sub} title="Annalisa Giangregorio" />
                 <Scene key="sub1" component={Sub1} title="Annalisa Giangregorio" />
