@@ -1,0 +1,3 @@
+rootProject.name = 'postcraft'
+
+include ':app'
