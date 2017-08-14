@@ -16,7 +16,6 @@ import { connect } from 'react-redux';
 import * as AuthAction from '../actions/auth';
 
 import MaterialsIcon from 'react-native-vector-icons/MaterialIcons';
-import { Kohana } from 'react-native-textinput-effects';
 
 var {height, width} = Dimensions.get('window');
 
@@ -53,7 +52,7 @@ class UploadLogo extends Component {
                     source={require('../assets/logo-woman.png')}>
                 </Image>
                 <Text style={styles.continueHint}>When you Ready Champ!</Text>
-                <TouchableOpacity onPress={() => Actions.signup()}>
+                <TouchableOpacity onPress={() => Actions.choosebusinesstype()}>
                     <Image
                         style={[styles.buttons, styles.btnContinue]}
                         source={require('../assets/logo-woman.png')}>
@@ -93,7 +92,7 @@ const styles = StyleSheet.create({
         fontWeight: '900',
     },
     logoHint: {
-        marginTop: 10,
+        marginTop: 11,
         color: '#c6cbdf',
         fontSize: 12,
         fontWeight: '600',
