@@ -27,12 +27,12 @@ const data = Array(20)
     .map((item, index) => index + 1);
 
 const filterData = [
+    {name: 'ALL', images: require('../assets/logo-woman.png')},
     {name: 'FOOD INDUSTRY', images: require('../assets/logo-woman.png')},
-    {name: 'FOOD INDUSTRY', images: require('../assets/logo-woman.png')},
-    {name: 'FOOD INDUSTRY', images: require('../assets/logo-woman.png')},
-    {name: 'FOOD INDUSTRY', images: require('../assets/logo-woman.png')},
-    {name: 'FOOD INDUSTRY', images: require('../assets/logo-woman.png')},
-    {name: 'FOOD INDUSTRY', images: require('../assets/logo-woman.png')}];
+    {name: 'BEAUTY & CARE', images: require('../assets/logo-woman.png')},
+    {name: 'FASHION & STYLE', images: require('../assets/logo-woman.png')},
+    {name: 'REAL ESTATE', images: require('../assets/logo-woman.png')},
+    {name: 'ELECTRONIC & GADGET', images: require('../assets/logo-woman.png')}];
 const dataSource = new GridView.DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2,
 }).cloneWithRows(filterData);
@@ -131,12 +131,17 @@ const styles = StyleSheet.create({
         margin: 10,
         backgroundColor: 'white',
         borderRadius: 5,
-        shodowColor: 'c6cb00',
+        shadowColor: '#c6cbdf',
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.31,
     },
     itemName: {
         color: '#c6cbdf',
-        fontSize: 32,
-        fontWeight: '900',
+        fontSize: 28,
+        fontWeight: '800',
         textAlign: 'center',
     },
     buttons: {
