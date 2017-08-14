@@ -66,7 +66,6 @@ class OnBoarding extends Component {
                                     <Text style={styles.btnText}>SIGNUP</Text>
                             </Image>
                         </TouchableOpacity>
-
                 </Image>
             </View>
         );
