@@ -8,6 +8,7 @@ import * as AuthAction from './actions/auth';
 
 import OnBoarding from './components/onboarding';
 import Login from './components/login';
+import Signup from './components/signup';
 import Main from './components/main';
 import Sub from './components/sub';
 import Sub1 from './components/sub1';
@@ -45,8 +46,9 @@ export default class postcraft extends Component {
         return(
             <Router createReducer={reducerCreate}>
                 <Scene key="root">
-                <Scene key="onboarding" hideNavBar={true} component={OnBoarding} title="OnBoarding" initial />
+                <Scene key="onboarding" hideNavBar={true} component={OnBoarding} title="OnBoarding" />
                 <Scene key="login" hideNavBar={true} component={Login} title="Login" />
+                <Scene key="signup" hideNavBar={true} component={Signup} title="Signup" initial />
                 <Scene key="main" component={Main} title="Main" />
                 <Scene key="sub" component={Sub} title="Annalisa Giangregorio" />
                 <Scene key="sub1" component={Sub1} title="Annalisa Giangregorio" />
