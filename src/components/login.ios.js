@@ -78,11 +78,26 @@ class Login extends Component {
                     <Image
                         style={[styles.buttons, styles.btnLogin]}
                         source={require('../assets/logo-woman.png')}>
-                            <Text style={styles.btnText}>LOGIN</Text>
+                            <Text style={styles.btnLoginText}>LOGIN</Text>
                     </Image>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.buttons, styles.btnSignup]} onPress={() => Actions.main()}>
-                    <Text style={styles.btnText}>SIGNUP</Text>
+                <View style={styles.btnArea}>
+                    <TouchableOpacity onPress={() => Actions.fbLogin()}>
+                        <Image
+                            style={styles.socialButtons}
+                            source={require('../assets/logo-woman.png')}>
+                        </Image>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => Actions.googleLogin()}>
+                        <Image
+                            style={styles.socialButtons}
+                            source={require('../assets/logo-man.png')}>
+                        </Image>
+                    </TouchableOpacity>
+                </View>
+                <Text style={styles.signupHint}>You don't have an account?</Text>
+                <TouchableOpacity style={[styles.buttons, styles.btnSignup]} onPress={() => Actions.signup()}>
+                    <Text style={styles.btnSignupText}>SIGNUP</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -116,20 +131,57 @@ const styles = StyleSheet.create({
         borderBottomColor: '#c6cbdf',
     },
     buttons: {
-        width: 140,
-        height: 40,
-        marginBottom: 35,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    btnLogin: {
+        width: 140,
+        height: 40,
+        backgroundColor: '#c6cbdf',
         borderRadius: 20,
     },
-    btnSignup: {
-        backgroundColor: '#c6cbdf'
-    },
-    btnText: {
+    btnLoginText: {
         backgroundColor: 'transparent',
         color: 'white',
-        fontWeight: '600',
+        fontSize: 20,
+        fontWeight: '800',
+    },
+    btnArea: {
+        position: 'absolute',
+        bottom: 77,
+        flexDirection: 'row',
+        width: width,
+        height: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    socialButtons: {
+        width: 30,
+        height: 30,
+        marginRight: 9,
+        borderRadius: 15,
+    },
+    signupHint: {
+        position: 'absolute',
+        bottom: 52,
+        color: '#4a90e2',
+        fontSize: 10,
+        fontWeight: '500',
+    },
+    btnSignup: {
+        position: 'absolute',
+        bottom: 0,
+        width: 300,
+        height: 80,
+        marginBottom: -38,
+        borderRadius: 40,
+        backgroundColor: '#c6cbdf'
+    },
+    btnSignupText: {
+        backgroundColor: 'transparent',
+        color: 'white',
+        fontSize: 40,
+        fontWeight: '800',
     },
     login: {
         alignItems: 'center',
