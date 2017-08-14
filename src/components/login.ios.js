@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     btnLoginText: {
         backgroundColor: 'transparent',
         color: 'white',
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: '800',
     },
     btnArea: {
@@ -182,13 +182,6 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 40,
         fontWeight: '800',
-    },
-    login: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 300,
-        height: 80,
-        backgroundColor: 'green',
     },
 });
 

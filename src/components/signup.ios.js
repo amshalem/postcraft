@@ -84,7 +84,7 @@ class Signup extends Component {
                     />
                 </View>
                 <Text style={styles.signupHint}>When you Ready Champ!</Text>
-                <TouchableOpacity onPress={() => Actions.signup()}>
+                <TouchableOpacity onPress={() => Actions.uploadlogo()}>
                     <Image
                         style={[styles.buttons, styles.btnSignup]}
                         source={require('../assets/logo-woman.png')}>
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     btnSignupText: {
         backgroundColor: 'transparent',
         color: 'white',
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: '800',
     },
     btnArea: {
