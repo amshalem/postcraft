@@ -14,6 +14,7 @@ import ChooseBusinessType from './components/choosebusinesstype';
 import Profile from './components/profile';
 import ProfilePreview from './components/profilepreview';
 import PostFeed from './components/postfeed';
+import ViewPost from './components/viewpost';
 import Main from './components/main';
 import Sub from './components/sub';
 import Sub1 from './components/sub1';
@@ -58,7 +59,8 @@ export default class postcraft extends Component {
                 <Scene key="choosebusinesstype" hideNavBar={true} component={ChooseBusinessType} title="ChooseBusinessType" />
                 <Scene key="profile" hideNavBar={true} component={Profile} title="Profile" />
                 <Scene key="profilepreview" hideNavBar={true} component={ProfilePreview} title="ProfilePreview" />
-                <Scene key="postfeed" hideNavBar={true} component={PostFeed} title="PostFeed" initial />
+                <Scene key="postfeed" hideNavBar={true} component={PostFeed} title="PostFeed" />
+                <Scene key="viewpost" hideNavBar={true} component={ViewPost} title="ViewPost" initial />
                 <Scene key="main" component={Main} title="Main" />
                 <Scene key="sub" component={Sub} title="Annalisa Giangregorio" />
                 <Scene key="sub1" component={Sub1} title="Annalisa Giangregorio" />
