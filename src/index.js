@@ -11,6 +11,7 @@ import Login from './components/login';
 import Signup from './components/signup';
 import UploadLogo from './components/uploadlogo';
 import ChooseBusinessType from './components/choosebusinesstype';
+import Profile from './components/profile';
 import Main from './components/main';
 import Sub from './components/sub';
 import Sub1 from './components/sub1';
@@ -52,7 +53,8 @@ export default class postcraft extends Component {
                 <Scene key="login" hideNavBar={true} component={Login} title="Login" />
                 <Scene key="signup" hideNavBar={true} component={Signup} title="Signup" />
                 <Scene key="uploadlogo" hideNavBar={true} component={UploadLogo} title="UploadLogo" />
-                <Scene key="choosebusinesstype" hideNavBar={true} component={ChooseBusinessType} title="ChooseBusinessType" initial />
+                <Scene key="choosebusinesstype" hideNavBar={true} component={ChooseBusinessType} title="ChooseBusinessType" />
+                <Scene key="profile" hideNavBar={true} component={Profile} title="Profile" initial />
                 <Scene key="main" component={Main} title="Main" />
                 <Scene key="sub" component={Sub} title="Annalisa Giangregorio" />
                 <Scene key="sub1" component={Sub1} title="Annalisa Giangregorio" />
