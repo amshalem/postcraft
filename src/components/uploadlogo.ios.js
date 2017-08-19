@@ -4,11 +4,12 @@ import {
     Dimensions,
     StyleSheet,
     Text,
-    TextInput,
     TouchableOpacity,
     View,
     Image,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+
 import { Actions, Scene, Router } from 'react-native-router-flux';
 
 import { bindActionCreators } from 'redux';
@@ -43,21 +44,30 @@ class UploadLogo extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.header} />
-                <Text style={styles.textLogoTop}>UPLOAD</Text>
-                <Text style={styles.textLogoBottom}>YOUR LOGO</Text>
+                <View style={styles.header}>
+                    <Image
+                        style={styles.imgNavLogo}
+                        source={require('../assets/PostcraftNavLogo.png')}>
+                    </Image>                    
+                </View>
+                <Image
+                    style={styles.imgTextLogo}
+                    source={require('../assets/PostcraftLogo.png')}>
+                </Image>
                 <Text style={styles.logoHint}>the logo is add automatic to your postcraft</Text>
                 <Image
                     style={styles.imageLogo}
-                    source={require('../assets/logo-woman.png')}>
+                    source={require('../assets/UserLogoContainer.png')}>
                 </Image>
                 <Text style={styles.continueHint}>When you Ready Champ!</Text>
                 <TouchableOpacity onPress={() => Actions.choosebusinesstype()}>
-                    <Image
-                        style={[styles.buttons, styles.btnContinue]}
-                        source={require('../assets/logo-woman.png')}>
-                            <Text style={styles.btnContinueText}>CONTINUE</Text>
-                    </Image>
+                    <LinearGradient
+                        start={{x: 0.0, y: 1}}
+                        end={{x: 1, y: 1.0}}
+                        colors={['#f050ba', '#88f7f9']}
+                        style={[styles.buttons, styles.btnContinue]}>
+                        <Text style={styles.btnContinueText}>CONTINUE</Text>
+                    </LinearGradient>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.buttons, styles.btnLater]} onPress={() => Actions.login()}>
                     <Text style={styles.btnLaterText}>LATER</Text>
@@ -77,8 +87,17 @@ const styles = StyleSheet.create({
     header: {
         width: width,
         height: 80,
-        backgroundColor: 'green',
-        marginBottom: 68,
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+    },
+    imgNavLogo: {
+        width: 150,
+        height: 48,
+    },
+    imgTextLogo: {
+        width: 280,
+        height: 62,
+        marginTop: 60,
     },
     textLogoTop: {
         color: '#4feeca',
@@ -95,18 +114,18 @@ const styles = StyleSheet.create({
         marginTop: 11,
         color: '#c6cbdf',
         fontSize: 12,
-        fontWeight: '600',
+        fontWeight: '400',
     },
     imageLogo: {
-        width: 180,
-        height: 180,
-        marginTop: 39,
+        width: 200,
+        height: 200,
+        marginTop: 25,
     },
     continueHint: {
         marginTop: 72,
         color: '#4feeca',
-        fontSize: 10,
-        fontWeight: '500',
+        fontSize: 11,
+        fontWeight: '400',
     },
     buttons: {
         alignItems: 'center',
@@ -117,11 +136,17 @@ const styles = StyleSheet.create({
         height: 40,
         marginTop: 12,
         borderRadius: 20,
-    },
+        shadowColor: '#f050ba',
+        shadowOffset: {
+            width: -3,
+            height: 4,
+        },
+        shadowOpacity: 0.2,
+        },
     btnContinueText: {
         backgroundColor: 'transparent',
         color: 'white',
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: '800',
     },
     btnLater: {
@@ -136,7 +161,7 @@ const styles = StyleSheet.create({
     btnLaterText: {
         backgroundColor: 'transparent',
         color: 'white',
-        fontSize: 40,
+        fontSize: 44,
         fontWeight: '800',
     },
 });
