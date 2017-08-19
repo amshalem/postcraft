@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
             width: -3,
             height: 4,
         },
-        shadowOpacity: 0.27,
+        shadowOpacity: 0.3,
     },
     btnDoneText: {
         backgroundColor: 'transparent',

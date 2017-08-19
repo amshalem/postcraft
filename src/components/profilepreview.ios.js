@@ -10,6 +10,8 @@ import {
     ListView,
     Image,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+
 import { Actions, Scene, Router } from 'react-native-router-flux';
 
 import { bindActionCreators } from 'redux';
@@ -18,6 +20,8 @@ import * as AuthAction from '../actions/auth';
 
 import MaterialsIcon from 'react-native-vector-icons/MaterialIcons';
 import GridView from 'react-native-gridview';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 var {height, width} = Dimensions.get('window');
 
@@ -45,13 +49,26 @@ class ProfilePreview extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.header} />
+                <View style={styles.header}>
+                    <View style={[styles.headerLeft, styles.layoutCenter]}>
+                        <Image
+                            style={styles.imgHeaderButton}
+                            source={require('../assets/CloseExit.png')}>
+                        </Image>
+                    </View>
+                    <View style={styles.headerMiddle}>
+                        <Text style={styles.textHeader}>VINTAGE ICECREAM</Text>
+                    </View>
+                    <View style={[styles.headerRight, styles.layoutCenter]}>
+                        <Icon name="upload" size={22} color="#000" />
+                    </View>
+                </View>
                 <Image
                     style={styles.imgBg}
                     source={require('../assets/logo-man.png')}>
                     <Image
                         style={styles.imgLogo}
-                        source={require('../assets/logo-woman.png')}>
+                        source={require('../assets/UserLogoContainer.png')}>
                     </Image>
                     <Text style={styles.textTop}>SOON</Text>
                     <Text style={styles.textBottom}>OPENING</Text>
@@ -61,18 +78,22 @@ class ProfilePreview extends Component {
                     <Text style={styles.textPreview}>Social PR Edit Text, quam vitae fringilla tincidunt. Suspendisse nec tortor urna. Ut laoreet sodales nisi, quis iaculis nulla iaculis vitae. Donec sagittis faucibus lacus eget blandit.</Text>
                 </View>
                 <TouchableOpacity onPress={() => Actions.copynedit()}>
-                    <Image
-                        style={[styles.buttons, styles.btnCopynedit]}
-                        source={require('../assets/logo-woman.png')}>
-                            <Text style={styles.btnText}>COPY & EDIT</Text>
-                    </Image>
+                    <LinearGradient
+                        start={{x: 0.0, y: 1}}
+                        end={{x: 1, y: 1.0}}
+                        colors={['#4ffdd6', '#6ac2ff']}
+                        style={[styles.buttons, styles.btnCopynedit]}>
+                        <Text style={styles.btnText}>COPY & EDIT</Text>
+                    </LinearGradient>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => Actions.delete()}>
-                    <Image
-                        style={[styles.buttons, styles.btnDelete]}
-                        source={require('../assets/logo-woman.png')}>
-                            <Text style={styles.btnText}>DELETE</Text>
-                    </Image>
+                    <LinearGradient
+                        start={{x: 0.0, y: 1}}
+                        end={{x: 1, y: 1.0}}
+                        colors={['#f85a6e', '#f36e7f']}
+                        style={[styles.buttons, styles.btnDelete]}>
+                        <Text style={styles.btnText}>DELETE</Text>
+                    </LinearGradient>
                 </TouchableOpacity>
             </View>
         );
@@ -80,6 +101,10 @@ class ProfilePreview extends Component {
 }
 
 const styles = StyleSheet.create({
+    layoutCenter: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     container: {
         flex: 1,
         backgroundColor: 'white',
@@ -87,9 +112,30 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
     },
     header: {
+        flexDirection: 'row',
         width: width,
-        height: 75,
-        backgroundColor: 'green',
+        height: 64,
+    },
+    headerLeft: {
+        flex: 0.15,
+    },
+    imgHeaderButton: {
+        width: 17,
+        height: 17,
+    },
+    headerMiddle: {
+        flex: 0.7,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    textHeader: {
+        fontSize: 12,
+        color: '#424c61',
+        fontWeight: '900',
+        textAlign: 'center',
+    },
+    headerRight: {
+        flex: 0.15,
     },
     imgBg: {
         width: width,
@@ -148,15 +194,27 @@ const styles = StyleSheet.create({
     },
     btnCopynedit: {
         left: - width / 2 + 35,
+        shadowColor: '#4feeca',
+        shadowOffset: {
+            width: -3,
+            height: 4,
+        },
+        shadowOpacity: 0.3,
     },
     btnText: {
         backgroundColor: 'transparent',
         color: 'white',
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: '800',
     },
     btnDelete: {
         right: - width / 2 + 35,
+        shadowColor: '#c6cbdf',
+        shadowOffset: {
+            width: -3,
+            height: 4,
+        },
+        shadowOpacity: 0.3,
     }
 });
 
