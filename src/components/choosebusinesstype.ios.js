@@ -4,12 +4,13 @@ import {
     Dimensions,
     StyleSheet,
     Text,
-    TextInput,
     TouchableOpacity,
     View,
     ListView,
     Image,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+
 import { Actions, Scene, Router } from 'react-native-router-flux';
 
 import { bindActionCreators } from 'redux';
@@ -61,9 +62,16 @@ class ChooseBusinessType extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.header} />
-                <Text style={styles.textLogoTop}>CHOOSE YOUR</Text>
-                <Text style={styles.textLogoBottom}>INTERESTS</Text>
+                <View style={styles.header}>
+                    <Image
+                        style={styles.imgNavLogo}
+                        source={require('../assets/PostcraftNavLogo.png')}>
+                    </Image>
+                </View>
+                <Image
+                    style={styles.imgTextLogo}
+                    source={require('../assets/PostcraftTextLogo1.png')}>
+                </Image>                
                 <Text style={styles.logoHint}>you can filter your post interests by your profession</Text>
                 <ListView
                     contentContainerStyle={styles.list}
@@ -77,11 +85,13 @@ class ChooseBusinessType extends Component {
                     }}
                 />
                 <TouchableOpacity onPress={() => Actions.choosebusinesstype()}>
-                    <Image
-                        style={[styles.buttons, styles.btnDone]}
-                        source={require('../assets/logo-woman.png')}>
-                            <Text style={styles.btnDoneText}>DONE</Text>
-                    </Image>
+                    <LinearGradient
+                        start={{x: 0.0, y: 1}}
+                        end={{x: 1, y: 1.0}}
+                        colors={['#4ffdd6', '#6ac2ff']}
+                        style={[styles.buttons, styles.btnDone]}>
+                        <Text style={styles.btnDoneText}>DONE</Text>
+                    </LinearGradient>
                 </TouchableOpacity>
             </View>
         );
@@ -97,31 +107,29 @@ const styles = StyleSheet.create({
     },
     header: {
         width: width,
-        height: 50,
-        backgroundColor: 'green',
+        height: 60,
+        alignItems: 'center',
+        justifyContent: 'flex-end',
     },
-    textLogoTop: {
-        color: '#f050ba',
-        fontSize: 40,
-        fontWeight: '900',
+    imgNavLogo: {
+        width: 80,
+        height: 40,
     },
-    textLogoBottom: {
-        marginTop: -10,
-        color: '#f050ba',
-        fontSize: 54,
-        fontWeight: '900',
+    imgTextLogo: {
+        width: 300,
+        height: 94,
     },
     logoHint: {
-        marginTop: 13,
+        marginTop: 10,
         color: '#c6cbdf',
         fontSize: 12,
-        fontWeight: '600',
+        fontWeight: '400',
     },
     list: {
         flexDirection: 'row',
         flexWrap: 'wrap',
         width: width,
-        height: height,
+        height: height - 1230,
     },
     listItem: {
         height: (width - 40) / 2,
@@ -140,7 +148,7 @@ const styles = StyleSheet.create({
     },
     itemName: {
         color: '#c6cbdf',
-        fontSize: 28,
+        fontSize: 26,
         fontWeight: '800',
         textAlign: 'center',
     },
@@ -151,15 +159,21 @@ const styles = StyleSheet.create({
     btnDone: {
         position: 'absolute',
         bottom: 21,
-        left: - width / 2 + 140,
+        right: -70,
         width: 140,
         height: 40,
         borderRadius: 20,
+        shadowColor: '#4feeca',
+        shadowOffset: {
+            width: -3,
+            height: 4,
+        },
+        shadowOpacity: 0.27,
     },
     btnDoneText: {
         backgroundColor: 'transparent',
         color: 'white',
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: '800',
     },
 });
