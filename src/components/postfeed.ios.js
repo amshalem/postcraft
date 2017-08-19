@@ -11,6 +11,8 @@ import {
     Image,
     ScrollView,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+
 import { Actions, Scene, Router } from 'react-native-router-flux';
 
 import { bindActionCreators } from 'redux';
@@ -19,6 +21,8 @@ import * as AuthAction from '../actions/auth';
 
 import MaterialsIcon from 'react-native-vector-icons/MaterialIcons';
 import GridView from 'react-native-gridview';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 var {height, width} = Dimensions.get('window');
 const itemsPerRow = 2;
@@ -67,22 +71,38 @@ class PostFeed extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.header} />
-                    <View style={styles.filterArea}>
-                        <ScrollView horizontal={true}>
-                            <ListView
-                                contentContainerStyle={styles.filterList}
-                                dataSource={filterDataSource}
-                                renderRow={(data) => {
-                                    return (
-                                        <View style={styles.filterListItem} backgroundColor={data.bgColor} borderColor={data.borderColor}>
-                                            <Text style={styles.textFilterListItem}>{data.name}</Text>
-                                        </View>
-                                    );
-                                }}
-                            />
-                        </ScrollView>
+                <View style={styles.header}>
+                    <View style={[styles.headerLeft, styles.layoutCenter]}>
+                        <Image
+                            style={styles.imgHeaderButton}
+                            source={require('../assets/User.png')}>
+                        </Image>
                     </View>
+                    <View style={styles.headerMiddle}>
+                        <Image
+                            style={styles.imgNavLogo}
+                            source={require('../assets/PostcraftNavLogo.png')}>
+                        </Image>
+                    </View>
+                    <View style={[styles.headerRight, styles.layoutCenter]}>
+                        <Icon name="gear" size={22} color="#000" />
+                    </View>
+                </View>
+                <View style={styles.filterArea}>
+                    <ScrollView horizontal={true}>
+                        <ListView
+                            contentContainerStyle={styles.filterList}
+                            dataSource={filterDataSource}
+                            renderRow={(data) => {
+                                return (
+                                    <View style={styles.filterListItem} backgroundColor={data.bgColor} borderColor={data.borderColor}>
+                                        <Text style={styles.textFilterListItem}>{data.name}</Text>
+                                    </View>
+                                );
+                            }}
+                        />
+                    </ScrollView>
+                </View>
                 <ListView
                     contentContainerStyle={styles.list}
                     dataSource={dataSource}
@@ -93,7 +113,7 @@ class PostFeed extends Component {
                                 source={data.image}>
                                     <Image
                                         style={styles.imgListItem}
-                                        source={require('../assets/logo-woman.png')}>
+                                        source={require('../assets/UserLogoContainer.png')}>
                                     </Image>
                                     <Text style={styles.textListItemTop}>SOON</Text>
                                     <Text style={styles.textListItemBottom}>OPENING</Text>
@@ -101,30 +121,44 @@ class PostFeed extends Component {
                         );
                     }}
                 />
-                <Image
-                    style={styles.bgCross}
-                    source={require('../assets/logo-man.png')}>
-                </Image>
+                <LinearGradient
+                    start={{x: 0.0, y: 0.25}}
+                    end={{x: 0.5, y: 0.5}}
+                    colors={['#50e3c2', '#88f3f2']}
+                    style={styles.bgCross}>
+                </LinearGradient>
                 <TouchableOpacity onPress={() => Actions.camera()}>
-                    <Image
-                        style={[styles.buttons, styles.btnCamera]}
-                        source={require('../assets/logo-woman.png')}>
-                            <Text style={styles.btnCrossText}>x</Text>
-                    </Image>
+                    <LinearGradient
+                        start={{x: 0.0, y: 0.0}}
+                        end={{x: 1.0, y: 1.0}}
+                        colors={['#50e3c2', '#88f3f2']}
+                        style={[styles.buttons, styles.btnCamera]}>
+                            <Image
+                                style={styles.imgCornerButton}
+                                source={require('../assets/Gallery.png')}>
+                            </Image>
+                    </LinearGradient>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => Actions.gallery()}>
-                    <Image
-                        style={[styles.buttons, styles.btnGallery]}
-                        source={require('../assets/logo-woman.png')}>
-                            <Text style={styles.btnCrossText}>x</Text>
-                    </Image>
+                    <LinearGradient
+                        start={{x: 0.0, y: 0.0}}
+                        end={{x: 1.0, y: 1.0}}
+                        colors={['#50e3c2', '#88f3f2']}
+                        style={[styles.buttons, styles.btnGallery]}>
+                            <Image
+                                style={styles.imgCornerButton}
+                                source={require('../assets/Gallery.png')}>
+                            </Image>
+                    </LinearGradient>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => Actions.cross()}>
-                    <Image
-                        style={[styles.buttons, styles.btnCross]}
-                        source={require('../assets/logo-woman.png')}>
+                    <LinearGradient
+                        start={{x: 0.0, y: 0.25}}
+                        end={{x: 0.5, y: 0.5}}
+                        colors={['#4ffdd6', '#6ac2ff']}
+                        style={[styles.buttons, styles.btnCross]}>
                             <Text style={styles.btnCrossText}>x</Text>
-                    </Image>
+                    </LinearGradient>
                 </TouchableOpacity>
             </View>
         );
@@ -132,6 +166,10 @@ class PostFeed extends Component {
 }
 
 const styles = StyleSheet.create({
+    layoutCenter: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     container: {
         flex: 1,
         backgroundColor: '#fafbfd',
@@ -139,9 +177,28 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
     },
     header: {
+        flexDirection: 'row',
         width: width,
-        height: 68,
-        backgroundColor: 'green',
+        height: 64,
+    },
+    headerLeft: {
+        flex: 0.15,
+    },
+    imgHeaderButton: {
+        width: 17,
+        height: 17,
+    },
+    headerMiddle: {
+        flex: 0.7,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    imgNavLogo: {
+        width: 100,
+        height: 40,
+    },
+    headerRight: {
+        flex: 0.15,
     },
     filterArea: {
         height: 55,
@@ -175,7 +232,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         width: width,
-        height: height,
+        height: height - 100,
         marginTop: 15,
     },
     listItem: {
@@ -228,6 +285,7 @@ const styles = StyleSheet.create({
         width: 222,
         height: 222,
         borderRadius: 111,
+        opacity: 0.25,
     },
     btnCross: {
         position: 'absolute',
@@ -260,7 +318,11 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         borderRadius: 20,  
-    }
+    },
+    imgCornerButton: {
+        height: 12,
+        width: 15,
+    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostFeed);
