@@ -10,6 +10,8 @@ import {
     ListView,
     Image,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+
 import { Actions, Scene, Router } from 'react-native-router-flux';
 
 import { bindActionCreators } from 'redux';
@@ -18,6 +20,8 @@ import * as AuthAction from '../actions/auth';
 
 import MaterialsIcon from 'react-native-vector-icons/MaterialIcons';
 import GridView from 'react-native-gridview';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 var {height, width} = Dimensions.get('window');
 const itemsPerRow = 2;
@@ -61,24 +65,45 @@ class Profile extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.header} />
+                <View style={styles.header}>
+                    <View style={[styles.headerLeft, styles.layoutCenter]}>
+                        <Image
+                            style={styles.imgHeaderButton}
+                            source={require('../assets/CloseExit.png')}>
+                        </Image>
+                    </View>
+                    <View style={styles.headerMiddle}>
+                        <Text style={styles.textHeader}>PROFILE</Text>
+                    </View>
+                    <View style={[styles.headerRight, styles.layoutCenter]}>
+                        <Icon name="gear" size={22} color="#000" />
+                    </View>
+                </View>
                 <Image
                     style={styles.imgLogo}
-                    source={require('../assets/logo-woman.png')}>
+                    source={require('../assets/UserLogoContainer.png')}>
                 </Image>
                 <Text style={styles.textLogoTop}>IDAN AM - SHALEM</Text>
                 <Text style={styles.textLogoBottom}>BEER - SHEVA, SOUTH, ISRAEL</Text>
                 <View style={styles.filterSwitch}>
-                    <Image
-                        style={styles.filterSelected}
-                        source={require('../assets/logo-woman.png')}>
-                        <Text style={styles.textFilterSelected}>MY CRAFT</Text>
-                    </Image>
-                    <Image
-                        style={styles.filterNSelected}
-                        source={require('../assets/logo-man.png')}>
-                        <Text style={styles.textFilterNSelected}>NOT SHARE</Text>
-                    </Image>
+                    <TouchableOpacity onPress={() => Actions.craft()}>
+                        <LinearGradient
+                            start={{x: 0.0, y: 1}}
+                            end={{x: 1, y: 1.0}}
+                            colors={['#4ffdd6', '#6ac2ff']}
+                            style={[styles.buttons, styles.filterSelected]}>
+                            <Text style={styles.textFilterSelected}>MY CRAFT</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => Actions.nshare()}>
+                        <LinearGradient
+                            start={{x: 0.0, y: 1}}
+                            end={{x: 1, y: 1.0}}
+                            colors={['transparent', 'transparent']}
+                            style={[styles.buttons, styles.filterNSelected]}>
+                            <Text style={styles.textFilterNSelected}>NOT SHARE</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
                 </View>
                 <ListView
                     contentContainerStyle={styles.list}
@@ -92,11 +117,13 @@ class Profile extends Component {
                     }}
                 />
                 <TouchableOpacity onPress={() => Actions.choosebusinesstype()}>
-                    <Image
-                        style={[styles.buttons, styles.btnPlus]}
-                        source={require('../assets/logo-woman.png')}>
+                    <LinearGradient
+                        start={{x: 0.0, y: 0.25}}
+                        end={{x: 0.5, y: 0.5}}
+                        colors={['#4ffdd6', '#6ac2ff']}
+                        style={[styles.buttons, styles.btnPlus]}>
                             <Text style={styles.btnPlusText}>+</Text>
-                    </Image>
+                    </LinearGradient>
                 </TouchableOpacity>
             </View>
         );
@@ -104,6 +131,10 @@ class Profile extends Component {
 }
 
 const styles = StyleSheet.create({
+    layoutCenter: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     container: {
         flex: 1,
         backgroundColor: 'white',
@@ -111,24 +142,45 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
     },
     header: {
+        flexDirection: 'row',
         width: width,
         height: 64,
-        backgroundColor: 'green',
+    },
+    headerLeft: {
+        flex: 0.15,
+    },
+    imgHeaderButton: {
+        width: 17,
+        height: 17,
+    },
+    headerMiddle: {
+        flex: 0.7,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    textHeader: {
+        fontSize: 12,
+        color: '#424c61',
+        fontWeight: '900',
+        textAlign: 'center',
+    },
+    headerRight: {
+        flex: 0.15,
     },
     imgLogo: {
-        width: 80,
-        height: 80,
+        width: 100,
+        height: 100,
         marginTop: 20,
         marginBottom: 28,
     },
     textLogoTop: {
         color: '#424c61',
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: '900',
     },
     textLogoBottom: {
         color: '#424c61',
-        fontSize: 16,
+        fontSize: 12,
         fontWeight: '300',
     },
     filterSwitch: {
@@ -161,19 +213,21 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         textAlign: 'center',
         color: 'white',
+        fontSize: 14,
         fontWeight: '900',
     },
     textFilterNSelected: {
         backgroundColor: 'transparent',
         textAlign: 'center',
         color: '#c6cbcb',
+        fontSize: 14,
         fontWeight: '900',
     },
     list: {
         flexDirection: 'row',
         flexWrap: 'wrap',
         width: width,
-        height: height,
+        height: height - 110,
     },
     listItem: {
         height: (width - 40) / 2,
