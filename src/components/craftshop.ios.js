@@ -56,12 +56,82 @@ class CraftShop extends Component {
                     <Text style={styles.textTop}>SOON</Text>
                     <Text style={styles.textBottom}>OPENING</Text>
                 </Image>
+                <View style={styles.toolTop}>
+                    <View style={[styles.toolTopLeft, styles.layoutCenter]}>
+                        <Image
+                            style={styles.imgToolTop}
+                            source={require('../assets/logo-woman.png')}>
+                        </Image>
+                    </View>
+                    <View style={[styles.toolTopMiddle, styles.layoutCenter]}>
+                        <Image
+                            style={styles.imgToolTop}
+                            source={require('../assets/logo-woman.png')}>
+                        </Image>
+                        <Image
+                            style={[styles.imgToolTop, styles.spaceBetween30]}
+                            source={require('../assets/logo-woman.png')}>
+                        </Image>
+                    </View>
+                    <View style={[styles.toolTopRight, styles.layoutCenter]}>
+                        <Image
+                            style={styles.imgToolTop}
+                            source={require('../assets/logo-woman.png')}>
+                        </Image>
+                    </View>
+                </View>
+                <View style={styles.toolBottom}>
+                    <View style={styles.toolBottomTop}>
+                        <View style={styles.toolBottomTopItem}>
+                            <Image style={styles.btnToolBottomTop}></Image>
+                            <Text style={styles.textToolBottomTop}>Filter</Text>
+                        </View>
+                        <View style={styles.toolBottomTopItem}>
+                            <Image style={styles.btnToolBottomTop}></Image>
+                            <Text style={styles.textToolBottomTop}>Crop</Text>
+                        </View>
+                        <View style={styles.toolBottomTopItem}>
+                            <Image style={styles.btnToolBottomTop}></Image>
+                            <Text style={styles.textToolBottomTop}>Focus</Text>
+                        </View>
+                        <View style={styles.toolBottomTopItem}>
+                            <Image style={styles.btnToolBottomTop}></Image>
+                            <Text style={styles.textToolBottomTop}>Color</Text>
+                        </View>
+                        <View style={styles.toolBottomTopItem}>
+                            <Image style={styles.btnToolBottomTop}></Image>
+                            <Text style={styles.textToolBottomTop}>Grid</Text>
+                        </View>
+                    </View>
+                    <View style={styles.toolBottomBottom}>
+                        <View style={[styles.toolBottomBottomItem, styles.toolItemSelected]}>
+                        </View>
+                        <View style={styles.toolBottomBottomItem}>
+                        </View>
+                        <View style={styles.toolBottomBottomItem}>
+                        </View>
+                        <View style={styles.btnPlus}>
+                            <Text style={styles.textPlus}>+</Text>
+                        </View>
+                    </View>
+                </View>
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
+    layoutCenter: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    spaceBetween30: {
+        marginLeft: 30,
+    },
+    toolItemSelected: {
+        borderColor: '#4feeca',
+        borderWidth: 1,
+    },
     container: {
         flex: 1,
         backgroundColor: 'white',
@@ -97,9 +167,75 @@ const styles = StyleSheet.create({
         fontWeight: '800',
         backgroundColor: 'transparent',
     },
-    buttons: {
+    toolTop: {
+        flexDirection: 'row',
+        width: width,
+        height: 57,
+        borderBottomWidth: 1,
+        borderBottomColor: '#c6cbdf',
+    },
+    toolTopLeft: {
+        flex: 0.15,
+    },
+    toolTopMiddle: {
+        flex: 0.7,
+        flexDirection: 'row',
+    },
+    imgToolTop: {
+        width: 15,
+        height: 15,
+    },
+    toolTopRight: {
+        flex: 0.15,
+    },
+    toolBottom: {
+    },
+    toolBottomTop: {
+        width: width,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        padding: 20,
+    },
+    toolBottomTopItem: {
+        alignItems: 'center',
+    },
+    btnToolBottomTop: {
+        width: 50,
+        height: 50,
+        // marginTop: 18,
+        borderRadius: 25,
+        borderWidth: 2,
+        borderColor: '#c6cbdf',
+    },
+    textToolBottomTop: {
+        marginTop: 5,
+        color: '#c6cbdf',
+        fontSize: 12,
+    },
+    toolBottomBottom: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    toolBottomBottomItem: {
+        width: 52,
+        height: 52,
+        marginLeft: 20,
+        backgroundColor: '#c6cbdf',
+        borderRadius: 5,
+    },
+    btnPlus: {
+        width: 30,
+        height: 30,
         alignItems: 'center',
         justifyContent: 'center',
+        marginLeft: 15,
+        borderRadius: 15,
+        borderWidth: 1,
+        borderColor: '#4feeca',
+    },
+    textPlus: {
+        fontSize: 20,
+        color: '#4feeca',
     },
 });
 

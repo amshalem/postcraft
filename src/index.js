@@ -16,11 +16,8 @@ import ProfilePreview from './components/profilepreview';
 import PostFeed from './components/postfeed';
 import ViewPost from './components/viewpost';
 import CraftShop from './components/craftshop';
+import Filter from './components/filter';
 import Main from './components/main';
-import Sub from './components/sub';
-import Sub1 from './components/sub1';
-import Sub2 from './components/sub2';
-import Sub3 from './components/sub3';
 
 // map redux store to props
 function mapStateToProps(state) {
@@ -62,12 +59,9 @@ export default class postcraft extends Component {
                 <Scene key="profilepreview" hideNavBar={true} component={ProfilePreview} title="ProfilePreview" />
                 <Scene key="postfeed" hideNavBar={true} component={PostFeed} title="PostFeed" />
                 <Scene key="viewpost" hideNavBar={true} component={ViewPost} title="ViewPost" />
-                <Scene key="craftshop" hideNavBar={true} component={CraftShop} title="CraftShop" initial />
+                <Scene key="craftshop" hideNavBar={true} component={CraftShop} title="CraftShop" />
+                <Scene key="filter" hideNavBar={true} component={Filter} title="Filter" initial />
                 <Scene key="main" component={Main} title="Main" />
-                <Scene key="sub" component={Sub} title="Annalisa Giangregorio" />
-                <Scene key="sub1" component={Sub1} title="Annalisa Giangregorio" />
-                <Scene key="sub2" component={Sub2} title="Telekinesis" />
-                <Scene key="sub3" component={Sub3} title="Fly Moon Royalty" />
                 </Scene>
             </Router>
         );
