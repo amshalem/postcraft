@@ -4,11 +4,12 @@ import {
     Dimensions,
     StyleSheet,
     Text,
-    TextInput,
     TouchableOpacity,
     View,
     Image,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+
 import { Actions, Scene, Router } from 'react-native-router-flux';
 
 import { bindActionCreators } from 'redux';
@@ -44,7 +45,12 @@ class Signup extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.header} />
+                <View style={styles.header}>
+                    <Image
+                        style={styles.imgNavLogo}
+                        source={require('../assets/PostcraftNavLogo.png')}>
+                    </Image>                    
+                </View>
                 <View style={styles.inputField}>
                     <Kohana
                         style={{ backgroundColor: '#ffffff' }}
@@ -52,7 +58,7 @@ class Signup extends Component {
                         iconClass={MaterialsIcon}
                         iconName={'mail'}
                         iconColor={'#c6cbdf'}
-                        labelStyle={{ marginLeft: -12, color: '#c6cbdf', fontSize: 20, fontWeight: 'bold' }}
+                        labelStyle={{ marginLeft: -12, color: '#c6cbdf', fontSize: 20, fontWeight: '900' }}
                         inputStyle={{ color: '#c6cbdf' }}
                         useNativeDrive
                     />
@@ -64,7 +70,7 @@ class Signup extends Component {
                         iconClass={MaterialsIcon}
                         iconName={'lock'}
                         iconColor={'#c6cbdf'}
-                        labelStyle={{ marginLeft: -12, color: '#c6cbdf', fontSize: 20, fontWeight: 'bold' }}
+                        labelStyle={{ marginLeft: -12, color: '#c6cbdf', fontSize: 20, fontWeight: '900' }}
                         inputStyle={{ color: '#c6cbdf' }}
                         secureTextEntry={true}
                         useNativeDrive
@@ -77,7 +83,7 @@ class Signup extends Component {
                         iconClass={MaterialsIcon}
                         iconName={'phone'}
                         iconColor={'#c6cbdf'}
-                        labelStyle={{ marginLeft: -12, color: '#c6cbdf', fontSize: 20, fontWeight: 'bold' }}
+                        labelStyle={{ marginLeft: -12, color: '#c6cbdf', fontSize: 20, fontWeight: '900' }}
                         inputStyle={{ color: '#c6cbdf' }}
                         secureTextEntry={true}
                         useNativeDrive
@@ -85,23 +91,25 @@ class Signup extends Component {
                 </View>
                 <Text style={styles.signupHint}>When you Ready Champ!</Text>
                 <TouchableOpacity onPress={() => Actions.uploadlogo()}>
-                    <Image
-                        style={[styles.buttons, styles.btnSignup]}
-                        source={require('../assets/logo-woman.png')}>
-                            <Text style={styles.btnSignupText}>SIGNUP</Text>
-                    </Image>
+                    <LinearGradient
+                        start={{x: 0.0, y: 1}}
+                        end={{x: 1, y: 1.0}}
+                        colors={['#f050ba', '#88f7f9']}
+                        style={[styles.buttons, styles.btnSignup]}>
+                        <Text style={styles.btnSignupText}>SIGNUP</Text>
+                    </LinearGradient>
                 </TouchableOpacity>
                 <View style={styles.btnArea}>
                     <TouchableOpacity onPress={() => Actions.fbLogin()}>
                         <Image
                             style={styles.socialButtons}
-                            source={require('../assets/logo-woman.png')}>
+                            source={require('../assets/LoginFacebook.png')}>
                         </Image>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => Actions.googleLogin()}>
                         <Image
                             style={styles.socialButtons}
-                            source={require('../assets/logo-man.png')}>
+                            source={require('../assets/LoginGmail.png')}>
                         </Image>
                     </TouchableOpacity>
                 </View>
@@ -123,13 +131,13 @@ const styles = StyleSheet.create({
     header: {
         width: width,
         height: 80,
-        backgroundColor: 'green',
         marginBottom: 68,
+        alignItems: 'center',
+        justifyContent: 'flex-end',
     },
-    imageLogo: {
-        width: 80,
-        height: 80,
-        marginTop: 18,
+    imgNavLogo: {
+        width: 150,
+        height: 48,
     },
     inputField: {
         width: width - 112,
@@ -144,7 +152,7 @@ const styles = StyleSheet.create({
         marginTop: 51,
         color: '#4feeca',
         fontSize: 10,
-        fontWeight: '500',
+        fontWeight: '400',
     },
     buttons: {
         alignItems: 'center',
@@ -155,11 +163,17 @@ const styles = StyleSheet.create({
         height: 40,
         marginTop: 12,
         borderRadius: 20,
+        shadowColor: '#f050ba',
+        shadowOffset: {
+            width: -3,
+            height: 4,
+        },
+        shadowOpacity: 0.2,
     },
     btnSignupText: {
         backgroundColor: 'transparent',
         color: 'white',
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: '800',
     },
     btnArea: {
@@ -189,15 +203,8 @@ const styles = StyleSheet.create({
     btnLoginText: {
         backgroundColor: 'transparent',
         color: 'white',
-        fontSize: 40,
+        fontSize: 44,
         fontWeight: '800',
-    },
-    login: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 300,
-        height: 80,
-        backgroundColor: 'green',
     },
 });
 
