@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     signupHint: {
         marginTop: 51,
         color: '#4feeca',
-        fontSize: 10,
+        fontSize: 11,
         fontWeight: '400',
     },
     buttons: {

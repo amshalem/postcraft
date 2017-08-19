@@ -4,11 +4,12 @@ import {
     Dimensions,
     StyleSheet,
     Text,
-    TextInput,
     TouchableOpacity,
     View,
     Image,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+
 import { Actions, Scene, Router } from 'react-native-router-flux';
 
 import { bindActionCreators } from 'redux';
@@ -44,10 +45,15 @@ class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.header} />
+                <View style={styles.header}>
+                    <Image
+                        style={styles.imgNavLogo}
+                        source={require('../assets/PostcraftNavLogo.png')}>
+                    </Image>                    
+                </View>
                 <Image
-                    style={styles.imageLogo}
-                    source={require('../assets/songs.png')}
+                    style={styles.imgLogo}
+                    source={require('../assets/UserLogoContainer.png')}
                 />
                 <View style={styles.inputField}>
                     <Kohana
@@ -74,24 +80,26 @@ class Login extends Component {
                         useNativeDrive
                     />
                 </View>
-                <TouchableOpacity onPress={() => Actions.login()}>
-                    <Image
-                        style={[styles.buttons, styles.btnLogin]}
-                        source={require('../assets/logo-woman.png')}>
-                            <Text style={styles.btnLoginText}>LOGIN</Text>
-                    </Image>
+                <TouchableOpacity onPress={() => Actions.main()}>
+                    <LinearGradient
+                        start={{x: 0.0, y: 1}}
+                        end={{x: 1, y: 1.0}}
+                        colors={['#4ffdd6', '#6ac2ff']}
+                        style={[styles.buttons, styles.btnLogin]}>
+                        <Text style={styles.btnLoginText}>LOGIN</Text>
+                    </LinearGradient>
                 </TouchableOpacity>
                 <View style={styles.btnArea}>
                     <TouchableOpacity onPress={() => Actions.fbLogin()}>
                         <Image
                             style={styles.socialButtons}
-                            source={require('../assets/logo-woman.png')}>
+                            source={require('../assets/LoginFacebook.png')}>
                         </Image>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => Actions.googleLogin()}>
                         <Image
                             style={styles.socialButtons}
-                            source={require('../assets/logo-man.png')}>
+                            source={require('../assets/LoginGmail.png')}>
                         </Image>
                     </TouchableOpacity>
                 </View>
@@ -114,11 +122,17 @@ const styles = StyleSheet.create({
     header: {
         width: width,
         height: 80,
-        backgroundColor: 'green',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
     },
-    imageLogo: {
-        width: 80,
-        height: 80,
+    imgNavLogo: {
+        width: 150,
+        height: 48,
+    },
+    imgLogo: {
+        width: 100,
+        height: 100,
+        marginBottom: 42,
         marginTop: 18,
     },
     inputField: {
@@ -139,11 +153,17 @@ const styles = StyleSheet.create({
         height: 40,
         backgroundColor: '#c6cbdf',
         borderRadius: 20,
+        shadowColor: '#4feeca',
+        shadowOffset: {
+            width: -3,
+            height: 4,
+        },
+        shadowOpacity: 0.27,
     },
     btnLoginText: {
         backgroundColor: 'transparent',
         color: 'white',
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: '800',
     },
     btnArea: {
@@ -165,8 +185,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 52,
         color: '#4a90e2',
-        fontSize: 10,
-        fontWeight: '500',
+        fontSize: 11,
+        fontWeight: '400',
     },
     btnSignup: {
         position: 'absolute',
@@ -180,7 +200,7 @@ const styles = StyleSheet.create({
     btnSignupText: {
         backgroundColor: 'transparent',
         color: 'white',
-        fontSize: 40,
+        fontSize: 44,
         fontWeight: '800',
     },
 });
