@@ -3360,6 +3360,12 @@ react-native-gridview@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/react-native-gridview/-/react-native-gridview-0.1.1.tgz#0f9a3fadb95dfef186790cbf10176628199fa127"
 
+react-native-linear-gradient@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.2.0.tgz#7d9ff9fc3e413079cf3c7354873eaf923145364d"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-router-flux@^4.0.0-beta.17:
   version "4.0.0-beta.17"
   resolved "https://registry.yarnpkg.com/react-native-router-flux/-/react-native-router-flux-4.0.0-beta.17.tgz#04d976587b4ab22eb96b7f92290ac2b9f90bcfd9"
