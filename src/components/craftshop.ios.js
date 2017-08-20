@@ -19,6 +19,8 @@ import * as AuthAction from '../actions/auth';
 import MaterialsIcon from 'react-native-vector-icons/MaterialIcons';
 import GridView from 'react-native-gridview';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 var {height, width} = Dimensions.get('window');
 
 // map redux store to props
@@ -45,13 +47,32 @@ class CraftShop extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.header} />
+                <View style={styles.header}>
+                    <View style={[styles.headerLeft, styles.layoutCenter]}>
+                        <Image
+                            style={styles.imgHeaderButton}
+                            source={require('../assets/User.png')}>
+                        </Image>
+                    </View>
+                    <View style={styles.headerMiddle}>
+                        <Image
+                            style={styles.imgNavLogo}
+                            source={require('../assets/PostcraftNavLogo.png')}>
+                        </Image>
+                    </View>
+                    <View style={[styles.headerRight, styles.layoutCenter]}>
+                        <Image
+                            style={styles.imgHeaderButton}
+                            source={require('../assets/Share.png')}>
+                        </Image>                        
+                    </View>
+                </View>
                 <Image
                     style={styles.imgBg}
                     source={require('../assets/logo-man.png')}>
                     <Image
                         style={styles.imgLogo}
-                        source={require('../assets/logo-woman.png')}>
+                        source={require('../assets/UserLogoContainer.png')}>
                     </Image>
                     <Text style={styles.textTop}>SOON</Text>
                     <Text style={styles.textBottom}>OPENING</Text>
@@ -60,55 +81,79 @@ class CraftShop extends Component {
                     <View style={[styles.toolTopLeft, styles.layoutCenter]}>
                         <Image
                             style={styles.imgToolTop}
-                            source={require('../assets/logo-woman.png')}>
+                            source={require('../assets/Undo.png')}>
                         </Image>
                     </View>
                     <View style={[styles.toolTopMiddle, styles.layoutCenter]}>
                         <Image
                             style={styles.imgToolTop}
-                            source={require('../assets/logo-woman.png')}>
+                            source={require('../assets/Copy.png')}>
                         </Image>
                         <Image
                             style={[styles.imgToolTop, styles.spaceBetween30]}
-                            source={require('../assets/logo-woman.png')}>
+                            source={require('../assets/Flip.png')}>
                         </Image>
                     </View>
                     <View style={[styles.toolTopRight, styles.layoutCenter]}>
                         <Image
                             style={styles.imgToolTop}
-                            source={require('../assets/logo-woman.png')}>
+                            source={require('../assets/RedoD.png')}>
                         </Image>
                     </View>
                 </View>
                 <View style={styles.toolBottom}>
                     <View style={styles.toolBottomTop}>
                         <View style={styles.toolBottomTopItem}>
-                            <Image style={styles.btnToolBottomTop}></Image>
+                            <Image
+                                style={styles.btnToolBottomTop}
+                                source={require('../assets/Filter.png')}>
+                            </Image>
                             <Text style={styles.textToolBottomTop}>Filter</Text>
                         </View>
-                        <View style={styles.toolBottomTopItem}>
-                            <Image style={styles.btnToolBottomTop}></Image>
+                        <View
+                            style={styles.toolBottomTopItem}>
+                            <Image
+                                style={styles.btnToolBottomTop}
+                                source={require('../assets/Crop.png')}>
+                            </Image>
                             <Text style={styles.textToolBottomTop}>Crop</Text>
                         </View>
                         <View style={styles.toolBottomTopItem}>
-                            <Image style={styles.btnToolBottomTop}></Image>
+                            <Image
+                                style={styles.btnToolBottomTop}
+                                source={require('../assets/RadialFocus.png')}>
+                            </Image>
                             <Text style={styles.textToolBottomTop}>Focus</Text>
                         </View>
                         <View style={styles.toolBottomTopItem}>
-                            <Image style={styles.btnToolBottomTop}></Image>
+                            <Image
+                                style={styles.btnToolBottomTop}
+                                source={require('../assets/ColorPicker.png')}>
+                            </Image>
                             <Text style={styles.textToolBottomTop}>Color</Text>
                         </View>
                         <View style={styles.toolBottomTopItem}>
-                            <Image style={styles.btnToolBottomTop}></Image>
+                            <Image
+                                style={styles.btnToolBottomTop}
+                                source={require('../assets/GridStock.png')}>
+                            </Image>
                             <Text style={styles.textToolBottomTop}>Grid</Text>
                         </View>
                     </View>
                     <View style={styles.toolBottomBottom}>
                         <View style={[styles.toolBottomBottomItem, styles.toolItemSelected]}>
+                            <Image
+                                style={styles.imgToolBottomBottomItem}
+                                source={require('../assets/logo-man.png')}>
+                            </Image>
                         </View>
                         <View style={styles.toolBottomBottomItem}>
                         </View>
                         <View style={styles.toolBottomBottomItem}>
+                            <Image
+                                style={styles.imgToolBottomBottomItem}
+                                source={require('../assets/UserLogoContainer.png')}>
+                            </Image>
                         </View>
                         <View style={styles.btnPlus}>
                             <Text style={styles.textPlus}>+</Text>
@@ -139,9 +184,28 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
     },
     header: {
+        flexDirection: 'row',
         width: width,
         height: 50,
-        backgroundColor: 'green',
+    },
+    headerLeft: {
+        flex: 0.15,
+    },
+    imgHeaderButton: {
+        width: 17,
+        height: 17,
+    },
+    headerMiddle: {
+        flex: 0.7,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    imgNavLogo: {
+        width: 100,
+        height: 40,
+    },
+    headerRight: {
+        flex: 0.15,
     },
     imgBg: {
         width: width,
@@ -204,7 +268,7 @@ const styles = StyleSheet.create({
         height: 50,
         // marginTop: 18,
         borderRadius: 25,
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: '#c6cbdf',
     },
     textToolBottomTop: {
@@ -219,8 +283,15 @@ const styles = StyleSheet.create({
     toolBottomBottomItem: {
         width: 52,
         height: 52,
+        alignItems: 'center',
+        justifyContent: 'center',
         marginLeft: 20,
         backgroundColor: '#c6cbdf',
+        borderRadius: 5,
+    },
+    imgToolBottomBottomItem: {
+        width: 50,
+        height: 50,
         borderRadius: 5,
     },
     btnPlus: {
