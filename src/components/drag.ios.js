@@ -18,10 +18,22 @@ import * as AuthAction from '../actions/auth';
 
 import MaterialsIcon from 'react-native-vector-icons/MaterialIcons';
 import GridView from 'react-native-gridview';
+import SwipeCards from 'react-native-swipe-cards';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 var {height, width} = Dimensions.get('window');
+
+let Card = React.createClass({
+    render() {
+        return (
+            <View style={[styles.card]}>
+            </View>
+        );
+    }
+})
+
+const Cards = [{imgUrl: require('../assets/CloseExit.png')}];
 
 // map redux store to props
 function mapStateToProps(state) {
@@ -39,9 +51,20 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
+function handleYup(card) {
+    console.log('Yup');
+}
+
+function handleNope(card) {
+    console.log('Nope');
+}
+
 class Drag extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            cards: Cards,
+        }
     }
 
     render() {
@@ -141,6 +164,13 @@ class Drag extends Component {
                         </View>
                     </View>
                     <View style={styles.toolBottomBottom}>
+                        <SwipeCards
+                            cards={this.state.cards}                     
+                            renderCard={(cardData) => <Card {...cardData} />}
+                            renderNoMoreCards={() => <NoMoreCards />}                     
+                            handleYup={this.handleYup}
+                            handleNope={this.handleNope}
+                        />
                         <View style={[styles.toolBottomBottomItem, styles.toolItemSelected]}>
                             <Image
                                 style={styles.imgToolBottomBottomItem}
@@ -303,6 +333,10 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         borderWidth: 1,
         borderColor: '#4feeca',
+    },
+    card: {
+        width: 50,
+        height: 50,
     },
     textPlus: {
         fontSize: 20,
