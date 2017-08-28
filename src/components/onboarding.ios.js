@@ -43,6 +43,7 @@ class OnBoarding extends Component {
         return (
             <View style={styles.container}>
                 <Image
+                    resizeMode="stretch"
                     style={styles.imgLogo}
                     source={require('../assets/postcraft-symbol-logo.png')}
                 />
