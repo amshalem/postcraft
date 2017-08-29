@@ -20,6 +20,7 @@ import Filter from './components/filter';
 import CropMask from './components/cropmask';
 import Drag from './components/drag';
 import AddComponent from './components/addcomponent';
+import Focus from './components/focus';
 import Main from './components/main';
 
 // map redux store to props
@@ -66,7 +67,8 @@ export default class postcraft extends Component {
                 <Scene key="filter" hideNavBar={true} component={Filter} title="Filter" />
                 <Scene key="cropmask" hideNavBar={true} component={CropMask} title="CropMask" />
                 <Scene key="drag" hideNavBar={true} component={Drag} title="Drag" />
-                <Scene key="addcomponent" hideNavBar={true} component={AddComponent} title="AddComponent" initial />
+                <Scene key="addcomponent" hideNavBar={true} component={AddComponent} title="AddComponent" />
+                <Scene key="focus" hideNavBar={true} component={Focus} title="Focus" initial />
                 <Scene key="main" component={Main} title="Main" />
                 </Scene>
             </Router>
