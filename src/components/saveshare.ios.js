@@ -69,13 +69,16 @@ class SaveShare extends Component {
                 <Image
                     style={[styles.imgBg, styles.layoutCenter]}
                     source={require('../assets/logo-man.png')}>
-                        <View style={styles.layoutCenter}>
+                        <View style={[styles.layoutCenter, styles.imgArea]}>
                             <Image
                                 style={styles.imgLogo}
                                 source={require('../assets/UserLogoContainer.png')}>
                             </Image>
                             <Text style={styles.textTop}>SOON</Text>
                             <Text style={styles.textBottom}>OPENING</Text>
+                            <Image
+                                style={styles.imgTagLogo}
+                                source={require('../assets/PostcraftNavLogo.png')}></Image>
                         </View>
                 </Image>
                 <View style={styles.textBox}>
@@ -162,6 +165,10 @@ const styles = StyleSheet.create({
         width: width,
         height: width,
     },
+    imgArea: {
+        width: width,
+        height: width,
+    },
     imgLogo: {
         width: 60,
         height: 60,
@@ -179,6 +186,14 @@ const styles = StyleSheet.create({
         color: '#f050ba',
         fontWeight: '800',
         backgroundColor: 'transparent',
+    },
+    imgTagLogo: {
+        position: 'absolute',
+        left: -20,
+        top: 30,
+        width: 60,
+        height: 20,
+        transform: [{rotate: '-90deg'}],
     },
     textBox: {
         width: 300,
