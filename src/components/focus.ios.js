@@ -116,21 +116,21 @@ class Focus extends Component {
                             style={styles.toolBottomTopItem}>
                             <Image
                                 style={styles.btnToolBottomTop}
-                                source={require('../assets/Clear.png')}>
+                                source={require('../assets/ClearFocus.png')}>
                             </Image>
                             <Text style={styles.textToolBottomTop}>Clear</Text>
                         </View>
                         <View style={styles.toolBottomTopItem}>
                             <Image
                                 style={styles.btnToolBottomTop}
-                                source={require('../assets/Radial.png')}>
+                                source={require('../assets/RadialFocus.png')}>
                             </Image>
                             <Text style={styles.textToolBottomTop}>Radial</Text>
                         </View>
                         <View style={styles.toolBottomTopItem}>
                             <Image
                                 style={styles.btnToolBottomTop}
-                                source={require('../assets/Linear.png')}>
+                                source={require('../assets/LinearFocus.png')}>
                             </Image>
                             <Text style={styles.textToolBottomTop}>Linear</Text>
                         </View>
