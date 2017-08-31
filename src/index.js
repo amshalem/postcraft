@@ -23,6 +23,7 @@ import AddComponent from './components/addcomponent';
 import Focus from './components/focus';
 import SaveShare from './components/saveshare';
 import TextEditor from './components/texteditor';
+import CraftStock from './components/craftstock';
 import Main from './components/main';
 
 // map redux store to props
@@ -72,7 +73,8 @@ export default class postcraft extends Component {
                 <Scene key="addcomponent" hideNavBar={true} component={AddComponent} title="AddComponent" />
                 <Scene key="focus" hideNavBar={true} component={Focus} title="Focus" />
                 <Scene key="saveshare" hideNavBar={true} component={SaveShare} title="SaveShare" />
-                <Scene key="texteditor" hideNavBar={true} component={TextEditor} title="TextEditor" initial />
+                <Scene key="texteditor" hideNavBar={true} component={TextEditor} title="TextEditor" />
+                <Scene key="craftstock" hideNavBar={true} component={CraftStock} title="CraftStock" initial />
                 <Scene key="main" component={Main} title="Main" />
                 </Scene>
             </Router>
