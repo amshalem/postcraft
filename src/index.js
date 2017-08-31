@@ -57,7 +57,7 @@ export default class postcraft extends Component {
         return(
             <Router createReducer={reducerCreate}>
                 <Scene key="root">
-                <Scene key="onboarding" hideNavBar={true} component={OnBoarding} title="OnBoarding" />
+                <Scene key="onboarding" hideNavBar={true} component={OnBoarding} title="OnBoarding" initial />
                 <Scene key="login" hideNavBar={true} component={Login} title="Login" />
                 <Scene key="signup" hideNavBar={true} component={Signup} title="Signup" />
                 <Scene key="uploadlogo" hideNavBar={true} component={UploadLogo} title="UploadLogo" />
@@ -74,7 +74,7 @@ export default class postcraft extends Component {
                 <Scene key="focus" hideNavBar={true} component={Focus} title="Focus" />
                 <Scene key="saveshare" hideNavBar={true} component={SaveShare} title="SaveShare" />
                 <Scene key="texteditor" hideNavBar={true} component={TextEditor} title="TextEditor" />
-                <Scene key="craftstock" hideNavBar={true} component={CraftStock} title="CraftStock" initial />
+                <Scene key="craftstock" hideNavBar={true} component={CraftStock} title="CraftStock" />
                 <Scene key="main" component={Main} title="Main" />
                 </Scene>
             </Router>

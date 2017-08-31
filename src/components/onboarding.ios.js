@@ -82,8 +82,8 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
     },
     imgLogo: {
-        width: 262,
-        height: 219,
+        width: width - 120,
+        height: width - 150,
         marginTop: 150,
     },
     btnArea: {
