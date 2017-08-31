@@ -22,6 +22,7 @@ import Drag from './components/drag';
 import AddComponent from './components/addcomponent';
 import Focus from './components/focus';
 import SaveShare from './components/saveshare';
+import TextEditor from './components/texteditor';
 import Main from './components/main';
 
 // map redux store to props
@@ -70,7 +71,8 @@ export default class postcraft extends Component {
                 <Scene key="drag" hideNavBar={true} component={Drag} title="Drag" />
                 <Scene key="addcomponent" hideNavBar={true} component={AddComponent} title="AddComponent" />
                 <Scene key="focus" hideNavBar={true} component={Focus} title="Focus" />
-                <Scene key="saveshare" hideNavBar={true} component={SaveShare} title="SaveShare" initial />
+                <Scene key="saveshare" hideNavBar={true} component={SaveShare} title="SaveShare" />
+                <Scene key="texteditor" hideNavBar={true} component={TextEditor} title="TextEditor" initial />
                 <Scene key="main" component={Main} title="Main" />
                 </Scene>
             </Router>
