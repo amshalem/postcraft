@@ -43,6 +43,7 @@ class OnBoarding extends Component {
         return (
             <View style={styles.container}>
                 <Image
+                    resizeMode="stretch"
                     style={styles.imgLogo}
                     source={require('../assets/postcraft-symbol-logo.png')}
                 />
@@ -81,8 +82,8 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
     },
     imgLogo: {
-        width: 262,
-        height: 219,
+        width: width - 120,
+        height: width - 150,
         marginTop: 150,
     },
     btnArea: {

@@ -19,6 +19,11 @@ import CraftShop from './components/craftshop';
 import Filter from './components/filter';
 import CropMask from './components/cropmask';
 import Drag from './components/drag';
+import AddComponent from './components/addcomponent';
+import Focus from './components/focus';
+import SaveShare from './components/saveshare';
+import TextEditor from './components/texteditor';
+import CraftStock from './components/craftstock';
 import Main from './components/main';
 
 // map redux store to props
@@ -52,7 +57,7 @@ export default class postcraft extends Component {
         return(
             <Router createReducer={reducerCreate}>
                 <Scene key="root">
-                <Scene key="onboarding" hideNavBar={true} component={OnBoarding} title="OnBoarding" />
+                <Scene key="onboarding" hideNavBar={true} component={OnBoarding} title="OnBoarding" initial />
                 <Scene key="login" hideNavBar={true} component={Login} title="Login" />
                 <Scene key="signup" hideNavBar={true} component={Signup} title="Signup" />
                 <Scene key="uploadlogo" hideNavBar={true} component={UploadLogo} title="UploadLogo" />
@@ -64,7 +69,12 @@ export default class postcraft extends Component {
                 <Scene key="craftshop" hideNavBar={true} component={CraftShop} title="CraftShop" />
                 <Scene key="filter" hideNavBar={true} component={Filter} title="Filter" />
                 <Scene key="cropmask" hideNavBar={true} component={CropMask} title="CropMask" />
-                <Scene key="drag" hideNavBar={true} component={Drag} title="Drag" initial />
+                <Scene key="drag" hideNavBar={true} component={Drag} title="Drag" />
+                <Scene key="addcomponent" hideNavBar={true} component={AddComponent} title="AddComponent" />
+                <Scene key="focus" hideNavBar={true} component={Focus} title="Focus" />
+                <Scene key="saveshare" hideNavBar={true} component={SaveShare} title="SaveShare" />
+                <Scene key="texteditor" hideNavBar={true} component={TextEditor} title="TextEditor" />
+                <Scene key="craftstock" hideNavBar={true} component={CraftStock} title="CraftStock" />
                 <Scene key="main" component={Main} title="Main" />
                 </Scene>
             </Router>

@@ -80,7 +80,7 @@ class Login extends Component {
                         useNativeDrive
                     />
                 </View>
-                <TouchableOpacity onPress={() => Actions.main()}>
+                <TouchableOpacity onPress={() => Actions.profile()}>
                     <LinearGradient
                         start={{x: 0.0, y: 1}}
                         end={{x: 1, y: 1.0}}
