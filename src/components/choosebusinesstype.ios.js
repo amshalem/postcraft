@@ -48,12 +48,12 @@ class ChooseBusinessType extends Component {
         super(props);
         this.state = {
             filterData : [
-                {name: 'ALL', images: null, selected: false},
-                {name: 'FOOD INDUSTRY', images: require('../assets/FoodIconD.png'), selected: false},
-                {name: 'BEAUTY & CARE', images: require('../assets/BeautyIconD.png'), selected: false},
-                {name: 'FASHION & STYLE', images: require('../assets/FashionIconD.png'), selected: false},
-                {name: 'REAL ESTATE', images: require('../assets/ConstructionIconD.png'), selected: false},
-                {name: 'ELECTRONIC & GADGET', images: require('../assets/ElectronicIconD.png'), selected: false}]
+                {name: 'ALL', image: null, selected: false},
+                {name: 'FOOD INDUSTRY', image: require('../assets/FoodIconD.png'), imageSelected: require('../assets/FoodIcon.png'), selected: false},
+                {name: 'BEAUTY & CARE', image: require('../assets/BeautyIconD.png'), imageSelected: require('../assets/BeautyIcon.png'), selected: false},
+                {name: 'FASHION & STYLE', image: require('../assets/FashionIconD.png'),imageSelected: require('../assets/FashionIcon.png'), selected: false},
+                {name: 'REAL ESTATE', image: require('../assets/ConstructionIconD.png'), imageSelected: require('../assets/ConstructionIcon.png'), selected: false},
+                {name: 'ELECTRONIC & GADGET', image: require('../assets/ElectronicIconD.png'), imageSelected: require('../assets/ElectronicIcon.png'), selected: false}]
             };
 
         this.state = {
@@ -63,26 +63,26 @@ class ChooseBusinessType extends Component {
 
     componentDidMount() {
         this.state.filterData = [
-                {name: 'ALL', images: null, selected: false},
-                {name: 'FOOD INDUSTRY', images: require('../assets/FoodIconD.png'), selected: false},
-                {name: 'BEAUTY & CARE', images: require('../assets/BeautyIconD.png'), selected: false},
-                {name: 'FASHION & STYLE', images: require('../assets/FashionIconD.png'), selected: false},
-                {name: 'REAL ESTATE', images: require('../assets/ConstructionIconD.png'), selected: false},
-                {name: 'ELECTRONIC & GADGET', images: require('../assets/ElectronicIconD.png'), selected: false}];
+                {name: 'ALL', image: null, selected: false},
+                {name: 'FOOD INDUSTRY', image: require('../assets/FoodIconD.png'), imageSelected: require('../assets/FoodIcon.png'), selected: false},
+                {name: 'BEAUTY & CARE', image: require('../assets/BeautyIconD.png'), imageSelected: require('../assets/BeautyIcon.png'), selected: false},
+                {name: 'FASHION & STYLE', image: require('../assets/FashionIconD.png'),imageSelected: require('../assets/FashionIcon.png'), selected: false},
+                {name: 'REAL ESTATE', image: require('../assets/ConstructionIconD.png'), imageSelected: require('../assets/ConstructionIcon.png'), selected: false},
+                {name: 'ELECTRONIC & GADGET', image: require('../assets/ElectronicIconD.png'), imageSelected: require('../assets/ElectronicIcon.png'), selected: false}];
     }
 
     updateSelectItem = (rowID, selectedState) => {
         var newArray = this.state.filterData.slice();
         newArray[rowID] = {
             name: newArray[rowID].name,
-            images: newArray[rowID].images,
+            image: newArray[rowID].image,
+            imageSelected: newArray[rowID].imageSelected,
             selected: !newArray[rowID].selected
         };
         this.setState({
             dataSource: filterDS.cloneWithRows(newArray),
             filterData: newArray
         });
-        console.log('****************', newArray[rowID]);
     }
 
     render() {
@@ -110,14 +110,14 @@ class ChooseBusinessType extends Component {
                                     <View style={[styles.listItem, styles.itemSelected]}>
                                         <Image
                                             style={styles.itemImg}
-                                            source={rowData.images}></Image>
-                                        <Text style={styles.itemName}>{rowData.name}</Text>
+                                            source={rowData.imageSelected}></Image>
+                                        <Text style={styles.itemNameSelected}>{rowData.name}</Text>
                                     </View>
                                     :
                                     <View style={[styles.listItem, styles.itemUnselected]}>
                                         <Image
                                             style={styles.itemImg}
-                                            source={rowData.images}></Image>
+                                            source={rowData.image}></Image>
                                         <Text style={styles.itemName}>{rowData.name}</Text>
                                     </View>
                                 }
@@ -199,6 +199,12 @@ const styles = StyleSheet.create({
     },
     itemName: {
         color: '#c6cbdf',
+        fontSize: 24,
+        fontWeight: '800',
+        textAlign: 'center',
+    },
+    itemNameSelected: {
+        color: '#4feeca',
         fontSize: 24,
         fontWeight: '800',
         textAlign: 'center',
