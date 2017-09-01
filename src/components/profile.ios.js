@@ -78,6 +78,10 @@ class Profile extends Component {
         });
     }
 
+    addProfile() {
+        console.log('add profile feature coming soon');
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -156,7 +160,7 @@ class Profile extends Component {
                         );
                     }}
                 />
-                <TouchableOpacity onPress={() => Actions.choosebusinesstype()}>
+                <TouchableOpacity onPress={() => this.addProfile()}>
                     <LinearGradient
                         start={{x: 0.0, y: 0.25}}
                         end={{x: 0.5, y: 0.5}}
