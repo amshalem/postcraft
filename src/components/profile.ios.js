@@ -31,12 +31,13 @@ const data = Array(20)
     .map((item, index) => index + 1);
 
 const filterData = [
-    {name: '', images: require('../assets/logo-woman.png')},
-    {name: '', images: require('../assets/logo-woman.png')},
-    {name: '', images: require('../assets/logo-woman.png')},
-    {name: '', images: require('../assets/logo-woman.png')},
-    {name: '', images: require('../assets/logo-woman.png')},
-    {name: '', images: require('../assets/logo-woman.png')}];
+    {name: '', image: null},
+    {name: '', image: null},
+    {name: '', image: null},
+    {name: '', image: null},
+    {name: '', image: null},
+    {name: '', image: null}];
+
 const dataSource = new GridView.DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2,
 }).cloneWithRows(filterData);
@@ -60,6 +61,21 @@ function mapDispatchToProps(dispatch) {
 class Profile extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            selectedMyCraft: true,
+        }
+    }
+
+    onCraftSelected() {
+        this.setState({
+            selectedMyCraft: true,
+        })
+    }
+
+    onNShareSelected() {
+        this.setState({
+            selectedMyCraft: false,
+        });
     }
 
     render() {
@@ -85,26 +101,50 @@ class Profile extends Component {
                 </Image>
                 <Text style={styles.textLogoTop}>IDAN AM - SHALEM</Text>
                 <Text style={styles.textLogoBottom}>BEER - SHEVA, SOUTH, ISRAEL</Text>
-                <View style={styles.filterSwitch}>
-                    <TouchableOpacity onPress={() => Actions.craft()}>
-                        <LinearGradient
-                            start={{x: 0.0, y: 1}}
-                            end={{x: 1, y: 1.0}}
-                            colors={['#4ffdd6', '#6ac2ff']}
-                            style={[styles.buttons, styles.filterSelected]}>
-                            <Text style={styles.textFilterSelected}>MY CRAFT</Text>
-                        </LinearGradient>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => Actions.nshare()}>
-                        <LinearGradient
-                            start={{x: 0.0, y: 1}}
-                            end={{x: 1, y: 1.0}}
-                            colors={['transparent', 'transparent']}
-                            style={[styles.buttons, styles.filterNSelected]}>
-                            <Text style={styles.textFilterNSelected}>NOT SHARE</Text>
-                        </LinearGradient>
-                    </TouchableOpacity>
-                </View>
+                {
+                    this.state.selectedMyCraft ?
+                    <View style={styles.filterSwitch}>
+                        <TouchableOpacity onPress={() => this.onCraftSelected()}>
+                            <LinearGradient
+                                start={{x: 0.0, y: 1}}
+                                end={{x: 1, y: 1.0}}
+                                colors={['#4ffdd6', '#6ac2ff']}
+                                style={[styles.buttons, styles.filterSelected]}>
+                                <Text style={styles.textFilterSelected}>MY CRAFT</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.onNShareSelected()}>
+                            <LinearGradient
+                                start={{x: 0.0, y: 1}}
+                                end={{x: 1, y: 1.0}}
+                                colors={['transparent', 'transparent']}
+                                style={[styles.buttons, styles.filterNSelected]}>
+                                <Text style={styles.textFilterNSelected}>NOT SHARE</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
+                    </View>
+                    :
+                    <View style={styles.filterSwitch}>
+                        <TouchableOpacity onPress={() => this.onCraftSelected()}>
+                            <LinearGradient
+                                start={{x: 0.0, y: 1}}
+                                end={{x: 1, y: 1.0}}
+                                colors={['transparent', 'transparent']}
+                                style={[styles.buttons, styles.filterNSelected]}>
+                                <Text style={styles.textFilterNSelectedLeft}>MY CRAFT</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.onNShareSelected()}>
+                            <LinearGradient
+                                start={{x: 0.0, y: 1}}
+                                end={{x: 1, y: 1.0}}
+                                colors={['#4ffdd6', '#6ac2ff']}
+                                style={[styles.buttons, styles.filterSelected]}>
+                                <Text style={styles.textFilterSelected}>NOT SHARE</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
+                    </View>
+                }
                 <ListView
                     contentContainerStyle={styles.list}
                     dataSource={dataSource}
@@ -219,6 +259,14 @@ const styles = StyleSheet.create({
     textFilterNSelected: {
         backgroundColor: 'transparent',
         textAlign: 'center',
+        color: '#c6cbcb',
+        fontSize: 14,
+        fontWeight: '900',
+    },
+    textFilterNSelectedLeft: {
+        backgroundColor: 'transparent',
+        textAlign: 'center',
+        marginLeft: 40,
         color: '#c6cbcb',
         fontSize: 14,
         fontWeight: '900',
