@@ -9,6 +9,7 @@ import {
     View,
     ListView,
     Image,
+    ImageBackground,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -46,6 +47,14 @@ class ProfilePreview extends Component {
         super(props);
     }
 
+    copynedit() {
+        console.log('copy and edit feature coming soon');
+    }
+
+    delete() {
+        console.log('delete feature coming soon');
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -63,7 +72,7 @@ class ProfilePreview extends Component {
                         <Icon name="upload" size={22} color="#000" />
                     </View>
                 </View>
-                <Image
+                <ImageBackground
                     style={styles.imgBg}
                     source={require('../assets/logo-man.png')}>
                     <Image
@@ -72,12 +81,12 @@ class ProfilePreview extends Component {
                     </Image>
                     <Text style={styles.textTop}>SOON</Text>
                     <Text style={styles.textBottom}>OPENING</Text>
-                </Image>
+                </ImageBackground>
                 <View style={styles.space}></View>
                 <View style={styles.previewTextBox}>
                     <Text style={styles.textPreview}>Social PR Edit Text, quam vitae fringilla tincidunt. Suspendisse nec tortor urna. Ut laoreet sodales nisi, quis iaculis nulla iaculis vitae. Donec sagittis faucibus lacus eget blandit.</Text>
                 </View>
-                <TouchableOpacity onPress={() => Actions.copynedit()}>
+                <TouchableOpacity onPress={() => this.copynedit()}>
                     <LinearGradient
                         start={{x: 0.0, y: 1}}
                         end={{x: 1, y: 1.0}}
@@ -86,7 +95,7 @@ class ProfilePreview extends Component {
                         <Text style={styles.btnText}>COPY & EDIT</Text>
                     </LinearGradient>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => Actions.delete()}>
+                <TouchableOpacity onPress={() => this.delete()}>
                     <LinearGradient
                         start={{x: 0.0, y: 1}}
                         end={{x: 1, y: 1.0}}
@@ -165,6 +174,7 @@ const styles = StyleSheet.create({
         width: width,
         height: 5,
         backgroundColor: '#c6cbdf',
+        opacity: 0.4,
     },
     previewTextBox: {
         width: 300,
@@ -178,6 +188,12 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 20,
         borderWidth: 1,
         borderColor: '#c6cbdf',
+        shadowColor: '#c6cbdf',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.31,
     },
     textPreview: {
         color: '#c6cbdf',

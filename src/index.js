@@ -62,8 +62,8 @@ export default class postcraft extends Component {
                 <Scene key="signup" hideNavBar={true} component={Signup} title="Signup" />
                 <Scene key="uploadlogo" hideNavBar={true} component={UploadLogo} title="UploadLogo" />
                 <Scene key="choosebusinesstype" hideNavBar={true} component={ChooseBusinessType} title="ChooseBusinessType" />
-                <Scene key="profile" hideNavBar={true} component={Profile} title="Profile" initial />
-                <Scene key="profilepreview" hideNavBar={true} component={ProfilePreview} title="ProfilePreview" />
+                <Scene key="profile" hideNavBar={true} component={Profile} title="Profile" />
+                <Scene key="profilepreview" hideNavBar={true} component={ProfilePreview} title="ProfilePreview" initial />
                 <Scene key="postfeed" hideNavBar={true} component={PostFeed} title="PostFeed" />
                 <Scene key="viewpost" hideNavBar={true} component={ViewPost} title="ViewPost" />
                 <Scene key="craftshop" hideNavBar={true} component={CraftShop} title="CraftShop" />
