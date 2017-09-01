@@ -57,11 +57,11 @@ export default class postcraft extends Component {
         return(
             <Router createReducer={reducerCreate}>
                 <Scene key="root">
-                <Scene key="onboarding" hideNavBar={true} component={OnBoarding} title="OnBoarding" initial />
+                <Scene key="onboarding" hideNavBar={true} component={OnBoarding} title="OnBoarding" />
                 <Scene key="login" hideNavBar={true} component={Login} title="Login" />
                 <Scene key="signup" hideNavBar={true} component={Signup} title="Signup" />
                 <Scene key="uploadlogo" hideNavBar={true} component={UploadLogo} title="UploadLogo" />
-                <Scene key="choosebusinesstype" hideNavBar={true} component={ChooseBusinessType} title="ChooseBusinessType" />
+                <Scene key="choosebusinesstype" hideNavBar={true} component={ChooseBusinessType} title="ChooseBusinessType" initial />
                 <Scene key="profile" hideNavBar={true} component={Profile} title="Profile" />
                 <Scene key="profilepreview" hideNavBar={true} component={ProfilePreview} title="ProfilePreview" />
                 <Scene key="postfeed" hideNavBar={true} component={PostFeed} title="PostFeed" />
