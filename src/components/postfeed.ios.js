@@ -9,6 +9,7 @@ import {
     View,
     ListView,
     Image,
+    ImageBackground,
     ScrollView,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -25,24 +26,25 @@ import GridView from 'react-native-gridview';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 var {height, width} = Dimensions.get('window');
-const itemsPerRow = 2;
 
-const filterData = [
-    {name: 'SOON', bgColor: '#ffd357', borderColor: '#f5b957'},
-    {name: 'OPENING', bgColor: '#50e3c2', borderColor: '#50e3c2'},
-    {name: 'SALE', bgColor: '#f050ba', borderColor: '#f050ba'},
-    {name: 'HOLD', bgColor: '#57fcfe', borderColor: '#57fcfe'}];
-const filterDataSource = new GridView.DataSource({
-    rowHasChanged: (r1, r2) => r1 !== r2,
-}).cloneWithRows(filterData);
+var filterDS = new ListView.DataSource({
+    rowHasChanged: (r1, r2) => r1 != r2,
+});
+
+// const filterData = c
+
+// const filterDataSource = new GridView.DataSource({
+//     rowHasChanged: (r1, r2) => r1 !== r2,
+// }).cloneWithRows(filterData);
 
 const postData = [
-    {name: '', image: require('../assets/logo-man.png')},
-    {name: '', image: require('../assets/logo-man.png')},
-    {name: '', image: require('../assets/logo-man.png')},
-    {name: '', image: require('../assets/logo-man.png')},
-    {name: '', image: require('../assets/logo-man.png')},
-    {name: '', image: require('../assets/logo-man.png')}];
+    {name: '', image: require('../assets/logo-man.png'), logoImage: require('../assets/UserLogoContainer.png'), titleTop: 'SOON', titleBottom: 'OPENING'},
+    {name: '', image: null, logoImage: null, titleTop: '', titleBottom: ''},
+    {name: '', image: null, logoImage: null, titleTop: '', titleBottom: ''},
+    {name: '', image: null, logoImage: null, titleTop: '', titleBottom: ''},
+    {name: '', image: null, logoImage: null, titleTop: '', titleBottom: ''},
+    {name: '', image: null, logoImage: null, titleTop: '', titleBottom: ''}];
+
 const dataSource = new GridView.DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2,
 }).cloneWithRows(postData);
@@ -66,6 +68,28 @@ function mapDispatchToProps(dispatch) {
 class PostFeed extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            filterData:[
+                {name: 'SOON', bgColor: '#ffd357', borderColor: '#f5b957', selected: true},
+                {name: 'OPENING', bgColor: '#50e3c2', borderColor: '#50e3c2', selected: false},
+                {name: 'SALE', bgColor: '#f050ba', borderColor: '#f050ba', selected: false},
+                {name: 'HOLD', bgColor: '#57fcfe', borderColor: '#57fcfe', selected: false}
+            ],
+        };
+        this.state = {
+            filterDataSource: filterDS.cloneWithRows(this.state.filterData),
+        }
+    }
+
+    componetDidMount() {
+        this.state.filterData = [{name: 'SOON', bgColor: '#ffd357', borderColor: '#f5b957', selected: true},
+                                {name: 'OPENING', bgColor: '#50e3c2', borderColor: '#50e3c2', selected: false},
+                                {name: 'SALE', bgColor: '#f050ba', borderColor: '#f050ba', selected: false},
+                                {name: 'HOLD', bgColor: '#57fcfe', borderColor: '#57fcfe', selected: false}];
+    }
+
+    onFilterSelected(rowID) {
+        console.log('################', rowID);
     }
 
     render() {
@@ -92,12 +116,14 @@ class PostFeed extends Component {
                     <ScrollView horizontal={true}>
                         <ListView
                             contentContainerStyle={styles.filterList}
-                            dataSource={filterDataSource}
-                            renderRow={(data) => {
+                            dataSource={this.state.filterDataSource}
+                            renderRow={(rowData: string, sectionID: number, rowID: number) => {
                                 return (
-                                    <View style={styles.filterListItem} backgroundColor={data.bgColor} borderColor={data.borderColor}>
-                                        <Text style={styles.textFilterListItem}>{data.name}</Text>
-                                    </View>
+                                    <TouchableOpacity onPress={() => this.onFilterSelected(rowID)}>
+                                        <View style={styles.filterListItem} backgroundColor={rowData.bgColor} borderColor={rowData.borderColor}>
+                                            <Text style={styles.textFilterListItem}>{rowData.name}</Text>
+                                        </View>
+                                    </TouchableOpacity>
                                 );
                             }}
                         />
@@ -108,16 +134,16 @@ class PostFeed extends Component {
                     dataSource={dataSource}
                     renderRow={(data) => {
                         return (
-                            <Image
+                            <ImageBackground
                                 style={styles.listItem}
                                 source={data.image}>
                                     <Image
                                         style={styles.imgListItem}
-                                        source={require('../assets/UserLogoContainer.png')}>
+                                        source={data.logoImage}>
                                     </Image>
-                                    <Text style={styles.textListItemTop}>SOON</Text>
-                                    <Text style={styles.textListItemBottom}>OPENING</Text>
-                            </Image>
+                                    <Text style={styles.textListItemTop}>{data.titleTop}</Text>
+                                    <Text style={styles.textListItemBottom}>{data.titleBottom}</Text>
+                            </ImageBackground>
                         );
                     }}
                 />
@@ -245,7 +271,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         shadowColor: '#c6cbdf',
         shadowOffset: {
-            width: 2,
+            width: 0,
             height: 2,
         },
         shadowOpacity: 0.31,
