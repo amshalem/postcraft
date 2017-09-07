@@ -31,12 +31,6 @@ var filterDS = new ListView.DataSource({
     rowHasChanged: (r1, r2) => r1 != r2,
 });
 
-// const filterData = c
-
-// const filterDataSource = new GridView.DataSource({
-//     rowHasChanged: (r1, r2) => r1 !== r2,
-// }).cloneWithRows(filterData);
-
 const postData = [
     {name: '', image: require('../assets/logo-man.png'), logoImage: require('../assets/UserLogoContainer.png'), titleTop: 'SOON', titleBottom: 'OPENING'},
     {name: '', image: null, logoImage: null, titleTop: '', titleBottom: ''},
@@ -70,10 +64,10 @@ class PostFeed extends Component {
         super(props);
         this.state = {
             filterData:[
-                {name: 'SOON', bgColor: '#ffd357', borderColor: '#f5b957', selected: true},
-                {name: 'OPENING', bgColor: '#50e3c2', borderColor: '#50e3c2', selected: false},
-                {name: 'SALE', bgColor: '#f050ba', borderColor: '#f050ba', selected: false},
-                {name: 'HOLD', bgColor: '#57fcfe', borderColor: '#57fcfe', selected: false}
+                {name: 'SOON', bgColor: '#ffd357', borderColor: '#ffd357', selectedBorderColor: '#f5b957', selected: true},
+                {name: 'OPENING', bgColor: '#50e3c2', borderColor: '#50e3c2', selectedBorderColor: '#f5b957', selected: false},
+                {name: 'SALE', bgColor: '#f050ba', borderColor: '#f050ba', selectedBorderColor: '#f5b957', selected: false},
+                {name: 'HOLD', bgColor: '#57fcfe', borderColor: '#57fcfe', selectedBorderColor: '#f5b957', selected: false}
             ],
         };
         this.state = {
@@ -81,15 +75,26 @@ class PostFeed extends Component {
         }
     }
 
-    componetDidMount() {
-        this.state.filterData = [{name: 'SOON', bgColor: '#ffd357', borderColor: '#f5b957', selected: true},
-                                {name: 'OPENING', bgColor: '#50e3c2', borderColor: '#50e3c2', selected: false},
-                                {name: 'SALE', bgColor: '#f050ba', borderColor: '#f050ba', selected: false},
-                                {name: 'HOLD', bgColor: '#57fcfe', borderColor: '#57fcfe', selected: false}];
+    componentDidMount() {
+        this.state.filterData = [{name: 'SOON', bgColor: '#ffd357', borderColor: '#ffd357', selectedBorderColor: '#f5b957', selected: true},
+                                {name: 'OPENING', bgColor: '#50e3c2', borderColor: '#50e3c2', selectedBorderColor: '#f5b957', selected: false},
+                                {name: 'SALE', bgColor: '#f050ba', borderColor: '#f050ba', selectedBorderColor: '#f5b957', selected: false},
+                                {name: 'HOLD', bgColor: '#57fcfe', borderColor: '#57fcfe', selectedBorderColor: '#f5b957', selected: false}];
     }
 
-    onFilterSelected(rowID) {
-        console.log('################', rowID);
+    onFilterSelected = (rowID, selectedState) => {
+        var newArray = this.state.filterData.slice();
+        newArray[rowID] = {
+            name: newArray[rowID].name,
+            bgColor: newArray[rowID].bgColor,
+            borderColor: (!selectedState) ? newArray[rowID].selectedBorderColor : newArray[rowID].bgColor,
+            selectedBorderColor: newArray[rowID].selectedBorderColor,
+            selected: !newArray[rowID].selected
+        }
+        this.setState({
+            filterDataSource: filterDS.cloneWithRows(newArray),
+            filterData: newArray
+        });
     }
 
     render() {
@@ -119,7 +124,7 @@ class PostFeed extends Component {
                             dataSource={this.state.filterDataSource}
                             renderRow={(rowData: string, sectionID: number, rowID: number) => {
                                 return (
-                                    <TouchableOpacity onPress={() => this.onFilterSelected(rowID)}>
+                                    <TouchableOpacity onPress={() => this.onFilterSelected(rowID, rowData.selected)}>
                                         <View style={styles.filterListItem} backgroundColor={rowData.bgColor} borderColor={rowData.borderColor}>
                                             <Text style={styles.textFilterListItem}>{rowData.name}</Text>
                                         </View>
