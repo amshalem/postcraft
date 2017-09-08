@@ -52,7 +52,7 @@ class Filter extends Component {
                     source={require('../assets/logo-man.png')}>
                     <Image
                         style={styles.imgLogo}
-                        source={require('../assets/logo-woman.png')}>
+                        source={require('../assets/logo-man.png')}>
                     </Image>
                     <Text style={styles.textTop}>SOON</Text>
                     <Text style={styles.textBottom}>OPENING</Text>
@@ -64,35 +64,35 @@ class Filter extends Component {
                                 <Text style={styles.textColorDot}>Summer</Text>
                                 <Image
                                     style={styles.imgColorDotItem}
-                                    source={require('../assets/logo-woman.png')}>
+                                    source={require('../assets/logo-man.png')}>
                                 </Image>
                             </View>
                             <View style={styles.colorDotItem}>
                                 <Text style={styles.textColorDot}>Spring</Text>
                                 <Image
                                     style={styles.imgColorDotItem}
-                                    source={require('../assets/logo-woman.png')}>
+                                    source={require('../assets/logo-man.png')}>
                                 </Image>
                             </View>
                             <View style={styles.colorDotItem}>
                                 <Text style={styles.textColorDot}>Winter</Text>
                                 <Image
                                     style={styles.imgColorDotItem}
-                                    source={require('../assets/logo-woman.png')}>
+                                    source={require('../assets/logo-man.png')}>
                                 </Image>
                             </View>
                             <View style={styles.colorDotItem}>
                                 <Text style={styles.textColorDot}>Fall</Text>
                                 <Image
                                     style={styles.imgColorDotItem}
-                                    source={require('../assets/logo-woman.png')}>
+                                    source={require('../assets/logo-man.png')}>
                                 </Image>
                             </View>
                             <View style={styles.colorDotItem}>
                                 <Text style={styles.textColorDot}>Age</Text>
                                 <Image
                                     style={styles.imgColorDotItem}
-                                    source={require('../assets/logo-woman.png')}>
+                                    source={require('../assets/logo-man.png')}>
                                 </Image>
                             </View>
                         </View>

@@ -23,20 +23,9 @@ import GridView from 'react-native-gridview';
 var {height, width} = Dimensions.get('window');
 const itemsPerRow = 2;
 
-const data = Array(20)
-    .fill(null)
-    .map((item, index) => index + 1);
-
-const filterData = [
-    {name: 'ALL', images: require('../assets/logo-woman.png')},
-    {name: 'FOOD INDUSTRY', images: require('../assets/logo-woman.png')},
-    {name: 'BEAUTY & CARE', images: require('../assets/logo-woman.png')},
-    {name: 'FASHION & STYLE', images: require('../assets/logo-woman.png')},
-    {name: 'REAL ESTATE', images: require('../assets/logo-woman.png')},
-    {name: 'ELECTRONIC & GADGET', images: require('../assets/logo-woman.png')}];
-const dataSource = new GridView.DataSource({
-    rowHasChanged: (r1, r2) => r1 !== r2,
-}).cloneWithRows(filterData);
+var filterDS = new GridView.DataSource({
+    rowHasChanged: (r1, r2) => r1 != r2,
+});
 
 // map redux store to props
 function mapStateToProps(state) {
@@ -57,6 +46,43 @@ function mapDispatchToProps(dispatch) {
 class ChooseBusinessType extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            filterData : [
+                {name: 'ALL', image: null, selected: false},
+                {name: 'FOOD INDUSTRY', image: require('../assets/FoodIconD.png'), imageSelected: require('../assets/FoodIcon.png'), selected: false},
+                {name: 'BEAUTY & CARE', image: require('../assets/BeautyIconD.png'), imageSelected: require('../assets/BeautyIcon.png'), selected: false},
+                {name: 'FASHION & STYLE', image: require('../assets/FashionIconD.png'),imageSelected: require('../assets/FashionIcon.png'), selected: false},
+                {name: 'REAL ESTATE', image: require('../assets/ConstructionIconD.png'), imageSelected: require('../assets/ConstructionIcon.png'), selected: false},
+                {name: 'ELECTRONIC & GADGET', image: require('../assets/ElectronicIconD.png'), imageSelected: require('../assets/ElectronicIcon.png'), selected: false}]
+            };
+
+        this.state = {
+            dataSource : filterDS.cloneWithRows(this.state.filterData)
+        };
+    }
+
+    componentDidMount() {
+        this.state.filterData = [
+                {name: 'ALL', image: null, selected: false},
+                {name: 'FOOD INDUSTRY', image: require('../assets/FoodIconD.png'), imageSelected: require('../assets/FoodIcon.png'), selected: false},
+                {name: 'BEAUTY & CARE', image: require('../assets/BeautyIconD.png'), imageSelected: require('../assets/BeautyIcon.png'), selected: false},
+                {name: 'FASHION & STYLE', image: require('../assets/FashionIconD.png'),imageSelected: require('../assets/FashionIcon.png'), selected: false},
+                {name: 'REAL ESTATE', image: require('../assets/ConstructionIconD.png'), imageSelected: require('../assets/ConstructionIcon.png'), selected: false},
+                {name: 'ELECTRONIC & GADGET', image: require('../assets/ElectronicIconD.png'), imageSelected: require('../assets/ElectronicIcon.png'), selected: false}];
+    }
+
+    updateSelectItem = (rowID, selectedState) => {
+        var newArray = this.state.filterData.slice();
+        newArray[rowID] = {
+            name: newArray[rowID].name,
+            image: newArray[rowID].image,
+            imageSelected: newArray[rowID].imageSelected,
+            selected: !newArray[rowID].selected
+        };
+        this.setState({
+            dataSource: filterDS.cloneWithRows(newArray),
+            filterData: newArray
+        });
     }
 
     render() {
@@ -75,12 +101,27 @@ class ChooseBusinessType extends Component {
                 <Text style={styles.logoHint}>you can filter your post interests by your profession</Text>
                 <ListView
                     contentContainerStyle={styles.list}
-                    dataSource={dataSource}
-                    renderRow={(data) => {
+                    dataSource={this.state.dataSource}
+                    renderRow={(rowData: string, sectionID: number, rowID: number) => {
                         return (
-                            <View style={styles.listItem}>
-                                <Text style={styles.itemName}>{data.name}</Text>
-                            </View>
+                            <TouchableOpacity onPress={() => this.updateSelectItem(rowID, rowData.selected)}>
+                                {
+                                    rowData.selected ?
+                                    <View style={[styles.listItem, styles.itemSelected]}>
+                                        <Image
+                                            style={styles.itemImg}
+                                            source={rowData.imageSelected}></Image>
+                                        <Text style={styles.itemNameSelected}>{rowData.name}</Text>
+                                    </View>
+                                    :
+                                    <View style={[styles.listItem, styles.itemUnselected]}>
+                                        <Image
+                                            style={styles.itemImg}
+                                            source={rowData.image}></Image>
+                                        <Text style={styles.itemName}>{rowData.name}</Text>
+                                    </View>
+                                }
+                            </TouchableOpacity>
                         );
                     }}
                 />
@@ -139,6 +180,7 @@ const styles = StyleSheet.create({
         margin: 10,
         backgroundColor: 'white',
         borderRadius: 5,
+        borderWidth: 2,
         shadowColor: '#c6cbdf',
         shadowOffset: {
             width: 2,
@@ -146,9 +188,24 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.31,
     },
+    itemSelected: {
+        borderColor: '#4feeca',
+    },
+    itemUnselected: {
+        borderColor: 'white',
+    },
+    itemImg: {
+        marginBottom: 10,
+    },
     itemName: {
         color: '#c6cbdf',
-        fontSize: 26,
+        fontSize: 24,
+        fontWeight: '800',
+        textAlign: 'center',
+    },
+    itemNameSelected: {
+        color: '#4feeca',
+        fontSize: 24,
         fontWeight: '800',
         textAlign: 'center',
     },
