@@ -20,6 +20,8 @@ import * as AuthAction from '../actions/auth';
 import MaterialsIcon from 'react-native-vector-icons/MaterialIcons';
 import GridView from 'react-native-gridview';
 
+import Slider from '../widgets/Slider';
+
 var {height, width} = Dimensions.get('window');
 
 // map redux store to props
@@ -97,7 +99,7 @@ class Filter extends Component {
                             </View>
                         </View>
                         <View style={styles.opacityArea}>
-                            
+                            <Slider />
                         </View>
                     </View>
                 </ScrollView>
