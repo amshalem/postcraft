@@ -65,8 +65,8 @@ export default class postcraft extends Component {
                 <Scene key="profile" hideNavBar={true} component={Profile} title="Profile" />
                 <Scene key="profilepreview" hideNavBar={true} component={ProfilePreview} title="ProfilePreview" />
                 <Scene key="postfeed" hideNavBar={true} component={PostFeed} title="PostFeed" />
-                <Scene key="viewpost" hideNavBar={true} component={ViewPost} title="ViewPost" initial />
-                <Scene key="craftshop" hideNavBar={true} component={CraftShop} title="CraftShop" />
+                <Scene key="viewpost" hideNavBar={true} component={ViewPost} title="ViewPost" />
+                <Scene key="craftshop" hideNavBar={true} component={CraftShop} title="CraftShop" initial />
                 <Scene key="filter" hideNavBar={true} component={Filter} title="Filter" />
                 <Scene key="cropmask" hideNavBar={true} component={CropMask} title="CropMask" />
                 <Scene key="drag" hideNavBar={true} component={Drag} title="Drag" />

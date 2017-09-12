@@ -79,81 +79,105 @@ class CraftShop extends Component {
                 </Image>
                 <View style={styles.toolTop}>
                     <View style={[styles.toolTopLeft, styles.layoutCenter]}>
-                        <Image
-                            style={styles.imgToolTop}
-                            source={require('../assets/Undo.png')}>
-                        </Image>
+                        <TouchableOpacity onPress={() => this.onUndoClicked}>
+                            <Image
+                                style={styles.imgToolTop}
+                                source={require('../assets/Undo.png')}>
+                            </Image>
+                        </TouchableOpacity>
                     </View>
                     <View style={[styles.toolTopMiddle, styles.layoutCenter]}>
-                        <Image
-                            style={styles.imgToolTop}
-                            source={require('../assets/Copy.png')}>
-                        </Image>
-                        <Image
-                            style={[styles.imgToolTop, styles.spaceBetween30]}
-                            source={require('../assets/Flip.png')}>
-                        </Image>
+                        <TouchableOpacity onPress={() => this.onCopyClicked}>
+                            <Image
+                                style={styles.imgToolTop}
+                                source={require('../assets/Copy.png')}>
+                            </Image>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.onFlipClicked}>
+                            <Image
+                                style={[styles.imgToolTop, styles.spaceBetween30]}
+                                source={require('../assets/Flip.png')}>
+                            </Image>
+                        </TouchableOpacity>
                     </View>
                     <View style={[styles.toolTopRight, styles.layoutCenter]}>
-                        <Image
-                            style={styles.imgToolTop}
-                            source={require('../assets/RedoD.png')}>
-                        </Image>
+                        <TouchableOpacity onPress={() => this.onRedoClicked}>
+                            <Image
+                                style={styles.imgToolTop}
+                                source={require('../assets/RedoD.png')}>
+                            </Image>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={styles.toolBottom}>
                     <View style={styles.toolBottomTop}>
                         <View style={styles.toolBottomTopItem}>
-                            <Image
-                                style={styles.btnToolBottomTop}
-                                source={require('../assets/Filter.png')}>
-                            </Image>
+                            <TouchableOpacity onPress={() => this.onFilterClicked}>
+                                <Image
+                                    style={styles.btnToolBottomTop}
+                                    source={require('../assets/Filter.png')}>
+                                </Image>
+                            </TouchableOpacity>
                             <Text style={styles.textToolBottomTop}>Filter</Text>
                         </View>
                         <View
                             style={styles.toolBottomTopItem}>
-                            <Image
-                                style={styles.btnToolBottomTop}
-                                source={require('../assets/Crop.png')}>
-                            </Image>
+                            <TouchableOpacity onPress={() => this.onCropClicked}>
+                                <Image
+                                    style={styles.btnToolBottomTop}
+                                    source={require('../assets/Crop.png')}>
+                                </Image>
+                            </TouchableOpacity>
                             <Text style={styles.textToolBottomTop}>Crop</Text>
                         </View>
                         <View style={styles.toolBottomTopItem}>
-                            <Image
-                                style={styles.btnToolBottomTop}
-                                source={require('../assets/RadialFocus.png')}>
-                            </Image>
+                            <TouchableOpacity onPress={() => this.onRadialFocusClicked}>
+                                <Image
+                                    style={styles.btnToolBottomTop}
+                                    source={require('../assets/RadialFocus.png')}>
+                                </Image>
+                            </TouchableOpacity>
                             <Text style={styles.textToolBottomTop}>Focus</Text>
                         </View>
                         <View style={styles.toolBottomTopItem}>
-                            <Image
-                                style={styles.btnToolBottomTop}
-                                source={require('../assets/ColorPicker.png')}>
-                            </Image>
+                            <TouchableOpacity onPress={() => this.onColorPickerClicked}>
+                                <Image
+                                    style={styles.btnToolBottomTop}
+                                    source={require('../assets/ColorPicker.png')}>
+                                </Image>
+                            </TouchableOpacity>
                             <Text style={styles.textToolBottomTop}>Color</Text>
                         </View>
                         <View style={styles.toolBottomTopItem}>
-                            <Image
-                                style={styles.btnToolBottomTop}
-                                source={require('../assets/GridStock.png')}>
-                            </Image>
+                            <TouchableOpacity onPress={() => this.onGridStockClicked}>
+                                <Image
+                                    style={styles.btnToolBottomTop}
+                                    source={require('../assets/GridStock.png')}>
+                                </Image>
+                            </TouchableOpacity>
                             <Text style={styles.textToolBottomTop}>Grid</Text>
                         </View>
                     </View>
                     <View style={styles.toolBottomBottom}>
                         <View style={[styles.toolBottomBottomItem, styles.toolItemSelected]}>
-                            <Image
-                                style={styles.imgToolBottomBottomItem}
-                                source={require('../assets/logo-man.png')}>
-                            </Image>
+                            <TouchableOpacity onPress={() => this.onImgClicked}>
+                                <Image
+                                    style={styles.imgToolBottomBottomItem}
+                                    source={require('../assets/logo-man.png')}>
+                                </Image>
+                            </TouchableOpacity>
                         </View>
                         <View style={styles.toolBottomBottomItem}>
+                            <TouchableOpacity onPress={() => this.onTxtClicked}>
+                            </TouchableOpacity>
                         </View>
                         <View style={styles.toolBottomBottomItem}>
-                            <Image
-                                style={styles.imgToolBottomBottomItem}
-                                source={require('../assets/UserLogoContainer.png')}>
-                            </Image>
+                            <TouchableOpacity onPress={() => this.onLogoClicked}>
+                                <Image
+                                    style={styles.imgToolBottomBottomItem}
+                                    source={require('../assets/UserLogoContainer.png')}>
+                                </Image>
+                            </TouchableOpacity>
                         </View>
                         <View style={styles.btnPlus}>
                             <Text style={styles.textPlus}>+</Text>
