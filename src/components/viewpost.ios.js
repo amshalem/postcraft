@@ -41,6 +41,10 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
+onStartEditClicked = () => {
+    console.log('Start Edit Clicked');
+}
+
 class ViewPost extends Component {
     constructor(props) {
         super(props);
@@ -76,7 +80,7 @@ class ViewPost extends Component {
                 <View style={styles.viewpostTextBox}>
                     <Text style={styles.textPreview}>Social PR Edit Text, quam vitae fringilla tincidunt. Suspendisse nec tortor urna. Ut laoreet sodales nisi, quis iaculis nulla iaculis vitae. Donec sagittis faucibus lacus eget blandit.</Text>
                 </View>
-                <TouchableOpacity onPress={() => Actions.startedit()}>
+                <TouchableOpacity onPress={() => this.onStartEditClicked}>
                     <LinearGradient
                         start={{x: 0.0, y: 1}}
                         end={{x: 1, y: 1.0}}
