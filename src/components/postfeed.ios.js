@@ -97,6 +97,18 @@ class PostFeed extends Component {
         });
     }
 
+    onCameraClicked = () => {
+        console.log('Camera Clicked');
+    }
+
+    onGalleryClicked = () => {
+        console.log('Gallery Clicked');
+    }
+
+    onCrossClicked = () => {
+        console.log('Cross Clicked');
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -158,7 +170,7 @@ class PostFeed extends Component {
                     colors={['#50e3c2', '#88f3f2']}
                     style={styles.bgCross}>
                 </LinearGradient>
-                <TouchableOpacity onPress={() => Actions.camera()}>
+                <TouchableOpacity onPress={() => this.onCameraClicked()}>
                     <LinearGradient
                         start={{x: 0.0, y: 0.0}}
                         end={{x: 1.0, y: 1.0}}
@@ -170,7 +182,7 @@ class PostFeed extends Component {
                             </Image>
                     </LinearGradient>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => Actions.gallery()}>
+                <TouchableOpacity onPress={() => this.onGalleryClicked()}>
                     <LinearGradient
                         start={{x: 0.0, y: 0.0}}
                         end={{x: 1.0, y: 1.0}}
@@ -182,7 +194,7 @@ class PostFeed extends Component {
                             </Image>
                     </LinearGradient>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => Actions.cross()}>
+                <TouchableOpacity onPress={() => this.onCrossClicked()}>
                     <LinearGradient
                         start={{x: 0.0, y: 0.25}}
                         end={{x: 0.5, y: 0.5}}
