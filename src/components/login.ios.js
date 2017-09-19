@@ -42,6 +42,14 @@ class Login extends Component {
         super(props);
     }
 
+    onFBClicked() {
+        console.log('Facebook Clicked');
+    }
+
+    onGoogleClicked() {
+        console.log('Google Clicked');
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -90,13 +98,13 @@ class Login extends Component {
                     </LinearGradient>
                 </TouchableOpacity>
                 <View style={styles.btnArea}>
-                    <TouchableOpacity onPress={() => Actions.fbLogin()}>
+                    <TouchableOpacity onPress={() => this.onFBClicked()}>
                         <Image
                             style={styles.socialButtons}
                             source={require('../assets/LoginFacebook.png')}>
                         </Image>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => Actions.googleLogin()}>
+                    <TouchableOpacity onPress={() => this.onGoogleClicked()}>
                         <Image
                             style={styles.socialButtons}
                             source={require('../assets/LoginGmail.png')}>

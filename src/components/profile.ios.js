@@ -66,6 +66,14 @@ class Profile extends Component {
         }
     }
 
+    onCloseClicked() {
+        Actions.login();
+    }
+
+    onSettingClicked() {
+        console.log('Settings Clicked');
+    }
+
     onCraftSelected() {
         this.setState({
             selectedMyCraft: true,
@@ -78,6 +86,10 @@ class Profile extends Component {
         });
     }
 
+    onProfileItemClicked() {
+        Actions.profilepreview();
+    }
+
     addProfile() {
         console.log('add profile feature coming soon');
     }
@@ -87,16 +99,20 @@ class Profile extends Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <View style={[styles.headerLeft, styles.layoutCenter]}>
-                        <Image
-                            style={styles.imgHeaderButton}
-                            source={require('../assets/CloseExit.png')}>
-                        </Image>
+                        <TouchableOpacity onPress={() => this.onCloseClicked()}>
+                            <Image
+                                style={styles.imgHeaderButton}
+                                source={require('../assets/CloseExit.png')}>
+                            </Image>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.headerMiddle}>
                         <Text style={styles.textHeader}>PROFILE</Text>
                     </View>
                     <View style={[styles.headerRight, styles.layoutCenter]}>
-                        <Icon name="gear" size={22} color="#000" />
+                        <TouchableOpacity onPress={() => this.onSettingClicked()}>
+                            <Icon name="gear" size={22} color="#000" />
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <Image
@@ -154,9 +170,11 @@ class Profile extends Component {
                     dataSource={dataSource}
                     renderRow={(data) => {
                         return (
-                            <View style={styles.listItem}>
-                                <Text style={styles.itemName}>{data.name}</Text>
-                            </View>
+                            <TouchableOpacity onPress={() => this.onProfileItemClicked()}>
+                                <View style={styles.listItem}>
+                                    <Text style={styles.itemName}>{data.name}</Text>
+                                </View>
+                            </TouchableOpacity>
                         );
                     }}
                 />

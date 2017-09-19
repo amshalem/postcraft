@@ -23,6 +23,8 @@ import GridView from 'react-native-gridview';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import ValueSlider from '../widgets/ValueSlider';
+
 var {height, width} = Dimensions.get('window');
 
 // map redux store to props
@@ -47,6 +49,10 @@ class TextEditor extends Component {
         this.state = {
             text: 'TYPE SOMETHING',
         };
+    }
+
+    onUndoClicked() {
+        console.log('Undo Clicked');
     }
 
     render() {
@@ -99,10 +105,19 @@ class TextEditor extends Component {
                         </View>
                     </View>
                 </View>
-                <View style={styles.toolBottom}></View>
+                <View style={styles.toolBottom}>
+                    <View style={styles.sliderArea}>
+                        <ValueSlider
+                            trackColor="#c6cbdf"
+                            thumbStyle={styles.grayThumbStyle}
+                            thumbText="Size"
+                            value={this.state.sizeValue}
+                            onValueChange={(value) => this.setState({value})} />
+                    </View>
+                </View>
                 <TouchableOpacity
                     style={[styles.btnUndoArea, styles.layoutCenter]}
-                    onPress={() => Actions.finish()}>
+                    onPress={() => this.onUndoClicked()}>
                         <LinearGradient
                             start={{x: 0.0, y: 1}}
                             end={{x: 1, y: 1}}
@@ -225,6 +240,19 @@ const styles = StyleSheet.create({
     },
     toolbottom: {
         backgroundColor: 'green',
+    },
+    sliderArea: {
+        marginTop: 20,
+        marginBottom: 10,
+        width: width - 80,
+        height: 30,
+    },
+    grayThumbStyle: {
+        width: 100,
+        height: 30,
+        borderRadius: 15,
+        borderWidth: 1,
+        borderColor: '#c6cbdf',
     },
     btnUndoArea: {
         position: 'absolute',

@@ -47,8 +47,17 @@ class ProfilePreview extends Component {
         super(props);
     }
 
+    onCloseClicked() {
+        Actions.profile();
+    }
+
+    onUploadClicked() {
+        console.log('Upload Clicked');
+    }
+
     copynedit() {
         console.log('copy and edit feature coming soon');
+        Actions.postfeed();
     }
 
     delete() {
@@ -60,16 +69,20 @@ class ProfilePreview extends Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <View style={[styles.headerLeft, styles.layoutCenter]}>
-                        <Image
-                            style={styles.imgHeaderButton}
-                            source={require('../assets/CloseExit.png')}>
-                        </Image>
+                        <TouchableOpacity onPress={() => this.onCloseClicked()}>
+                            <Image
+                                style={styles.imgHeaderButton}
+                                source={require('../assets/CloseExit.png')}>
+                            </Image>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.headerMiddle}>
                         <Text style={styles.textHeader}>VINTAGE ICECREAM</Text>
                     </View>
                     <View style={[styles.headerRight, styles.layoutCenter]}>
-                        <Icon name="upload" size={22} color="#000" />
+                        <TouchableOpacity onPress={() => this.onUploadClicked()}>
+                            <Icon name="upload" size={22} color="#000" />
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <ImageBackground

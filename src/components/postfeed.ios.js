@@ -82,6 +82,14 @@ class PostFeed extends Component {
                                 {name: 'HOLD', bgColor: '#57fcfe', borderColor: '#57fcfe', selectedBorderColor: '#f5b957', selected: false}];
     }
 
+    onCloseClicked() {
+        Actions.profilepreview();
+    }
+
+    onSettingClicked() {
+        console.log('Settings Clicked');
+    }
+
     onFilterSelected = (rowID, selectedState) => {
         var newArray = this.state.filterData.slice();
         newArray[rowID] = {
@@ -95,6 +103,10 @@ class PostFeed extends Component {
             filterDataSource: filterDS.cloneWithRows(newArray),
             filterData: newArray
         });
+    }
+
+    onPostItemClicked() {
+        Actions.viewpost();
     }
 
     onCameraClicked = () => {
@@ -114,10 +126,12 @@ class PostFeed extends Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <View style={[styles.headerLeft, styles.layoutCenter]}>
-                        <Image
-                            style={styles.imgHeaderButton}
-                            source={require('../assets/User.png')}>
-                        </Image>
+                        <TouchableOpacity onPress={() => this.onCloseClicked()}>
+                            <Image
+                                style={styles.imgHeaderButton}
+                                source={require('../assets/User.png')}>
+                            </Image>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.headerMiddle}>
                         <Image
@@ -126,7 +140,9 @@ class PostFeed extends Component {
                         </Image>
                     </View>
                     <View style={[styles.headerRight, styles.layoutCenter]}>
-                        <Icon name="gear" size={22} color="#000" />
+                        <TouchableOpacity onPress={() => this.onSettingClicked}>
+                            <Icon name="gear" size={22} color="#000" />
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={styles.filterArea}>
@@ -151,16 +167,18 @@ class PostFeed extends Component {
                     dataSource={dataSource}
                     renderRow={(data) => {
                         return (
-                            <ImageBackground
-                                style={styles.listItem}
-                                source={data.image}>
-                                    <Image
-                                        style={styles.imgListItem}
-                                        source={data.logoImage}>
-                                    </Image>
-                                    <Text style={styles.textListItemTop}>{data.titleTop}</Text>
-                                    <Text style={styles.textListItemBottom}>{data.titleBottom}</Text>
-                            </ImageBackground>
+                            <TouchableOpacity onPress={() => this.onPostItemClicked()}>
+                                <ImageBackground
+                                    style={styles.listItem}
+                                    source={data.image}>
+                                        <Image
+                                            style={styles.imgListItem}
+                                            source={data.logoImage}>
+                                        </Image>
+                                        <Text style={styles.textListItemTop}>{data.titleTop}</Text>
+                                        <Text style={styles.textListItemBottom}>{data.titleBottom}</Text>
+                                </ImageBackground>
+                            </TouchableOpacity>
                         );
                     }}
                 />

@@ -67,6 +67,41 @@ class Drag extends Component {
         }
     }
 
+    onUndoClicked() {
+        console.log('Undo Clicked');
+    }
+
+    onCopyClicked() {
+        console.log('Copy Clicked');
+    }
+
+    onFlipClicked() {
+        console.log('Flip Clicked');
+    }
+
+    onRedoClicked() {
+        console.log('Redo Clicked');
+    }
+
+    onFilterClicked() {
+        console.log('Filter Clicked');
+    }
+
+    onCropClicked() {
+        console.log('Crop Clicked');
+    }
+
+    onFocusClicked() {
+        console.log('Focus Clicked');
+    }
+    onColorPickerClicked() {
+        console.log('Color Picker Clicked');
+    }
+
+    onGridClicked() {
+        console.log('Grid Clicked');
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -102,66 +137,84 @@ class Drag extends Component {
                 </Image>
                 <View style={styles.toolTop}>
                     <View style={[styles.toolTopLeft, styles.layoutCenter]}>
-                        <Image
-                            style={styles.imgToolTop}
-                            source={require('../assets/UndoD.png')}>
-                        </Image>
+                        <TouchableOpacity onPress={() => this.onUndoClicked()}>
+                            <Image
+                                style={styles.imgToolTop}
+                                source={require('../assets/UndoD.png')}>
+                            </Image>
+                        </TouchableOpacity>
                     </View>
                     <View style={[styles.toolTopMiddle, styles.layoutCenter]}>
-                        <Image
-                            style={styles.imgToolTop}
-                            source={require('../assets/CopyD.png')}>
-                        </Image>
-                        <Image
-                            style={[styles.imgToolTop, styles.spaceBetween30]}
-                            source={require('../assets/Flip.png')}>
-                        </Image>
+                        <TouchableOpacity onPress={() => this.onCopyClicked()}>
+                            <Image
+                                style={styles.imgToolTop}
+                                source={require('../assets/CopyD.png')}>
+                            </Image>
+                        </TouchableOpacity>    
+                        <TouchableOpacity onPress={() => this.onFlipClicked()}>
+                            <Image
+                                style={[styles.imgToolTop, styles.spaceBetween30]}
+                                source={require('../assets/Flip.png')}>
+                            </Image>
+                        </TouchableOpacity>
                     </View>
                     <View style={[styles.toolTopRight, styles.layoutCenter]}>
-                        <Image
-                            style={styles.imgToolTop}
-                            source={require('../assets/RedoD.png')}>
-                        </Image>
+                        <TouchableOpacity onPress={() => this.onRedoClicked()}>
+                            <Image
+                                style={styles.imgToolTop}
+                                source={require('../assets/RedoD.png')}>
+                            </Image>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={styles.toolBottom}>
                     <View style={styles.toolBottomTop}>
-                        <View style={styles.toolBottomTopItem}>
-                            <Image
-                                style={styles.btnToolBottomTop}
-                                source={require('../assets/FilterD.png')}>
-                            </Image>
-                            <Text style={styles.textToolBottomTop}>Filter</Text>
-                        </View>
-                        <View
-                            style={styles.toolBottomTopItem}>
-                            <Image
-                                style={styles.btnToolBottomTop}
-                                source={require('../assets/CropD.png')}>
-                            </Image>
-                            <Text style={styles.textToolBottomTop}>Crop</Text>
-                        </View>
-                        <View style={styles.toolBottomTopItem}>
-                            <Image
-                                style={styles.btnToolBottomTop}
-                                source={require('../assets/FocusD.png')}>
-                            </Image>
-                            <Text style={styles.textToolBottomTop}>Focus</Text>
-                        </View>
-                        <View style={styles.toolBottomTopItem}>
-                            <Image
-                                style={styles.btnToolBottomTop}
-                                source={require('../assets/ColorPickerD.png')}>
-                            </Image>
-                            <Text style={styles.textToolBottomTop}>Color</Text>
-                        </View>
-                        <View style={styles.toolBottomTopItem}>
-                            <Image
-                                style={styles.btnToolBottomTop}
-                                source={require('../assets/GridStockD.png')}>
-                            </Image>
-                            <Text style={styles.textToolBottomTop}>Grid</Text>
-                        </View>
+                        <TouchableOpacity onPress={() => this.onFilterClicked()}>
+                            <View style={styles.toolBottomTopItem}>
+                                <Image
+                                    style={styles.btnToolBottomTop}
+                                    source={require('../assets/FilterD.png')}>
+                                </Image>
+                                <Text style={styles.textToolBottomTop}>Filter</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.onCropClicked()}>
+                            <View
+                                style={styles.toolBottomTopItem}>
+                                <Image
+                                    style={styles.btnToolBottomTop}
+                                    source={require('../assets/CropD.png')}>
+                                </Image>
+                                <Text style={styles.textToolBottomTop}>Crop</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.onFocusClicked()}>
+                            <View style={styles.toolBottomTopItem}>
+                                <Image
+                                    style={styles.btnToolBottomTop}
+                                    source={require('../assets/FocusD.png')}>
+                                </Image>
+                                <Text style={styles.textToolBottomTop}>Focus</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.onColorPickerClicked()}>
+                            <View style={styles.toolBottomTopItem}>
+                                <Image
+                                    style={styles.btnToolBottomTop}
+                                    source={require('../assets/ColorPickerD.png')}>
+                                </Image>
+                                <Text style={styles.textToolBottomTop}>Color</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.onGridClicked()}>
+                            <View style={styles.toolBottomTopItem}>
+                                <Image
+                                    style={styles.btnToolBottomTop}
+                                    source={require('../assets/GridStockD.png')}>
+                                </Image>
+                                <Text style={styles.textToolBottomTop}>Grid</Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.toolBottomBottom}>
                         <SwipeCards

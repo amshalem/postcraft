@@ -46,6 +46,30 @@ class SaveShare extends Component {
         super(props);
     }
 
+    onFBClicked() {
+        console.log('Facebook Clicked');
+    }
+
+    onInstagramClicked() {
+        console.log('Instagram Clicked');
+    }
+
+    onWhatsappClicked() {
+        console.log('Whatsapp Clicked');
+    }
+
+    onMailClicked() {
+        console.log('Mail Clicked');
+    }
+
+    onEllipsisClicked() {
+        console.log('Ellipsis Clicked');
+    }
+
+    onFinishClicked() {
+        console.log('Finish Clicked');
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -85,25 +109,25 @@ class SaveShare extends Component {
                     <Text style={styles.textPreview}>Social PR Edit Text, quam vitae fringilla tincidunt. Suspendisse nec tortor urna. Ut laoreet sodales nisi, quis iaculis nulla iaculis vitae. Donec sagittis faucibus lacus eget blandit.</Text>
                 </View>
                 <View style={styles.socialMediaBtnArea}>
-                    <Image
-                        style={styles.socialMediaBtn}
-                        source={require('../assets/logo-man.png')}></Image>
-                    <Image
-                        style={styles.socialMediaBtn}
-                        source={require('../assets/logo-man.png')}></Image>
-                    <Image
-                        style={styles.socialMediaBtn}
-                        source={require('../assets/logo-man.png')}></Image>
-                    <Image
-                        style={styles.socialMediaBtn}
-                        source={require('../assets/logo-man.png')}></Image>
-                    <Image
-                        style={styles.socialMediaBtn}
-                        source={require('../assets/logo-man.png')}></Image>
+                    <TouchableOpacity onPress={() => this.onFBClicked()}>
+                        <Icon style={styles.socialMediaBtn} name="facebook" size={26} color="#000" />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.onInstagramClicked()}>
+                        <Icon style={styles.socialMediaBtn} name="instagram" size={26} color="#000" />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.onWhatsappClicked()}>
+                        <Icon style={styles.socialMediaBtn} name="whatsapp" size={26} color="#000" />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.onMailClicked()}>
+                        <Icon style={styles.socialMediaBtn} name="inbox" size={26} color="#000" />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.onEllipsisClicked()}>
+                        <Icon style={styles.socialMediaBtn} name="ellipsis-h" size={26} color="#000" />
+                    </TouchableOpacity>
                 </View>
                 <TouchableOpacity
                     style={[styles.btnFinishArea, styles.layoutCenter]}
-                    onPress={() => Actions.finish()}>
+                    onPress={() => this.onFinishClicked()}>
                         <LinearGradient
                             start={{x: 0.0, y: 1}}
                             end={{x: 1, y: 1}}

@@ -44,6 +44,38 @@ class Focus extends Component {
         super(props);
     }
 
+    onUndoClicked() {
+        console.log('Undo Clicked');
+    }
+
+    onCopyClicked() {
+        console.log('Copy Clicked');
+    }
+
+    onFlipClicked() {
+        console.log('Flip Clicked');
+    }
+
+    onRedoClicked() {
+        console.log('Redo Clicked');
+    }
+
+    onCloseClicked() {
+        console.log('Close Clicked');
+    }
+
+    onClearClicked() {
+        console.log('Clear Clicked');
+    }
+
+    onRadialClicked() {
+        console.log('Radial Clicked');
+    }
+
+    onLinearClicked() {
+        console.log('Lindear Clicked');
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -81,59 +113,75 @@ class Focus extends Component {
                 </Image>
                 <View style={styles.toolTop}>
                     <View style={[styles.toolTopLeft, styles.layoutCenter]}>
-                        <Image
-                            style={styles.imgToolTop}
-                            source={require('../assets/Undo.png')}>
-                        </Image>
+                        <TouchableOpacity onPress={() => this.onUndoClicked()}>
+                            <Image
+                                style={styles.imgToolTop}
+                                source={require('../assets/Undo.png')}>
+                            </Image>
+                        </TouchableOpacity>
                     </View>
                     <View style={[styles.toolTopMiddle, styles.layoutCenter]}>
-                        <Image
-                            style={styles.imgToolTop}
-                            source={require('../assets/Copy.png')}>
-                        </Image>
-                        <Image
-                            style={[styles.imgToolTop, styles.spaceBetween30]}
-                            source={require('../assets/Flip.png')}>
-                        </Image>
+                        <TouchableOpacity onPress={() => this.onCopyClicked()}>
+                            <Image
+                                style={styles.imgToolTop}
+                                source={require('../assets/Copy.png')}>
+                            </Image>
+                        </TouchableOpacity>    
+                        <TouchableOpacity onPress={() => this.onFlipClicked()}>
+                            <Image
+                                style={[styles.imgToolTop, styles.spaceBetween30]}
+                                source={require('../assets/Flip.png')}>
+                            </Image>
+                        </TouchableOpacity>
                     </View>
                     <View style={[styles.toolTopRight, styles.layoutCenter]}>
-                        <Image
-                            style={styles.imgToolTop}
-                            source={require('../assets/RedoD.png')}>
-                        </Image>
+                        <TouchableOpacity onPress={() => this.onRedoClicked()}>
+                            <Image
+                                style={styles.imgToolTop}
+                                source={require('../assets/RedoD.png')}>
+                            </Image>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={styles.toolBottom}>
                     <View style={styles.toolBottomTop}>
-                        <View style={styles.toolBottomTopItem}>
-                            <Image
-                                style={styles.btnToolBottomTop}
-                                source={require('../assets/Close.png')}>
-                            </Image>
-                            <Text style={styles.textToolBottomTop}>Close</Text>
-                        </View>
-                        <View
-                            style={styles.toolBottomTopItem}>
-                            <Image
-                                style={styles.btnToolBottomTop}
-                                source={require('../assets/ClearFocus.png')}>
-                            </Image>
-                            <Text style={styles.textToolBottomTop}>Clear</Text>
-                        </View>
-                        <View style={styles.toolBottomTopItem}>
-                            <Image
-                                style={styles.btnToolBottomTop}
-                                source={require('../assets/RadialFocus.png')}>
-                            </Image>
-                            <Text style={styles.textToolBottomTop}>Radial</Text>
-                        </View>
-                        <View style={styles.toolBottomTopItem}>
-                            <Image
-                                style={styles.btnToolBottomTop}
-                                source={require('../assets/LinearFocus.png')}>
-                            </Image>
-                            <Text style={styles.textToolBottomTop}>Linear</Text>
-                        </View>
+                        <TouchableOpacity onPress={() => this.onCloseClicked()}>
+                            <View style={styles.toolBottomTopItem}>
+                                <Image
+                                    style={styles.btnToolBottomTop}
+                                    source={require('../assets/Close.png')}>
+                                </Image>
+                                <Text style={styles.textToolBottomTop}>Close</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.onClearClicked()}>
+                            <View
+                                style={styles.toolBottomTopItem}>
+                                <Image
+                                    style={styles.btnToolBottomTop}
+                                    source={require('../assets/ClearFocus.png')}>
+                                </Image>
+                                <Text style={styles.textToolBottomTop}>Clear</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.onRadialClicked()}>
+                            <View style={styles.toolBottomTopItem}>
+                                <Image
+                                    style={styles.btnToolBottomTop}
+                                    source={require('../assets/RadialFocus.png')}>
+                                </Image>
+                                <Text style={styles.textToolBottomTop}>Radial</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.onLinearClicked()}>
+                            <View style={styles.toolBottomTopItem}>
+                                <Image
+                                    style={styles.btnToolBottomTop}
+                                    source={require('../assets/LinearFocus.png')}>
+                                </Image>
+                                <Text style={styles.textToolBottomTop}>Linear</Text>
+                            </View>
+                        </TouchableOpacity>
                         <View style={styles.toolBottomTopItem}>
                         </View>
                     </View>
