@@ -78,7 +78,7 @@ class Filter extends Component {
                     source={require('../assets/logo-man.png')}>
                     <Image
                         style={styles.imgLogo}
-                        source={require('../assets/logo-man.png')}>
+                        source={require('../assets/UserLogoContainer.png')}>
                     </Image>
                     <Text style={styles.textTop}>SOON</Text>
                     <Text style={styles.textBottom}>OPENING</Text>

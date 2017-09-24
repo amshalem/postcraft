@@ -44,6 +44,10 @@ class CraftShop extends Component {
         super(props);
     }
 
+    onFilterClicked() {
+        Actions.filter();
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -112,7 +116,7 @@ class CraftShop extends Component {
                 <View style={styles.toolBottom}>
                     <View style={styles.toolBottomTop}>
                         <View style={styles.toolBottomTopItem}>
-                            <TouchableOpacity onPress={() => this.onFilterClicked}>
+                            <TouchableOpacity onPress={() => this.onFilterClicked()}>
                                 <Image
                                     style={styles.btnToolBottomTop}
                                     source={require('../assets/Filter.png')}>
