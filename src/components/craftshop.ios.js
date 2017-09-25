@@ -44,8 +44,40 @@ class CraftShop extends Component {
         super(props);
     }
 
+    onUndoClicked() {
+        console.log('Undo Clicked');
+    }
+
+    onCopyClicked() {
+        console.log('Copy Clicked');
+    }
+
+    onFlipClicked() {
+        console.log('Flip Clicked');
+    }
+
+    onRedoClicked() {
+        console.log('Redo Clicked');
+    }
+    
     onFilterClicked() {
         Actions.filter();
+    }
+
+    onCropClicked() {
+        console.log('Crop Clicked');
+    }
+
+    onFocusClicked() {
+        console.log('Focus Clicked');
+    }
+
+    onColorPickerClicked() {
+        console.log('Color Picker Clicked');
+    }
+
+    onGridStockClicked() {
+        console.log('Grid Stock Clicked');
     }
 
     render() {
