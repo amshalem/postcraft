@@ -3,6 +3,7 @@ import {
     AppRegistry,
     Dimensions,
     StyleSheet,
+    StatusBar,
     Text,
     TextInput,
     TouchableOpacity,
@@ -72,7 +73,12 @@ class Filter extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.header} />
+                <StatusBar
+                    hidden={true}
+                />   
+                <View style={styles.header}>
+                    <Text style={styles.textHeader}>ADJUSTMENT FILTER</Text>
+                </View>
                 <Image
                     style={styles.imgBg}
                     source={require('../assets/logo-man.png')}>
@@ -218,7 +224,13 @@ const styles = StyleSheet.create({
     header: {
         width: width,
         height: 50,
-        backgroundColor: 'green',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    textHeader: {
+        color: '#424c61',
+        fontSize: 12,
+        fontWeight: '900',
     },
     imgBg: {
         width: width,

@@ -59,7 +59,7 @@ class CraftShop extends Component {
     onRedoClicked() {
         console.log('Redo Clicked');
     }
-    
+
     onFilterClicked() {
         Actions.filter();
     }
@@ -80,6 +80,10 @@ class CraftShop extends Component {
         console.log('Grid Stock Clicked');
     }
 
+    onPlusClicked() {
+        console.log('Plus Clicked');
+    }
+    
     render() {
         return (
             <View style={styles.container}>
