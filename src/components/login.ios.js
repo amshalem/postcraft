@@ -5,9 +5,11 @@ import {
     StyleSheet,
     Text,
     TouchableOpacity,
+    ActivityIndicator,
     View,
     Image,
 } from 'react-native';
+import firebase from 'firebase';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { Actions, Scene, Router } from 'react-native-router-flux';
@@ -38,8 +40,44 @@ function mapDispatchToProps(dispatch) {
 }
 
 class Login extends Component {
+    state = {
+        email: '',
+        password: '',
+        loading: false,
+    };
+
     constructor(props) {
         super(props);
+    }
+
+    onLoginClicked() {
+        this.setState({
+            error: '',
+            loading: true,
+        });
+        const { email, password } = this.state;
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(() => {
+                this.setState({
+                    error: '',
+                })
+            })
+            .catch(() => {
+                firebase.auth().createUserWithEmailAndPassword(email, password)
+                    .then(() => {
+                        this.setState({
+                            error: '',
+                            loading: false,
+                        })
+                    })
+                    .catch(() => {
+                        this.setState({
+                            erorr: 'Authentication failed',
+                            loading: false,
+                        })
+                    })
+            })
+        Actions.profile();
     }
 
     onFBClicked() {
@@ -50,6 +88,20 @@ class Login extends Component {
         console.log('Google Clicked');
     }
 
+    renderSpinnerOrButton() {
+        if (this.state.loading) {
+            return <ActivityIndicator size='small' />;
+        }
+        return (
+            <LinearGradient
+                start={{x: 0.0, y: 1}}
+                end={{x: 1, y: 1.0}}
+                colors={['#4ffdd6', '#6ac2ff']}
+                style={[styles.buttons, styles.btnLogin]}>
+                <Text style={styles.btnLoginText}>LOGIN</Text>
+            </LinearGradient>
+            );
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -88,14 +140,9 @@ class Login extends Component {
                         useNativeDrive
                     />
                 </View>
-                <TouchableOpacity onPress={() => Actions.profile()}>
-                    <LinearGradient
-                        start={{x: 0.0, y: 1}}
-                        end={{x: 1, y: 1.0}}
-                        colors={['#4ffdd6', '#6ac2ff']}
-                        style={[styles.buttons, styles.btnLogin]}>
-                        <Text style={styles.btnLoginText}>LOGIN</Text>
-                    </LinearGradient>
+                <TouchableOpacity onPress={() => this.onLoginClicked()}>
+                    <Text style={styles.textError}>{this.state.error}</Text>
+                    {this.renderSpinnerOrButton()}
                 </TouchableOpacity>
                 <View style={styles.btnArea}>
                     <TouchableOpacity onPress={() => this.onFBClicked()}>

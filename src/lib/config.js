@@ -5,7 +5,7 @@ module.exports = {
 	authDomain: "postcraft-e3a32.firebaseapp.com",
 	databaseURL: "https://postcraft-e3a32.firebaseio.com",
 	projectID: "postcraft-e3a32",
-	storageBucket: ""
+	storageBucket: "",
 	messagingSenderID: "314883363333",
 	}
 }

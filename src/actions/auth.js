@@ -1,5 +1,8 @@
 import React from 'react';
 import { Actions } from 'react-native-router-flux';
+import * as firebase from 'firebase';
+
+import config from '../lib/config';
 
 const {
     LOGIN_REQUEST,
@@ -7,6 +10,7 @@ const {
     LOGIN_FAILURE,
 } = require('../lib/constants').default;
 
+const firebaseApp = firebase.initializeApp(config.firebaseConfig);
 
 export function loginWithMobile(item) {
     return dispatch => {
@@ -16,4 +20,3 @@ export function loginWithMobile(item) {
         })
     }
 }
-
