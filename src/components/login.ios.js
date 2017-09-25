@@ -51,34 +51,37 @@ class Login extends Component {
     }
 
     onLoginClicked() {
-        this.setState({
-            error: '',
-            loading: true,
-        });
-        const { email, password } = this.state;
-        firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(() => {
-                this.setState({
-                    error: '',
-                    loading: false,
-                })
-                Actions.profile();
-            })
-            .catch(() => {
-                firebase.auth().createUserWithEmailAndPassword(email, password)
-                    .then(() => {
-                        this.setState({
-                            error: '',
-                            loading: false,
-                        })
-                    })
-                    .catch(() => {
-                        this.setState({
-                            error: 'Authentication failed',
-                            loading: false,
-                        })
-                    })
-            })
+        console.log('Login Clicked');
+
+        // this.setState({
+        //     error: '',
+        //     loading: true,
+        // });
+        // const { email, password } = this.state;
+        // firebase.auth().signInWithEmailAndPassword(email, password)
+        //     .then(() => {
+        //         this.setState({
+        //             error: '',
+        //             loading: false,
+        //         })
+        //         Actions.profile();
+        //     })
+        //     .catch(() => {
+        //         firebase.auth().createUserWithEmailAndPassword(email, password)
+        //             .then(() => {
+        //                 this.setState({
+        //                     error: '',
+        //                     loading: false,
+        //                 })
+        //             })
+        //             .catch(() => {
+        //                 this.setState({
+        //                     error: 'Authentication failed',
+        //                     loading: false,
+        //                 })
+        //             })
+        //     })
+        Actions.profile();
     }
 
     onFBClicked() {
@@ -87,6 +90,18 @@ class Login extends Component {
 
     onGoogleClicked() {
         console.log('Google Clicked');
+
+
+        // const provider = firebase.auth.GoogleAuthProvider;
+        // const credential = provider.credential(idToken, accessToken);
+
+        // firebase.auth().signInWithCredential(credential)
+        //     .then((data) => {
+        //         console.log('SUCESS', data);
+        //     })
+        //     .catch((error) => {
+        //         console.log('ERROR', error);
+        //     })
     }
 
     renderSpinnerOrButton() {
