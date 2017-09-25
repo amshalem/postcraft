@@ -60,7 +60,9 @@ class Login extends Component {
             .then(() => {
                 this.setState({
                     error: '',
+                    loading: false,
                 })
+                Actions.profile();
             })
             .catch(() => {
                 firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -72,12 +74,11 @@ class Login extends Component {
                     })
                     .catch(() => {
                         this.setState({
-                            erorr: 'Authentication failed',
+                            error: 'Authentication failed',
                             loading: false,
                         })
                     })
             })
-        Actions.profile();
     }
 
     onFBClicked() {
