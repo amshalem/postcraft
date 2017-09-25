@@ -3,6 +3,7 @@ import {
     AppRegistry,
     Dimensions,
     StyleSheet,
+    StatusBar,
     Text,
     TextInput,
     TouchableOpacity,
@@ -44,9 +45,43 @@ class CropMask extends Component {
         super(props);
     }
 
+    onUndoClicked() {
+        console.log('Undo Clicked');
+    }
+
+    onCopyClicked() {
+        console.log('Copy Clicked');
+    }
+
+    onFlipClicked() {
+        console.log('Flip Clicked');
+    }
+
+    onRedoClicked() {
+        console.log('Redo Clicked');
+    }
+
+    onCloseClicked() {
+        console.log('Close Clicked');
+    }
+
+    onRectangleClicked() {
+        console.log('Rectangle Clicked');
+    }
+
+    onCircleClicked() {
+        console.log('Circle Clicked');
+    }
+
+    onTriangleClicked() {
+        console.log('Triangle Clicked');
+    }
+
     render() {
         return (
             <View style={styles.container}>
+                <StatusBar
+                    hidden={true} />
                 <View style={styles.header}>
                     <Text style={styles.textHeader}>CROP/MASK</Text>
                 </View>
@@ -80,57 +115,73 @@ class CropMask extends Component {
                 </Image>
                 <View style={styles.toolTop}>
                     <View style={[styles.toolTopLeft, styles.layoutCenter]}>
-                        <Image
-                            style={styles.imgToolTop}
-                            source={require('../assets/Undo.png')}>
-                        </Image>
+                        <TouchableOpacity onPress={() => this.onCloseClicked()}>
+                            <Image
+                                style={styles.imgToolTop}
+                                source={require('../assets/Undo.png')}>
+                            </Image>
+                        </TouchableOpacity>
                     </View>
                     <View style={[styles.toolTopMiddle, styles.layoutCenter]}>
-                        <Image
-                            style={styles.imgToolTop}
-                            source={require('../assets/Copy.png')}>
-                        </Image>
-                        <Image
-                            style={[styles.imgToolTop, styles.spaceBetween30]}
-                            source={require('../assets/Flip.png')}>
-                        </Image>
+                        <TouchableOpacity onPress={() => this.onCopyClicked()}>
+                            <Image
+                                style={styles.imgToolTop}
+                                source={require('../assets/Copy.png')}>
+                            </Image>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.onFlipClicked()}>
+                            <Image
+                                style={[styles.imgToolTop, styles.spaceBetween30]}
+                                source={require('../assets/Flip.png')}>
+                            </Image>
+                        </TouchableOpacity>
                     </View>
                     <View style={[styles.toolTopRight, styles.layoutCenter]}>
-                        <Image
-                            style={styles.imgToolTop}
-                            source={require('../assets/RedoD.png')}>
-                        </Image>
+                        <TouchableOpacity onPress={() => this.onRedoClicked()}>
+                            <Image
+                                style={styles.imgToolTop}
+                                source={require('../assets/RedoD.png')}>
+                            </Image>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={styles.toolBottom}>
                     <View style={styles.toolBottomTop}>
                         <View style={styles.toolBottomTopItem}>
-                            <Image
-                                style={styles.btnToolBottomTop}
-                                source={require('../assets/Close.png')}>
-                            </Image>
+                            <TouchableOpacity onPress={() => this.onCloseClicked()}>
+                                <Image
+                                    style={styles.btnToolBottomTop}
+                                    source={require('../assets/Close.png')}>
+                                </Image>
+                            </TouchableOpacity>
                             <Text style={styles.textToolBottomTop}>Close</Text>
                         </View>
                         <View
                             style={styles.toolBottomTopItem}>
-                            <Image
-                                style={styles.btnToolBottomTop}
-                                source={require('../assets/CropRectActive.png')}>
-                            </Image>
+                            <TouchableOpacity onPress={() => this.onRectangleClicked()}>
+                                <Image
+                                    style={styles.btnToolBottomTop}
+                                    source={require('../assets/CropRectActive.png')}>
+                                </Image>
+                            </TouchableOpacity>
                             <Text style={styles.textToolBottomTop}>Rectangle</Text>
                         </View>
                         <View style={styles.toolBottomTopItem}>
-                            <Image
-                                style={styles.btnToolBottomTop}
-                                source={require('../assets/CropMaskCircle.png')}>
-                            </Image>
+                            <TouchableOpacity onPress={() => this.onCircleClicked()}>
+                                <Image
+                                    style={styles.btnToolBottomTop}
+                                    source={require('../assets/CropMaskCircle.png')}>
+                                </Image>
+                            </TouchableOpacity>
                             <Text style={styles.textToolBottomTop}>Circle</Text>
                         </View>
                         <View style={styles.toolBottomTopItem}>
-                            <Image
-                                style={styles.btnToolBottomTop}
-                                source={require('../assets/CropMaskTrin.png')}>
-                            </Image>
+                            <TouchableOpacity onPress={() => this.onTriangleClicked()}>
+                                <Image
+                                    style={styles.btnToolBottomTop}
+                                    source={require('../assets/CropMaskTrin.png')}>
+                                </Image>
+                            </TouchableOpacity>
                             <Text style={styles.textToolBottomTop}>Tringale</Text>
                         </View>
                         <View style={styles.toolBottomTopItem}>
@@ -205,29 +256,29 @@ const styles = StyleSheet.create({
         borderStyle: 'dotted',
     },
     btnCrop: {
-        width: 36,
-        height: 8,
+        width: 48,
+        height: 16,
     },
     btnCropTop: {
         position: 'absolute',
-        top: 10,
-        left: width / 2 - 18,
+        top: 0,
+        left: width / 2 - 24,
     },
     btnCropBottom: {
         position: 'absolute',
-        bottom: 10,
-        left: width /2 - 18,
+        bottom: 0,
+        left: width /2 - 24,
     },
     btnCropLeft: {
         position: 'absolute',
-        left: 1,
-        top: width / 2 - 18,
+        left: -12,
+        top: width / 2 - 24,
         transform: [{rotate: '90deg'}],
     },
     btnCropRight: {
         position: 'absolute',
-        right: 1,
-        top: width / 2 - 18,
+        right: -12,
+        top: width / 2 - 24,
         transform: [{rotate: '90deg'}],
     },
     imgLogo: {
