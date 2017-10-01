@@ -64,6 +64,7 @@ class CraftShop extends Component {
             rowHasChanged: (r1, r2) => rq != r2
         });
         this.state = {
+            displayEditorBox: false,
             tabIndex: 0,
             dataSource: ds.cloneWithRows(postData),
             text: '',
@@ -79,10 +80,37 @@ class CraftShop extends Component {
         console.log('Share Clicked');
     }
 
+    onMoreClicked() {
+        this.setState({
+            displayEditorBox: true,
+        });
+    }
+
+    onUndoClicked() {
+        console.log('Undo Clicked');
+    }
+
+    onRedoClicked() {
+        console.log('Redo Clicked');
+    }
+
+    onCopyClicked() {
+        console.log('Copy Clicked');
+    }
+
+    onExchangeUnderClicked() {
+        console.log('Exchange Under Clicked');
+    }
+
+    onExchangeAboveClicked() {
+        console.log('Exchange Above Clicked');
+    }
+
     onStockClicked() {
         console.log('Stock Clicked');
         this.setState({
             tabIndex: 0,
+            displayEditorBox: false,
         })
     }
 
@@ -90,6 +118,7 @@ class CraftShop extends Component {
         console.log('Filter Clicked');
         this.setState({
             tabIndex: 1,
+            displayEditorBox: false,
         })
     }
 
@@ -97,19 +126,12 @@ class CraftShop extends Component {
         console.log('Crop Clicked');
         this.setState({
             tabIndex: 2,
+            displayEditorBox: false,
         });
-    }
-
-    onCopyClicked() {
-        console.log('Copy Clicked');
     }
 
     onFlipClicked() {
         console.log('Flip Clicked');
-    }
-
-    onRedoClicked() {
-        console.log('Redo Clicked');
     }
 
     onFocusClicked() {
@@ -152,6 +174,18 @@ class CraftShop extends Component {
         console.log('Plus Clicked');
     }
 
+    onRectangleClicked() {
+        console.log('Rectangle Clicked');
+    }
+
+    onCircleClicked() {
+        console.log('Circle Clicked');
+    }
+
+    onGridClicked() {
+        console.log('Grid Clicked');
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -180,13 +214,100 @@ class CraftShop extends Component {
                 <ImageBackground
                     style={styles.imgBg}
                     source={require('../assets/logo-man.png')}>
-                    <Image
-                        style={styles.imgLogo}
-                        source={require('../assets/UserLogoContainer.png')}>
-                    </Image>
-                    <Text style={styles.textTop}>SOON</Text>
-                    <Text style={styles.textBottom}>OPENING</Text>
+                    {
+                        (this.state.tabIndex==2) ?
+                            (
+                                <View style={[styles.cropArea, styles.layoutCenter]}>
+                                    <Image
+                                        style={[styles.btnCrop, styles.btnCropTop]}
+                                        source={require('../assets/CropBtn.png')}>
+                                    </Image>
+                                    <Image
+                                        style={[styles.btnCrop, styles.btnCropBottom]}
+                                        source={require('../assets/CropBtn.png')}>
+                                    </Image>
+                                    <Image
+                                        style={[styles.btnCrop, styles.btnCropLeft]}
+                                        source={require('../assets/CropBtn.png')}>
+                                    </Image>
+                                    <Image
+                                        style={[styles.btnCrop, styles.btnCropRight]}
+                                        source={require('../assets/CropBtn.png')}>
+                                    </Image>
+                                    <Image
+                                        style={styles.imgLogo}
+                                        source={require('../assets/UserLogoContainer.png')}>
+                                    </Image>
+                                    <Text style={styles.textTop}>SOON</Text>
+                                    <Text style={styles.textBottom}>OPENING</Text>
+                                </View>
+                            )
+                            :
+                            (
+                                <View style={[styles.layoutCenter]}>
+                                    <Image
+                                        style={styles.imgLogo}
+                                        source={require('../assets/UserLogoContainer.png')}>
+                                    </Image>
+                                    <Text style={styles.textTop}>SOON</Text>
+                                    <Text style={styles.textBottom}>OPENING</Text>
+                                </View>
+                            )
+                    }
+                    {
+                        (!this.state.displayEditorBox && this.state.tabIndex==0) ?
+                            (
+                                <TouchableOpacity onPress={() => this.onMoreClicked()}>
+                                    <IonIcon name="ios-more" size={56} style={styles.iconMore} />
+                                </TouchableOpacity>
+                            )
+                            : null
+                    }
                 </ImageBackground>
+                {
+                    (this.state.displayEditorBox) ?
+                        (
+                            <View style={styles.editorBox}>
+                                <View style={[styles.toolTopLeft, styles.layoutCenter]}>
+                                    <TouchableOpacity onPress={() => this.onUndoClicked()}>
+                                        <Image
+                                            style={styles.imgToolTop}
+                                            source={require('../assets/Undo.png')}>
+                                        </Image>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.onRedoClicked}>
+                                        <Image
+                                            style={[styles.imgToolTop, styles.spaceBetween20]}
+                                            source={require('../assets/RedoD.png')}>
+                                        </Image>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={[styles.toolTopMiddle, styles.layoutCenter]}>
+                                    <TouchableOpacity onPress={() => this.onCopyClicked}>
+                                        <Image
+                                            style={styles.imgToolTop}
+                                            source={require('../assets/Copy.png')}>
+                                        </Image>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={[styles.toolTopRight, styles.layoutCenter]}>
+                                    <TouchableOpacity onPress={() => this.onExchangeUnderClicked()}>
+                                        <Image
+                                            style={styles.imgToolTop}
+                                            source={require('../assets/ExchangeUnder.png')}>
+                                        </Image>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.onExchangeAboveClicked()}>
+                                        <Image
+                                            style={[styles.imgToolTop, styles.spaceBetween20]}
+                                            source={require('../assets/ExchangeAbove.png')}>
+                                        </Image>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        )
+                        : null
+                }
                 <View style={styles.toolTop}>
                     <View style={[styles.toolTopLeft, styles.layoutCenter]}>
                         <TouchableOpacity
@@ -254,15 +375,6 @@ class CraftShop extends Component {
                                         );
                                     }}
                                 />
-                                <TouchableOpacity onPress={() => this.onBtnPlusClicked()}>
-                                    <LinearGradient
-                                        start={{x: 0.0, y: 0.25}}
-                                        end={{x: 0.5, y: 0.5}}
-                                        colors={['#4ffdd6', '#6ac2ff']}
-                                        style={[styles.layoutCenter, styles.btnPlus]}>
-                                            <Text style={styles.btnPlusText}>+</Text>
-                                    </LinearGradient>
-                                </TouchableOpacity>
                             </View>
                         )
                         : null
@@ -274,9 +386,53 @@ class CraftShop extends Component {
                 }
                 {
                     (this.state.tabIndex == 2) ?
-                        <View style={[styles.tabContent, styles.cropContent]}></View>
+                        <View style={[styles.tabContent, styles.cropContent]}>
+                            <View style={[styles.cropToolItem, styles.layoutCenter]}>
+                                <TouchableOpacity
+                                    onPress={() => this.onRectangleClicked()}
+                                    style={[styles.btnCropTool, styles.layoutCenter]}>
+                                    <Image
+                                        style={styles.imgCropTool}
+                                        source={require('../assets/RectangleCrop.png')}>
+                                    </Image>
+                                </TouchableOpacity>
+                                <Text style={styles.textCropTool}>Rectangle</Text>
+                            </View>
+                            <View
+                                style={[styles.cropToolItem, styles.layoutCenter]}>
+                                <TouchableOpacity
+                                    onPress={() => this.onCircleClicked()}
+                                    style={[styles.btnCropTool, styles.layoutCenter]}>
+                                    <Image
+                                        style={styles.btnToolBottomTop}
+                                        source={require('../assets/CircleCrop.png')}>
+                                    </Image>
+                                </TouchableOpacity>
+                                <Text style={styles.textCropTool}>Circle</Text>
+                            </View>
+                            <View style={[styles.cropToolItem, styles.layoutCenter]}>
+                                <TouchableOpacity
+                                    onPress={() => this.onGridClicked()}
+                                    style={[styles.btnCropTool, styles.layoutCenter]}>
+                                    <Image
+                                        style={styles.btnToolBottomTop}
+                                        source={require('../assets/GridCrop.png')}>
+                                    </Image>
+                                </TouchableOpacity>
+                                <Text style={styles.textCropTool}>Grid</Text>
+                            </View>
+                        </View>
                         : null
                 }
+                <TouchableOpacity onPress={() => this.onBtnPlusClicked()}>
+                    <LinearGradient
+                        start={{x: 0.0, y: 0.25}}
+                        end={{x: 0.5, y: 0.5}}
+                        colors={['#4ffdd6', '#6ac2ff']}
+                        style={[styles.layoutCenter, styles.btnPlus, (this.state.displayEditorBox?styles.btnPlusOffsetP:styles.btnPlusOffsetM)]}>
+                            <Text style={styles.btnPlusText}>+</Text>
+                    </LinearGradient>
+                </TouchableOpacity>
             </View>
         );
     }
@@ -298,8 +454,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    spaceBetween30: {
-        marginLeft: 30,
+    spaceBetween20: {
+        marginLeft: 20,
     },
     toolItemSelected: {
         borderColor: '#4feeca',
@@ -343,6 +499,40 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    cropArea: {
+        width: width - 10,
+        height: width - 10,
+        borderRadius: 5,
+        borderColor: '#424c61',
+        borderWidth: 1,
+        borderStyle: 'dotted',
+    },
+    btnCrop: {
+        width: 48,
+        height: 16,
+    },
+    btnCropTop: {
+        position: 'absolute',
+        top: 0,
+        left: width / 2 - 24,
+    },
+    btnCropBottom: {
+        position: 'absolute',
+        bottom: 0,
+        left: width /2 - 24,
+    },
+    btnCropLeft: {
+        position: 'absolute',
+        left: -12,
+        top: width / 2 - 24,
+        transform: [{rotate: '90deg'}],
+    },
+    btnCropRight: {
+        position: 'absolute',
+        right: -12,
+        top: width / 2 - 24,
+        transform: [{rotate: '90deg'}],
+    },
     imgLogo: {
         width: 60,
         height: 60,
@@ -360,6 +550,23 @@ const styles = StyleSheet.create({
         color: '#f050ba',
         fontWeight: '800',
         backgroundColor: 'transparent',
+    },
+    iconMore: {
+        position: 'absolute',
+        bottom: 0,
+        marginBottom: -130,
+        backgroundColor: 'transparent',
+        color: '#424c61',
+        textShadowOffset: {
+            width: 1,
+            height: 1
+        },
+        textShadowColor: 'white',
+    },
+    editorBox: {
+        flexDirection: 'row',
+        width: width,
+        height: 42,
     },
     toolTop: {
         flexDirection: 'row',
@@ -498,11 +705,17 @@ const styles = StyleSheet.create({
     },
     btnPlus: {
         position: 'absolute',
-        bottom: 405,
-        right: -50,
+        right: -width / 2 - 50,
         width: 100,
         height: 100,
         borderRadius: 69,
+        zIndex: 1,
+    },
+    btnPlusOffsetM: {
+        top: -500,
+    },
+    btnPlusOffsetP: {
+        top: -542,
     },
     btnPlusText: {
         marginLeft: -40,
@@ -513,10 +726,12 @@ const styles = StyleSheet.create({
         fontWeight: '300',
     },
     filterContent: {
-        backgroundColor: 'red',
     },
     cropContent: {
-        backgroundColor: 'yellow',
+        width: width,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        padding: 50,
     },
     toolBottom: {
     },
@@ -526,18 +741,18 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 20,
     },
-    toolBottomTopItem: {
-        alignItems: 'center',
+    cropToolItem: {
+        width: 60,
+        height: 60,
     },
-    btnToolBottomTop: {
+    btnCropTool: {
         width: 50,
         height: 50,
-        // marginTop: 18,
-        borderRadius: 25,
+        borderRadius: 5,
         borderWidth: 1,
         borderColor: '#c6cbdf',
     },
-    textToolBottomTop: {
+    textCropTool: {
         marginTop: 5,
         color: '#c6cbdf',
         fontSize: 12,
@@ -560,20 +775,6 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 5,
     },
-    // btnPlus: {
-    //     width: 30,
-    //     height: 30,
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    //     marginLeft: 15,
-    //     borderRadius: 15,
-    //     borderWidth: 1,
-    //     borderColor: '#4feeca',
-    // },
-    // textPlus: {
-    //     fontSize: 20,
-    //     color: '#4feeca',
-    // },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CraftShop);
