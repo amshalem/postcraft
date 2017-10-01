@@ -275,13 +275,13 @@ export default class ValueSlider extends PureComponent {
           renderToHardwareTextureAndroid={true}
           onLayout={this._measureTrack}>
           <View
-            style={[mainStyles.circle, {borderColor: trackColor}]} />
+            style={[mainStyles.rectangle, {borderColor: trackColor}]} />
           <Dash
             dashLength={2}
             dashColor={trackColor}
             style={mainStyles.dash} />
           <View
-            style={[mainStyles.circle, {borderColor: trackColor}]} />
+            style={[mainStyles.rectangle, {borderColor: trackColor}]} />
         </View>
         <Animated.View
           onLayout={this._measureThumb}
@@ -546,15 +546,14 @@ var defaultStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  circle: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    borderWidth: 1,
+  rectangle: {
+    width: 8,
+    height: 18,
+    borderWidth: 2,
     borderColor: 'black',
   },
   dash: {
-    width: width - 80,
+    width: width - 180,
     height: 1,
   },
   thumb: {
