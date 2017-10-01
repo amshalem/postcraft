@@ -27,6 +27,8 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 
 import GridView from 'react-native-gridview';
 
+import ValueSlider from '../widgets/ValueSlider';
+
 var {height, width} = Dimensions.get('window');
 
 const postData = [
@@ -68,6 +70,7 @@ class CraftShop extends Component {
             tabIndex: 0,
             dataSource: ds.cloneWithRows(postData),
             text: '',
+            opacityValue: 0.2,
         };
     }
 
@@ -170,8 +173,32 @@ class CraftShop extends Component {
         })
     }
 
+    onSummerClicked() {
+        console.log('Summer Clicked');
+    }
+
+    onSpringClicked() {
+        console.log('Spring Clicked');
+    }
+
+    onWinterClicked() {
+        console.log('Winter Clicked');
+    }
+
+    onFallClicked() {
+        console.log('Fall Clicked');
+    }
+
+    onAgeClicked() {
+        console.log('Age Clicked');
+    }
+    
     onBtnPlusClicked() {
         console.log('Plus Clicked');
+    }
+
+    onBtnProClicked() {
+        console.log('Pro Clicked');
     }
 
     onRectangleClicked() {
@@ -336,52 +363,126 @@ class CraftShop extends Component {
                 </View>
                 {
                     (this.state.tabIndex == 0) ?
-                        (
-                            <View style={[styles.tabContent, styles.stockContent]}>
-                                <View style={styles.stockTop}>
-                                    <View style={styles.searchBox}>
-                                        <Icon name="search" size={14} color="#000" style={styles.searchIcon} />
-                                        <TextInput
-                                            style={styles.searchInput}
-                                            onChangeText={(text) => this.filterSearch(text)}
-                                            value={this.state.text}
-                                        />
-                                    </View>
-                                    <TouchableOpacity
-                                        onPress={() => this.onCameraRollClicked()}>
-                                        <View style={[styles.cameraRollBox, styles.layoutCenter]}>
-                                            <Text style={[styles.textCameraRoll, styles.disabledColor]}>Camera Roll</Text>
-                                        </View>
-                                    </TouchableOpacity>
+                        <View style={[styles.tabContent, styles.stockContent]}>
+                            <View style={styles.stockTop}>
+                                <View style={styles.searchBox}>
+                                    <Icon name="search" size={14} color="#000" style={styles.searchIcon} />
+                                    <TextInput
+                                        style={styles.searchInput}
+                                        onChangeText={(text) => this.filterSearch(text)}
+                                        value={this.state.text}
+                                    />
                                 </View>
-                                <ListView
-                                    enableEmptySections={true}
-                                    contentContainerStyle={styles.list}
-                                    dataSource={this.state.dataSource}
-                                    renderRow={(data) => {
-                                        return (
-                                            <TouchableOpacity onPress={() => this.onPostItemClicked()}>
-                                                <ImageBackground
-                                                    style={styles.listItem}
-                                                    source={data.image}>
-                                                        <Image
-                                                            style={styles.imgListItem}
-                                                            source={data.logoImage}>
-                                                        </Image>
-                                                        <Text style={styles.textListItemTop}>{data.titleTop}</Text>
-                                                        <Text style={styles.textListItemBottom}>{data.titleBottom}</Text>
-                                                </ImageBackground>
-                                            </TouchableOpacity>
-                                        );
-                                    }}
-                                />
+                                <TouchableOpacity
+                                    onPress={() => this.onCameraRollClicked()}>
+                                    <View style={[styles.cameraRollBox, styles.layoutCenter]}>
+                                        <Text style={[styles.textCameraRoll, styles.disabledColor]}>Camera Roll</Text>
+                                    </View>
+                                </TouchableOpacity>
                             </View>
-                        )
+                            <ListView
+                                enableEmptySections={true}
+                                contentContainerStyle={styles.list}
+                                dataSource={this.state.dataSource}
+                                renderRow={(data) => {
+                                    return (
+                                        <TouchableOpacity onPress={() => this.onPostItemClicked()}>
+                                            <ImageBackground
+                                                style={styles.listItem}
+                                                source={data.image}>
+                                                    <Image
+                                                        style={styles.imgListItem}
+                                                        source={data.logoImage}>
+                                                    </Image>
+                                                    <Text style={styles.textListItemTop}>{data.titleTop}</Text>
+                                                    <Text style={styles.textListItemBottom}>{data.titleBottom}</Text>
+                                            </ImageBackground>
+                                        </TouchableOpacity>
+                                    );
+                                }}
+                            />
+                        </View>
                         : null
                 }
                 {
                     (this.state.tabIndex == 1) ?
-                        <View style={[styles.tabContent, styles.filterContent]}></View>
+                        <View style={[styles.tabContent, styles.filterContent]}>
+                            <View style={[styles.colorDotsArea]}>
+                                <TouchableOpacity onPress={() => this.onSummerClicked()}>
+                                    <View style={styles.layoutCenter}>
+                                        <LinearGradient
+                                            start={{x: 0.0, y: 0.5}}
+                                            end={{x: 0, y: 1.0}}
+                                            colors={['#fad961', '#f76b1c']}
+                                            style={[styles.colorDotItem, styles.layoutCenter]}>
+                                            <Text style={styles.textColorDot}>Summer</Text>
+                                        </LinearGradient>
+                                </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.onSpringClicked()}>
+                                    <View style={styles.layoutCenter}>
+                                        <LinearGradient
+                                            start={{x: 0.0, y: 0.5}}
+                                            end={{x: 0, y: 1.0}}
+                                            colors={['#3023ae', '#c86dd7']}
+                                            style={[styles.colorDotItem, styles.layoutCenter]}>
+                                            <Text style={styles.textColorDot}>Spring</Text>
+                                        </LinearGradient>
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.onWinterClicked()}>
+                                    <View style={styles.layoutCenter}>
+                                        <LinearGradient
+                                            start={{x: 0.0, y: 0.5}}
+                                            end={{x: 0, y: 1.0}}
+                                            colors={['#557599', '#99b9db']}
+                                            style={[styles.colorDotItem, styles.layoutCenter]}>
+                                            <Text style={styles.textColorDot}>Winter</Text>
+                                        </LinearGradient>
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.onFallClicked()}>
+                                    <View style={styles.layoutCenter}>
+                                        <LinearGradient
+                                            start={{x: 0.0, y: 0.5}}
+                                            end={{x: 0, y: 1.0}}
+                                            colors={['#1c242d', '#e20098']}
+                                            style={[styles.colorDotItem, styles.layoutCenter]}>
+                                            <Text style={styles.textColorDot}>Fall</Text>
+                                        </LinearGradient>
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.onAgeClicked()}>
+                                    <View style={styles.layoutCenter}>
+                                        <LinearGradient
+                                            start={{x: 0.0, y: 0.5}}
+                                            end={{x: 0, y: 1.0}}
+                                            colors={['#6ac2ff', '#4ffdd6']}
+                                            style={[styles.colorDotItem, styles.layoutCenter]}>
+                                            <Text style={styles.textColorDot}>Age</Text>
+                                        </LinearGradient>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.filterArea}>
+                                <View style={[styles.sliderArea, styles.layoutCenter]}>
+                                    <ValueSlider
+                                        trackColor="#c6cbdf"
+                                        thumbStyle={styles.grayThumbStyle}
+                                        thumbText="Opacity"
+                                        value={this.state.opacityValue}
+                                        onValueChange={(value) => this.setState({value})} />
+                                </View>
+                                <View style={[styles.operationArea, styles.layoutCenter]}>
+                                    <Text style={styles.textOperation}>None</Text>
+                                </View>
+                            </View>
+                            <TouchableOpacity onPress={() => this.onBtnProClicked()}>
+                                <View style={[styles.layoutCenter, styles.btnPro, (this.state.displayEditorBox?styles.btnProOffsetP:styles.btnProOffsetM)]}>
+                                    <Text style={styles.btnProText}>PRO</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
                         : null
                 }
                 {
@@ -719,10 +820,10 @@ const styles = StyleSheet.create({
     },
     btnPlusText: {
         marginLeft: -40,
-        marginTop: -40,
+        marginTop: -50,
         backgroundColor: 'transparent',
         color: 'white',
-        fontSize: 32,
+        fontSize: 28,
         fontWeight: '300',
     },
     filterContent: {
@@ -740,6 +841,86 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         padding: 20,
+    },
+    colorDotsArea: {
+        width: width,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: 20,
+        paddingHorizontal: 25,
+    },
+    textColorDot: {
+        backgroundColor: 'transparent',
+        color: 'white',
+        fontSize: 11,
+    },
+    colorDotItem: {
+        width: 50,
+        height: 50,
+        borderRadius: 5,
+    },
+    filterArea: {
+        flexDirection: 'row',
+        height: 30,
+        width: width,
+        marginTop: 30,
+        paddingHorizontal: 30,
+        justifyContent: 'space-between',
+    },
+    sliderArea: {
+        marginBottom: 10,
+        width: width - 180,
+        height: 30,
+    },
+    grayThumbStyle: {
+        width: 70,
+        height: 30,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: '#c6cbdf',
+    },
+    greenThumbStyle: {
+        width: 70,
+        height: 30,
+        borderRadius: 15,
+        borderWidth: 1,
+        borderColor: '#50e3c2',
+    },
+    operationArea: {
+        height: 30,
+        width: 80,
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: '#c6cbdf',
+    },
+    textOperation: {
+        color: '#424c61',
+        fontSize: 12,
+        fontWeight: '900',
+    },
+    btnPro: {
+        position: 'absolute',
+        left: -50,
+        width: 100,
+        height: 100,
+        borderRadius: 69,
+        zIndex: 2,
+        backgroundColor: '#424c61',
+    },
+    btnProOffsetM: {
+        top: 35,
+    },
+    btnProOffsetP: {
+        top: 0,
+    },
+    btnProText: {
+        marginLeft: 40,
+        marginTop: -40,
+        backgroundColor: 'transparent',
+        color: 'white',
+        fontSize: 12,
+        fontWeight: '900',
     },
     cropToolItem: {
         width: 60,
