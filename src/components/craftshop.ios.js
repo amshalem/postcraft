@@ -22,8 +22,10 @@ import { connect } from 'react-redux';
 import * as AuthAction from '../actions/auth';
 
 import MaterialsIcon from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IonIcon from 'react-native-vector-icons/Ionicons';
+import EvilIcon from 'react-native-vector-icons/EvilIcons';
 
 import GridView from 'react-native-gridview';
 
@@ -76,6 +78,7 @@ class CraftShop extends Component {
             layerIndex: 0,
             aboveLayerClickable: true,
             underLayerClickable: false,
+            textSelected: false,
         };
     }
     componentDidMount() {
@@ -130,6 +133,9 @@ class CraftShop extends Component {
                 aboveLayerClickable: true
             });
         }
+        this.setState({
+            textSelected: (this.state.layerIndex == 3) ? true : false
+        });
     }
 
     onExchangeAboveClicked() {
@@ -149,6 +155,9 @@ class CraftShop extends Component {
                 underLayerClickable: true
             });
         }
+        this.setState({
+            textSelected: (this.state.layerIndex == 1) ? true : false
+        });
     }
 
     onStockClicked() {
@@ -156,7 +165,15 @@ class CraftShop extends Component {
         this.setState({
             tabIndex: 0,
             displayEditorBox: false,
-        })
+        });
+    }
+
+    onStyleClicked() {
+        console.log('Style Clicked');
+        this.setState({
+            tabIndex: 0,
+            displayEditorBox: false,
+        });
     }
 
     onFilterClicked() {
@@ -164,7 +181,7 @@ class CraftShop extends Component {
         this.setState({
             tabIndex: 1,
             displayEditorBox: false,
-        })
+        });
     }
 
     onCropClicked() {
@@ -181,10 +198,6 @@ class CraftShop extends Component {
 
     onFocusClicked() {
         console.log('Focus Clicked');
-    }
-
-    onColorPickerClicked() {
-        console.log('Color Picker Clicked');
     }
 
     onGridStockClicked() {
@@ -248,6 +261,38 @@ class CraftShop extends Component {
         const array = this.state.opacityArray.slice();
         array[this.state.layerIndex] = value;
         this.setState({ opacityArray: array });
+    }
+
+    onSizeChanged(value) {
+        console.log('Size Changed');
+    }
+
+    onAlignTextClicked() {
+        console.log('Text Align Clicked');
+    }
+
+    onColorPickerClicked() {
+        console.log('Color Picker Clicked');
+    }
+
+    onSpacingChanged(value) {
+        console.log('Spacing Changed');
+    }
+
+    onLineClicked() {
+        console.log('Line Clicked');
+    }
+
+    onCharClicked() {
+        console.log('Character Clicked');
+    }
+
+    onBorderChanged(value) {
+        console.log('Border Changed');
+    }
+    
+    onBorderColorClicked() {
+        console.log('Border Color Picker Clicked');
     }
 
     onRectangleClicked() {
@@ -321,10 +366,12 @@ class CraftShop extends Component {
                             :
                             (
                                 <View style={[styles.layoutCenter]}>
-                                    <Image
-                                        style={[styles.imgLogo, {opacity: this.state.opacityArray[1]}]}
-                                        source={require('../assets/UserLogoContainer.png')}>
-                                    </Image>
+                                    <View style={[styles.logoArea, (this.state.layerIndex == 1) && styles.logoSelected]}>
+                                        <Image
+                                            style={[styles.imgLogo, {opacity: this.state.opacityArray[1]}]}
+                                            source={require('../assets/UserLogoContainer.png')}>
+                                        </Image>
+                                    </View>
                                     <Text style={[styles.textTop, {opacity: this.state.opacityArray[2]}]}>SOON</Text>
                                     <Text style={[styles.textBottom, {opacity: this.state.opacityArray[2]}]}>OPENING</Text>
                                 </View>
@@ -384,35 +431,65 @@ class CraftShop extends Component {
                         )
                         : null
                 }
-                <View style={styles.toolTop}>
-                    <View style={[styles.toolTopLeft, styles.layoutCenter]}>
-                        <TouchableOpacity
-                            style={{flexDirection: 'row'}}
-                            onPress={() => this.onStockClicked()}>
-                            <IonIcon name="ios-cloud-outline" size={22} style={styles.activeColor} />
-                            <Text style={styles.textToolTop}>STOCK</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={[styles.toolTopMiddle, styles.layoutCenter]}>
-                        <TouchableOpacity
-                            style={{flexDirection: 'row'}}
-                            onPress={() => this.onFilterClicked()}>
-                            <IonIcon name="ios-color-wand-outline" size={22} style={[styles.rotate90, styles.disabledColor]} />
-                            <Text style={styles.textToolTopD}>FILTER</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={[styles.toolTopRight, styles.layoutCenter]}>
-                        <TouchableOpacity
-                            style={{flexDirection: 'row'}}
-                            onPress={() => this.onCropClicked()}>
-                            <IonIcon name="ios-crop-outline" size={22} style={[styles.rotate90, styles.disabledColor]} />
-                            <Text style={styles.textToolTopD}>CROP</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
                 {
-                    (this.state.tabIndex == 0) ?
-                        <View style={[styles.tabContent, styles.stockContent]}>
+                    (!this.state.textSelected) ?
+                        <View style={styles.toolTop}>
+                            <View style={[styles.toolTopLeft, styles.layoutCenter]}>
+                                <TouchableOpacity
+                                    style={{flexDirection: 'row'}}
+                                    onPress={() => this.onStockClicked()}>
+                                    <IonIcon name="ios-cloud-outline" size={22} style={styles.activeColor} />
+                                    <Text style={styles.textToolTop}>STOCK</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={[styles.toolTopMiddle, styles.layoutCenter]}>
+                                <TouchableOpacity
+                                    style={{flexDirection: 'row'}}
+                                    onPress={() => this.onFilterClicked()}>
+                                    <IonIcon name="ios-color-wand-outline" size={22} style={[styles.rotate90, styles.disabledColor]} />
+                                    <Text style={styles.textToolTopD}>FILTER</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={[styles.toolTopRight, styles.layoutCenter]}>
+                                <TouchableOpacity
+                                    style={{flexDirection: 'row'}}
+                                    onPress={() => this.onCropClicked()}>
+                                    <IonIcon name="ios-crop-outline" size={22} style={[styles.rotate90, styles.disabledColor]} />
+                                    <Text style={styles.textToolTopD}>CROP</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        :
+                        <View style={styles.toolTop}>
+                            <View style={[styles.toolTopLeft, styles.layoutCenter]}>
+                                <TouchableOpacity
+                                    style={[styles.layoutCenter, {flexDirection: 'row'}]}
+                                    onPress={() => this.onStyleClicked()}>
+                                    <EvilIcon name="pencil" size={22} style={styles.activeColor} />
+                                    <Text style={[styles.textToolTop, {marginBottom: 5}]}>STYLE</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={[styles.toolTopMiddle, styles.layoutCenter]}>
+                                <TouchableOpacity
+                                    style={[styles.layoutCenter, {flexDirection: 'row'}]}
+                                    onPress={() => this.onFilterClicked()}>
+                                    <Icon name="font" size={14} style={[styles.disabledColor]} />
+                                    <Text style={[styles.textToolTopD, {marginBottom: 5}]}>FONT</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={[styles.toolTopRight, styles.layoutCenter]}>
+                                <TouchableOpacity
+                                    style={{flexDirection: 'row'}}
+                                    onPress={() => this.onFilterClicked()}>
+                                    <IonIcon name="ios-color-wand-outline" size={22} style={[styles.rotate90, styles.disabledColor]} />
+                                    <Text style={styles.textToolTopD}>FILTER</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                }
+                {
+                    (this.state.tabIndex == 0 && !this.state.textSelected) ?
+                        <View style={[styles.tabContent]}>
                             <View style={styles.stockTop}>
                                 <View style={styles.searchBox}>
                                     <Icon name="search" size={14} color="#000" style={styles.searchIcon} />
@@ -454,8 +531,69 @@ class CraftShop extends Component {
                         : null
                 }
                 {
+                    (this.state.tabIndex == 0 && this.state.textSelected) ?
+                        <View style={[styles.tabContent]}>
+                            <View style={styles.sliderBox}>
+                                <View style={[styles.sliderArea, styles.layoutCenter]}>
+                                    <ValueSlider
+                                        trackColor="#c6cbdf"
+                                        thumbStyle={styles.grayThumbStyle}
+                                        thumbText="Size"
+                                        value={this.state.opacityArray[this.state.layerIndex]}
+                                        onValueChange={(value) => this.onSizeChanged(value)} />
+                                </View>
+                                <TouchableOpacity onPress={() => this.onAlignTextClicked()}>
+                                    <View style={[styles.sideBoxGreen, styles.layoutCenter]}>
+                                        <MaterialCommunityIcon name="format-align-center" color="#4feeca" size={22} />                                    
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.onColorPickerClicked()}>
+                                    <View style={[styles.sideBoxGray, {backgroundColor: '#f050ba'}]}>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.sliderBox}>
+                                <View style={[styles.sliderArea, styles.layoutCenter]}>
+                                    <ValueSlider
+                                        trackColor="#c6cbdf"
+                                        thumbStyle={styles.grayThumbStyle}
+                                        thumbText="Spacing"
+                                        value={this.state.opacityArray[this.state.layerIndex]}
+                                        onValueChange={(value) => this.onSpacingChanged(value)} />
+                                </View>
+                                <TouchableOpacity onPress={() => this.onLineClicked()}>
+                                    <View style={[styles.sideBoxGreen, styles.layoutCenter]}>
+                                        <Text style={[styles.textSideBox, {color: '#4feeca'}]}>Line</Text>                                    
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.onCharClicked()}>
+                                    <View style={[styles.sideBoxGray, styles.layoutCenter]}>
+                                        <Text style={[styles.textSideBox, {color: '#c6cbdf'}]}>Char</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.sliderBox}>
+                                <View style={[styles.sliderArea, styles.layoutCenter]}>
+                                    <ValueSlider
+                                        trackColor="#c6cbdf"
+                                        thumbStyle={styles.grayThumbStyle}
+                                        thumbText="Border"
+                                        value={this.state.opacityArray[this.state.layerIndex]}
+                                        onValueChange={(value) => this.onBorderChanged(value)} />
+                                </View>
+                                <TouchableOpacity onPress={() => this.onBorderColorClicked()}>
+                                    <View style={[styles.sideBoxGray, {backgroundColor: '#424c61'}]}>
+                                    </View>
+                                </TouchableOpacity>
+                                <View style={{width: 30, height: 30}}>
+                                </View>
+                            </View>
+                        </View>
+                        : null
+                }
+                {
                     (this.state.tabIndex == 1) ?
-                        <View style={[styles.tabContent, styles.filterContent]}>
+                        <View style={[styles.tabContent]}>
                             <View style={[styles.colorDotsArea]}>
                                 <TouchableOpacity onPress={() => this.onSummerClicked()}>
                                     <View style={styles.layoutCenter}>
@@ -513,7 +651,7 @@ class CraftShop extends Component {
                                     </View>
                                 </TouchableOpacity>
                             </View>
-                            <View style={styles.filterArea}>
+                            <View style={styles.sliderBox}>
                                 <View style={[styles.sliderArea, styles.layoutCenter]}>
                                     <ValueSlider
                                         trackColor="#c6cbdf"
@@ -683,6 +821,16 @@ const styles = StyleSheet.create({
         top: width / 2 - 24,
         transform: [{rotate: '90deg'}],
     },
+    logoArea: {
+        width: 60,
+        height: 60,  
+    },
+    logoSelected: {
+        borderWidth: 1,
+        borderColor: 'black',
+        borderRadius: 5,
+        borderStyle: 'dotted',
+    },
     imgLogo: {
         width: 60,
         height: 60,
@@ -771,8 +919,6 @@ const styles = StyleSheet.create({
     tabContent: {
         width: width,
         height: height,
-    },
-    stockContent: {
         backgroundColor: 'white',
     },
     stockTop: {
@@ -882,8 +1028,6 @@ const styles = StyleSheet.create({
         fontSize: 28,
         fontWeight: '300',
     },
-    filterContent: {
-    },
     cropContent: {
         width: width,
         flexDirection: 'row',
@@ -916,7 +1060,7 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 5,
     },
-    filterArea: {
+    sliderBox: {
         flexDirection: 'row',
         height: 30,
         width: width,
@@ -943,6 +1087,24 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#50e3c2',
     },
+    sideBoxGray: {
+        height: 30,
+        width: 30,
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: '#c6cbdf'
+    },
+    sideBoxGreen: {
+        height: 30,
+        width: 30,
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: '#4feeca'
+    },
+    textSideBox: {
+        fontSize: 10,
+        fontWeight: '900',
+    },
     operationArea: {
         height: 30,
         width: 80,
@@ -968,7 +1130,7 @@ const styles = StyleSheet.create({
         top: 35,
     },
     btnProOffsetP: {
-        top: 0,
+        top: -7,
     },
     btnProText: {
         marginLeft: 40,
