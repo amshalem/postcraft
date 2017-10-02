@@ -69,9 +69,21 @@ class CraftShop extends Component {
             displayEditorBox: false,
             tabIndex: 0,
             dataSource: ds.cloneWithRows(postData),
-            text: '',
-            opacityValue: 0.2,
+            searchText: '',
+            opacityArray: [],
+            opacityValue: 0.5,
+            layerCount: 3,
+            layerIndex: 0,
+            aboveLayerClickable: true,
+            underLayerClickable: false,
         };
+    }
+    componentDidMount() {
+        for (var i = 0; i < this.state.layerCount; i++) {
+            this.setState({
+                opacityArray: [...this.state.opacityArray, 0.9]
+            })
+        }
     }
 
     onCloseClicked() {
@@ -103,10 +115,40 @@ class CraftShop extends Component {
 
     onExchangeUnderClicked() {
         console.log('Exchange Under Clicked');
+        if (this.state.layerIndex > 0) {
+            this.setState({
+                layerIndex: this.state.layerIndex - 1,
+            });
+        }
+        if (this.state.layerIndex == 1) {
+            this.setState({
+                underLayerClickable: false
+            });
+        }
+        if (this.state.layerIndex < this.state.layerCount) {
+            this.setState({
+                aboveLayerClickable: true
+            });
+        }
     }
 
     onExchangeAboveClicked() {
         console.log('Exchange Above Clicked');
+        if (this.state.layerIndex < this.state.layerCount - 1){
+            this.setState({
+                layerIndex: this.state.layerIndex + 1,
+            });
+        }
+        if (this.state.layerIndex == this.state.layerCount - 2) {
+            this.setState({
+                aboveLayerClickable: false
+            });
+        }
+        if (this.state.layerIndex > 0) {
+            this.setState({
+                underLayerClickable: true
+            });
+        }
     }
 
     onStockClicked() {
@@ -161,15 +203,15 @@ class CraftShop extends Component {
         console.log('Camera Roll Clicked');
     }
 
-    filterSearch(text) {
+    filterSearch(searchText) {
         const newData = postData.filter(function(item) {
             const itemData = item.name.toUpperCase()
-            const textData = text
+            const textData = searchText
             return itemData.indexOf(textData) > -1
         })
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(newData),
-            text: text
+            searchText: searchText
         })
     }
 
@@ -192,13 +234,20 @@ class CraftShop extends Component {
     onAgeClicked() {
         console.log('Age Clicked');
     }
-    
+
     onBtnPlusClicked() {
         console.log('Plus Clicked');
     }
 
     onBtnProClicked() {
         console.log('Pro Clicked');
+    }
+
+    onOpacityChanged(value) {
+        this.setState({opacityValue: value});
+        const array = this.state.opacityArray.slice();
+        array[this.state.layerIndex] = value;
+        this.setState({ opacityArray: array });
     }
 
     onRectangleClicked() {
@@ -239,7 +288,7 @@ class CraftShop extends Component {
                     </View>
                 </View>
                 <ImageBackground
-                    style={styles.imgBg}
+                    style={[styles.imgBg, {opacity: this.state.opacityArray[0]}]}
                     source={require('../assets/logo-man.png')}>
                     {
                         (this.state.tabIndex==2) ?
@@ -273,19 +322,19 @@ class CraftShop extends Component {
                             (
                                 <View style={[styles.layoutCenter]}>
                                     <Image
-                                        style={styles.imgLogo}
+                                        style={[styles.imgLogo, {opacity: this.state.opacityArray[1]}]}
                                         source={require('../assets/UserLogoContainer.png')}>
                                     </Image>
-                                    <Text style={styles.textTop}>SOON</Text>
-                                    <Text style={styles.textBottom}>OPENING</Text>
+                                    <Text style={[styles.textTop, {opacity: this.state.opacityArray[2]}]}>SOON</Text>
+                                    <Text style={[styles.textBottom, {opacity: this.state.opacityArray[2]}]}>OPENING</Text>
                                 </View>
                             )
                     }
                     {
-                        (!this.state.displayEditorBox && this.state.tabIndex==0) ?
+                        (!this.state.displayEditorBox ) ?
                             (
-                                <TouchableOpacity onPress={() => this.onMoreClicked()}>
-                                    <IonIcon name="ios-more" size={56} style={styles.iconMore} />
+                                <TouchableOpacity onPress={() => this.onMoreClicked()} style={[styles.layoutCenter, {marginLeft:10}]}>
+                                    <IonIcon name="ios-more" size={56} style={[styles.iconMore, (this.state.tabIndex==2)?styles.iconMoreCrop:styles.iconMoreNCrop]} />
                                 </TouchableOpacity>
                             )
                             : null
@@ -321,13 +370,13 @@ class CraftShop extends Component {
                                     <TouchableOpacity onPress={() => this.onExchangeUnderClicked()}>
                                         <Image
                                             style={styles.imgToolTop}
-                                            source={require('../assets/ExchangeUnder.png')}>
+                                            source={(this.state.underLayerClickable)?require('../assets/ExchangeUnder.png'):require('../assets/ExchangeUnderD.png')}>
                                         </Image>
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={() => this.onExchangeAboveClicked()}>
                                         <Image
                                             style={[styles.imgToolTop, styles.spaceBetween20]}
-                                            source={require('../assets/ExchangeAbove.png')}>
+                                            source={(this.state.aboveLayerClickable)?require('../assets/ExchangeAbove.png'):require('../assets/ExchangeAboveD.png')}>
                                         </Image>
                                     </TouchableOpacity>
                                 </View>
@@ -470,8 +519,8 @@ class CraftShop extends Component {
                                         trackColor="#c6cbdf"
                                         thumbStyle={styles.grayThumbStyle}
                                         thumbText="Opacity"
-                                        value={this.state.opacityValue}
-                                        onValueChange={(value) => this.setState({value})} />
+                                        value={this.state.opacityArray[this.state.layerIndex]}
+                                        onValueChange={(value) => this.onOpacityChanged(value)} />
                                 </View>
                                 <View style={[styles.operationArea, styles.layoutCenter]}>
                                     <Text style={styles.textOperation}>None</Text>
@@ -653,9 +702,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     iconMore: {
-        position: 'absolute',
-        bottom: 0,
-        marginBottom: -130,
         backgroundColor: 'transparent',
         color: '#424c61',
         textShadowOffset: {
@@ -663,6 +709,16 @@ const styles = StyleSheet.create({
             height: 1
         },
         textShadowColor: 'white',
+    },
+    iconMoreNCrop: {
+        position: 'absolute',
+        bottom: 0,
+        marginBottom: -130,
+    },
+    iconMoreCrop: {
+        position: 'absolute',
+        bottom: 0,
+        marginBottom: -10,
     },
     editorBox: {
         flexDirection: 'row',
