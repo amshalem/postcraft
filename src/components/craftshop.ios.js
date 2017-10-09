@@ -14,6 +14,7 @@ import {
     ImageBackground,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Modal from 'react-native-modal';
 
 import { Actions, Scene, Router } from 'react-native-router-flux';
 
@@ -29,6 +30,7 @@ import EvilIcon from 'react-native-vector-icons/EvilIcons';
 
 import GridView from 'react-native-gridview';
 
+import Draggable from '../widgets/Draggable';
 import ValueSlider from '../widgets/ValueSlider';
 
 var {height, width} = Dimensions.get('window');
@@ -72,21 +74,59 @@ class CraftShop extends Component {
             tabIndex: 0,
             dataSource: ds.cloneWithRows(postData),
             searchText: '',
+            isTextArray: [],
             opacityArray: [],
+            sizeArray: [],
+            spacingArray: [],
+            borderArray: [],
             opacityValue: 0.5,
-            layerCount: 3,
+            sizeValue: 10,
+            spacingValue: 1,
+            borderValue: 1,
+            layerCount: 4,
             layerIndex: 0,
             aboveLayerClickable: true,
             underLayerClickable: false,
             textSelected: false,
+            charSpacingSelected: false,
+            filterProSelected: false,
+            cropType: 1,
         };
     }
     componentDidMount() {
         for (var i = 0; i < this.state.layerCount; i++) {
             this.setState({
-                opacityArray: [...this.state.opacityArray, 0.9]
+                opacityArray: [...this.state.opacityArray, 0.9],
+                sizeArray: [...this.state.sizeArray, 1],
+                spacingArray: [...this.state.spacingArray, 1],
+                borderArray: [...this.state.borderArray, 1],
             })
         }
+        this.setState({
+            isTextArray: [...this.state.isTextArray, false]
+        });
+        this.setState({
+            isTextArray: [...this.state.isTextArray, false]
+        });
+        this.setState({
+            isTextArray: [...this.state.isTextArray, true]
+        });
+        this.setState({
+            isTextArray: [...this.state.isTextArray, true]
+        });
+        // isTextArray[0] = false;
+        // isTextArray[1] = false;
+        // isTextArray[2] = true;
+        // isTextArray[3] = true;
+        const szArray = this.state.sizeArray.slice();
+        szArray[2] = 30;
+        szArray[3] = 60;
+        this.setState({ sizeArray: szArray });
+        const spArray = this.state.spacingArray.slice();
+
+        spArray[2] = 1;
+        spArray[3] = 1;
+        this.setState({ spacingArray: spArray });
     }
 
     onCloseClicked() {
@@ -134,7 +174,7 @@ class CraftShop extends Component {
             });
         }
         this.setState({
-            textSelected: (this.state.layerIndex == 3) ? true : false
+            textSelected: (this.state.layerIndex == 3 || this.state.layerIndex == 4) ? true : false
         });
     }
 
@@ -156,7 +196,7 @@ class CraftShop extends Component {
             });
         }
         this.setState({
-            textSelected: (this.state.layerIndex == 1) ? true : false
+            textSelected: (this.state.layerIndex == 1 || this.state.layerIndex == 2) ? true : false
         });
     }
 
@@ -254,17 +294,24 @@ class CraftShop extends Component {
 
     onBtnProClicked() {
         console.log('Pro Clicked');
+        this.setState({
+            filterProSelected: true,
+        });
     }
 
     onOpacityChanged(value) {
-        this.setState({opacityValue: value});
+        this.setState({ opacityValue: value });
         const array = this.state.opacityArray.slice();
         array[this.state.layerIndex] = value;
         this.setState({ opacityArray: array });
     }
 
     onSizeChanged(value) {
-        console.log('Size Changed');
+        value = parseInt(value * 80);
+        this.setState({ sizeValue: value });
+        const array = this.state.sizeArray.slice();
+        array[this.state.layerIndex] = value;
+        this.setState({ sizeArray: array });
     }
 
     onAlignTextClicked() {
@@ -276,19 +323,30 @@ class CraftShop extends Component {
     }
 
     onSpacingChanged(value) {
-        console.log('Spacing Changed');
+        value = parseInt(value * 20);
+        this.setState({ spacingValue: value });
+        const array = this.state.spacingArray.slice();
+        array[this.state.layerIndex] = value;
+        this.setState({ spacingArray: array });
     }
 
     onLineClicked() {
-        console.log('Line Clicked');
+        this.setState({
+            charSpacingSelected: false,
+        });
     }
 
     onCharClicked() {
-        console.log('Character Clicked');
+        this.setState({
+            charSpacingSelected: true,
+        });
     }
 
     onBorderChanged(value) {
-        console.log('Border Changed');
+        this.setState({ borderValue: value });
+        const array = this.state.borderArray.slice();
+        array[this.state.layerIndex] = value;
+        this.setState({ borderArray: array });
     }
     
     onBorderColorClicked() {
@@ -296,15 +354,25 @@ class CraftShop extends Component {
     }
 
     onRectangleClicked() {
-        console.log('Rectangle Clicked');
+        this.setState({
+            cropType: 1,
+        })
     }
 
     onCircleClicked() {
-        console.log('Circle Clicked');
+        this.setState({
+            cropType: 2,
+        })
     }
 
     onGridClicked() {
-        console.log('Grid Clicked');
+        this.setState({
+            cropType: 3,
+        })
+    }
+
+    onDragReleased() {
+        alert('****************');
     }
 
     render() {
@@ -339,50 +407,95 @@ class CraftShop extends Component {
                         (this.state.tabIndex==2) ?
                             (
                                 <View style={[styles.cropArea, styles.layoutCenter]}>
-                                    <Image
-                                        style={[styles.btnCrop, styles.btnCropTop]}
-                                        source={require('../assets/CropBtn.png')}>
-                                    </Image>
-                                    <Image
-                                        style={[styles.btnCrop, styles.btnCropBottom]}
-                                        source={require('../assets/CropBtn.png')}>
-                                    </Image>
-                                    <Image
-                                        style={[styles.btnCrop, styles.btnCropLeft]}
-                                        source={require('../assets/CropBtn.png')}>
-                                    </Image>
-                                    <Image
-                                        style={[styles.btnCrop, styles.btnCropRight]}
-                                        source={require('../assets/CropBtn.png')}>
-                                    </Image>
-                                    <Image
-                                        style={styles.imgLogo}
-                                        source={require('../assets/UserLogoContainer.png')}>
-                                    </Image>
-                                    <Text style={styles.textTop}>SOON</Text>
-                                    <Text style={styles.textBottom}>OPENING</Text>
+                                    <Draggable
+                                        reverse={false}
+                                        renderShape='image'
+                                        imageSource={require('../assets/CropBtn.png')}
+                                        buttonPosition='top'
+                                        buttonWidth={48}
+                                        buttonHeight={16}
+                                        pressDragRelease={() => this.onDragReleased()}>
+                                        <Image
+                                            style={[styles.btnCrop, styles.btnCropTop]}
+                                            source={require('../assets/CropBtn.png')}>
+                                        </Image>
+                                    </Draggable>
+                                    <Draggable
+                                        reverse={false}
+                                        renderShape='image'
+                                        imageSource={require('../assets/CropBtn.png')}
+                                        buttonPosition='bottom'
+                                        buttonWidth={48}
+                                        buttonHeight={16}>
+                                        <Image
+                                            style={[styles.btnCrop, styles.btnCropBottom]}
+                                            source={require('../assets/CropBtn.png')}>
+                                        </Image>
+                                    </Draggable>
+                                    <Draggable
+                                        reverse={false}
+                                        renderShape='image'
+                                        imageSource={require('../assets/CropBtn.png')}
+                                        buttonPosition='left'
+                                        buttonWidth={48}
+                                        buttonHeight={16}>
+                                        <Image
+                                            style={[styles.btnCrop, styles.btnCropLeft]}
+                                            source={require('../assets/CropBtn.png')}>
+                                        </Image>
+                                    </Draggable>
+                                    <Draggable
+                                        reverse={false}
+                                        renderShape='image'
+                                        imageSource={require('../assets/CropBtn.png')}
+                                        buttonPosition='right'
+                                        buttonWidth={48}
+                                        buttonHeight={16}>
+                                        <Image
+                                            style={[styles.btnCrop, styles.btnCropRight]}
+                                            source={require('../assets/CropBtn.png')}>
+                                        </Image>
+                                    </Draggable>
+                                    <View style={[styles.logoArea, (this.state.layerIndex == 1) && styles.layerSelected]}>
+                                        <Image
+                                            style={styles.imgLogo}
+                                            source={require('../assets/UserLogoContainer.png')}>
+                                        </Image>
+                                    </View>
+                                    <View style={(this.state.layerIndex == 2) && styles.layerSelected}>
+                                        <Text style={styles.textTop}>SOON</Text>
+                                    </View>
+                                    <View style={(this.state.layerIndex == 3) && styles.layerSelected}>
+                                        <Text style={styles.textBottom}>OPENING</Text>
+                                    </View>
                                 </View>
                             )
                             :
                             (
                                 <View style={[styles.layoutCenter]}>
-                                    <View style={[styles.logoArea, (this.state.layerIndex == 1) && styles.logoSelected]}>
+                                    <View style={[styles.logoArea, (this.state.layerIndex == 1) && styles.layerSelected]}>
                                         <Image
                                             style={[styles.imgLogo, {opacity: this.state.opacityArray[1]}]}
                                             source={require('../assets/UserLogoContainer.png')}>
                                         </Image>
                                     </View>
-                                    <Text style={[styles.textTop, {opacity: this.state.opacityArray[2]}]}>SOON</Text>
-                                    <Text style={[styles.textBottom, {opacity: this.state.opacityArray[2]}]}>OPENING</Text>
+                                    <View style={(this.state.layerIndex == 2) && styles.layerSelected}>
+                                        <Text style={[styles.textTop, {opacity: this.state.opacityArray[2], fontSize: this.state.sizeArray[2], letterSpacing: this.state.spacingArray[2]}]}>SOON</Text>
+                                    </View>
+                                    <View style={(this.state.layerIndex == 3) && styles.layerSelected}>
+                                        <Text style={[styles.textBottom, {opacity: this.state.opacityArray[3], fontSize: this.state.sizeArray[3], letterSpacing: this.state.spacingArray[3]}]}>OPENING</Text>
+                                    </View>
                                 </View>
                             )
                     }
                     {
                         (!this.state.displayEditorBox ) ?
                             (
-                                <TouchableOpacity onPress={() => this.onMoreClicked()} style={[styles.layoutCenter, {marginLeft:10}]}>
-                                    <IonIcon name="ios-more" size={56} style={[styles.iconMore, (this.state.tabIndex==2)?styles.iconMoreCrop:styles.iconMoreNCrop]} />
-                                </TouchableOpacity>
+                                <View style={[styles.iconMore, (this.state.tabIndex==2)?styles.iconMoreCrop:styles.iconMoreNCrop]}>
+                                    <TouchableOpacity onPress={() => this.onMoreClicked()} style={[styles.layoutCenter, {marginLeft:10}]}>
+                                        <IonIcon name="ios-more" size={56} style={styles.textIconMore} />
+                                    </TouchableOpacity>
+                                </View>
                             )
                             : null
                     }
@@ -539,6 +652,7 @@ class CraftShop extends Component {
                                         trackColor="#c6cbdf"
                                         thumbStyle={styles.grayThumbStyle}
                                         thumbText="Size"
+                                        step={0.1}
                                         value={this.state.opacityArray[this.state.layerIndex]}
                                         onValueChange={(value) => this.onSizeChanged(value)} />
                                 </View>
@@ -562,13 +676,13 @@ class CraftShop extends Component {
                                         onValueChange={(value) => this.onSpacingChanged(value)} />
                                 </View>
                                 <TouchableOpacity onPress={() => this.onLineClicked()}>
-                                    <View style={[styles.sideBoxGreen, styles.layoutCenter]}>
-                                        <Text style={[styles.textSideBox, {color: '#4feeca'}]}>Line</Text>                                    
+                                    <View style={[(this.state.charSpacingSelected)?styles.sideBoxGray:styles.sideBoxGreen, styles.layoutCenter]}>
+                                        <Text style={[styles.textSideBox, {color: (this.state.charSpacingSelected)?'#c6cbdf':'#4feeca'}]}>Line</Text>                                    
                                     </View>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.onCharClicked()}>
-                                    <View style={[styles.sideBoxGray, styles.layoutCenter]}>
-                                        <Text style={[styles.textSideBox, {color: '#c6cbdf'}]}>Char</Text>
+                                    <View style={[(this.state.charSpacingSelected)?styles.sideBoxGreen:styles.sideBoxGray, styles.layoutCenter]}>
+                                        <Text style={[styles.textSideBox, {color: (this.state.charSpacingSelected)?'#4feeca':'#c6cbdf'}]}>Char</Text>
                                     </View>
                                 </TouchableOpacity>
                             </View>
@@ -588,6 +702,10 @@ class CraftShop extends Component {
                                 <View style={{width: 30, height: 30}}>
                                 </View>
                             </View>
+                            <Modal
+                                visible={true}
+                                style={{width: 100,height:100,backgroundColor:'red'}}>
+                            </Modal>
                         </View>
                         : null
                 }
@@ -678,7 +796,7 @@ class CraftShop extends Component {
                             <View style={[styles.cropToolItem, styles.layoutCenter]}>
                                 <TouchableOpacity
                                     onPress={() => this.onRectangleClicked()}
-                                    style={[styles.btnCropTool, styles.layoutCenter]}>
+                                    style={[(this.state.cropType == 1)?styles.btnCropToolSelected:styles.btnCropToolNSelected, styles.btnCropTool, styles.layoutCenter]}>
                                     <Image
                                         style={styles.imgCropTool}
                                         source={require('../assets/RectangleCrop.png')}>
@@ -690,7 +808,7 @@ class CraftShop extends Component {
                                 style={[styles.cropToolItem, styles.layoutCenter]}>
                                 <TouchableOpacity
                                     onPress={() => this.onCircleClicked()}
-                                    style={[styles.btnCropTool, styles.layoutCenter]}>
+                                    style={[(this.state.cropType == 2)?styles.btnCropToolSelected:styles.btnCropToolNSelected, styles.btnCropTool, styles.layoutCenter]}>
                                     <Image
                                         style={styles.btnToolBottomTop}
                                         source={require('../assets/CircleCrop.png')}>
@@ -701,7 +819,7 @@ class CraftShop extends Component {
                             <View style={[styles.cropToolItem, styles.layoutCenter]}>
                                 <TouchableOpacity
                                     onPress={() => this.onGridClicked()}
-                                    style={[styles.btnCropTool, styles.layoutCenter]}>
+                                    style={[(this.state.cropType == 3)?styles.btnCropToolSelected:styles.btnCropToolNSelected, styles.btnCropTool, styles.layoutCenter]}>
                                     <Image
                                         style={styles.btnToolBottomTop}
                                         source={require('../assets/GridCrop.png')}>
@@ -825,7 +943,7 @@ const styles = StyleSheet.create({
         width: 60,
         height: 60,  
     },
-    logoSelected: {
+    layerSelected: {
         borderWidth: 1,
         borderColor: 'black',
         borderRadius: 5,
@@ -850,7 +968,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     iconMore: {
+        position: 'absolute',
         backgroundColor: 'transparent',
+    },
+    textIconMore: {
         color: '#424c61',
         textShadowOffset: {
             width: 1,
@@ -861,7 +982,7 @@ const styles = StyleSheet.create({
     iconMoreNCrop: {
         position: 'absolute',
         bottom: 0,
-        marginBottom: -130,
+        marginBottom: -20,
     },
     iconMoreCrop: {
         position: 'absolute',
@@ -1149,6 +1270,11 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 5,
         borderWidth: 1,
+    },
+    btnCropToolSelected: {
+        borderColor: '#50e3c2',       
+    },
+    btnCropToolNSelected: {
         borderColor: '#c6cbdf',
     },
     textCropTool: {
