@@ -82,8 +82,8 @@ class PostFeed extends Component {
                                 {name: 'HOLD', bgColor: '#57fcfe', borderColor: '#57fcfe', selectedBorderColor: '#f5b957', selected: false}];
     }
 
-    onCloseClicked() {
-        Actions.profilepreview();
+    onProfileClicked() {
+        Actions.profile();
     }
 
     onSettingClicked() {
@@ -126,7 +126,7 @@ class PostFeed extends Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <View style={[styles.headerLeft, styles.layoutCenter]}>
-                        <TouchableOpacity onPress={() => this.onCloseClicked()}>
+                        <TouchableOpacity onPress={() => this.onProfileClicked()}>
                             <Image
                                 style={styles.imgHeaderButton}
                                 source={require('../assets/User.png')}>
