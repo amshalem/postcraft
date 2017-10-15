@@ -91,6 +91,7 @@ class CraftShop extends Component {
             charSpacingSelected: false,
             filterProSelected: false,
             cropType: 1,
+            blendOptions: 'None',
         };
     }
     componentDidMount() {
@@ -304,6 +305,22 @@ class CraftShop extends Component {
         const array = this.state.opacityArray.slice();
         array[this.state.layerIndex] = value;
         this.setState({ opacityArray: array });
+    }
+
+    onBtnBlendClicked() {
+        if (this.state.blendOptions == 'None') {
+            this.setState({
+                blendOptions: 'Normal',        
+            });
+        } else if (this.state.blendOptions == 'Normal') {
+            this.setState({
+                blendOptions: 'Multiply',
+            });
+        } else if (this.state.blendOptions == 'Multiply') {
+            this.setState({
+                blendOptions: 'None',
+            })
+        }
     }
 
     onSizeChanged(value) {
@@ -551,24 +568,24 @@ class CraftShop extends Component {
                                 <TouchableOpacity
                                     style={{flexDirection: 'row'}}
                                     onPress={() => this.onStockClicked()}>
-                                    <IonIcon name="ios-cloud-outline" size={22} style={styles.activeColor} />
-                                    <Text style={styles.textToolTop}>STOCK</Text>
+                                    <IonIcon name="ios-cloud-outline" size={22} style={(this.state.tabIndex==0)?styles.activeColor:styles.disabledColor} />
+                                    <Text style={[styles.textToolTop, (this.state.tabIndex==0)?styles.activeColor:styles.disabledColor]}>STOCK</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={[styles.toolTopMiddle, styles.layoutCenter]}>
                                 <TouchableOpacity
                                     style={{flexDirection: 'row'}}
                                     onPress={() => this.onFilterClicked()}>
-                                    <IonIcon name="ios-color-wand-outline" size={22} style={[styles.rotate90, styles.disabledColor]} />
-                                    <Text style={styles.textToolTopD}>FILTER</Text>
+                                    <IonIcon name="ios-color-wand-outline" size={22} style={[styles.rotate90, (this.state.tabIndex==1)?styles.activeColor:styles.disabledColor]} />
+                                    <Text style={[styles.textToolTopD, (this.state.tabIndex==1)?styles.activeColor:styles.disabledColor]}>FILTER</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={[styles.toolTopRight, styles.layoutCenter]}>
                                 <TouchableOpacity
                                     style={{flexDirection: 'row'}}
                                     onPress={() => this.onCropClicked()}>
-                                    <IonIcon name="ios-crop-outline" size={22} style={[styles.rotate90, styles.disabledColor]} />
-                                    <Text style={styles.textToolTopD}>CROP</Text>
+                                    <IonIcon name="ios-crop-outline" size={22} style={[styles.rotate90, (this.state.tabIndex==2)?styles.activeColor:styles.disabledColor]} />
+                                    <Text style={[styles.textToolTopD, (this.state.tabIndex==2)?styles.activeColor:styles.disabledColor]}>CROP</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -778,9 +795,11 @@ class CraftShop extends Component {
                                         value={this.state.opacityArray[this.state.layerIndex]}
                                         onValueChange={(value) => this.onOpacityChanged(value)} />
                                 </View>
-                                <View style={[styles.operationArea, styles.layoutCenter]}>
-                                    <Text style={styles.textOperation}>None</Text>
-                                </View>
+                                <TouchableOpacity onPress={() => this.onBtnBlendClicked()}>
+                                    <View style={[styles.operationArea, styles.layoutCenter]}>
+                                        <Text style={styles.textOperation}>{this.state.blendOptions}</Text>
+                                    </View>
+                                </TouchableOpacity>
                             </View>
                             <TouchableOpacity onPress={() => this.onBtnProClicked()}>
                                 <View style={[styles.layoutCenter, styles.btnPro, (this.state.displayEditorBox?styles.btnProOffsetP:styles.btnProOffsetM)]}>
