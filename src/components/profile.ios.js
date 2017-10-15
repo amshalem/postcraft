@@ -67,7 +67,7 @@ class Profile extends Component {
     }
 
     onCloseClicked() {
-        Actions.login();
+        Actions.postfeed();
     }
 
     onSettingClicked() {

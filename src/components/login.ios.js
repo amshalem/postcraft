@@ -81,7 +81,7 @@ class Login extends Component {
         //                 })
         //             })
         //     })
-        Actions.postfeed();
+        Actions.profile();
     }
 
     onFBClicked() {
