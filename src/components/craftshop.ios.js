@@ -717,10 +717,6 @@ class CraftShop extends Component {
                                 <View style={{width: 30, height: 30}}>
                                 </View>
                             </View>
-                            <Modal
-                                visible={true}
-                                style={{width: 100,height:100,backgroundColor:'red'}}>
-                            </Modal>
                         </View>
                         : null
                 }
@@ -1101,7 +1097,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         width: width,
-        height: height - width - 800,
+        // height: height - width - 800,
+        height: 700,
         justifyContent: 'center',
         marginTop: 5,
     },
