@@ -131,12 +131,12 @@ class CraftShop extends Component {
     }
 
     onCloseClicked() {
-        console.log('Close Clicked');
         Actions.viewpost();
     }
 
     onShareClicked() {
-        console.log('Share Clicked');
+
+        Actions.saveshare();
     }
 
     onMoreClicked() {
@@ -249,10 +249,6 @@ class CraftShop extends Component {
         Actions.viewpost();
     }
     
-    onPlusClicked() {
-        console.log('Plus Clicked');
-    }
-    
     onCameraRollClicked() {
         console.log('Camera Roll Clicked');
     }
@@ -291,6 +287,7 @@ class CraftShop extends Component {
 
     onBtnPlusClicked() {
         console.log('Plus Clicked');
+        Actions.uploadlogo();
     }
 
     onBtnProClicked() {
@@ -624,6 +621,7 @@ class CraftShop extends Component {
                                 <View style={styles.searchBox}>
                                     <Icon name="search" size={14} color="#000" style={styles.searchIcon} />
                                     <TextInput
+                                        placeholder="Search"
                                         style={styles.searchInput}
                                         onChangeText={(text) => this.filterSearch(text)}
                                         value={this.state.text}
