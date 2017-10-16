@@ -110,7 +110,7 @@ class PostFeed extends Component {
     }
 
     onCameraClicked = () => {
-        console.log('Camera Clicked');
+        Actions.takecamera();
     }
 
     onGalleryClicked = () => {
@@ -194,10 +194,7 @@ class PostFeed extends Component {
                         end={{x: 1.0, y: 1.0}}
                         colors={['#50e3c2', '#88f3f2']}
                         style={[styles.buttons, styles.btnCamera]}>
-                            <Image
-                                style={styles.imgCornerButton}
-                                source={require('../assets/Gallery.png')}>
-                            </Image>
+                        <Icon name="camera" size={14} color="#FFF" style={styles.imgCornerButton} />
                     </LinearGradient>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => this.onGalleryClicked()}>
@@ -206,10 +203,7 @@ class PostFeed extends Component {
                         end={{x: 1.0, y: 1.0}}
                         colors={['#50e3c2', '#88f3f2']}
                         style={[styles.buttons, styles.btnGallery]}>
-                            <Image
-                                style={styles.imgCornerButton}
-                                source={require('../assets/Gallery.png')}>
-                            </Image>
+                        <Icon name="image" size={14} color="#FFF" style={styles.imgCornerButton} />
                     </LinearGradient>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => this.onCrossClicked()}>
@@ -378,11 +372,12 @@ const styles = StyleSheet.create({
         right: -width / 2 + 79,
         width: 40,
         height: 40,
-        borderRadius: 20,  
+        borderRadius: 20,
     },
     imgCornerButton: {
-        height: 12,
+        height: 13,
         width: 15,
+        backgroundColor: 'transparent',
     },
 });
 
